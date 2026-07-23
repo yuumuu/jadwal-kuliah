@@ -1,433 +1,1341 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jadwal TI5xx — Semester 5</title>
+<title>Jadwal Kuliah — TI UMY</title>
 <style>
-  :root{
-    --ink:#1c2b3a;
-    --paper:#f6f4ef;
-    --card:#ffffff;
-    --line:#dcd6c8;
-    --navy:#1f3a5f;
-    --navy-deep:#132840;
-    --amber:#f5c344;
-    --amber-ink:#6b4a05;
-    --amber-bg:#fff3d6;
-    --muted:#6b7280;
-    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+/* ═══════════════════════════════════════════════════════════════
+   VARIABLES
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#1c2b3a;
+  --paper:#f6f4ef;
+  --card:#ffffff;
+  --line:#dcd6c8;
+  --navy:#1f3a5f;
+  --navy-deep:#132840;
+  --navy-light:#e8edf3;
+  --amber:#f5c344;
+  --amber-ink:#6b4a05;
+  --amber-bg:#fff3d6;
+  --muted:#6b7280;
+  --success:#10b981;
+  --danger:#ef4444;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --shadow-sm:0 1px 2px rgba(20,30,45,0.04);
+  --shadow-card:0 1px 3px rgba(20,30,45,0.06),0 1px 2px rgba(20,30,45,0.04);
+  --shadow-hover:0 4px 14px rgba(20,30,45,0.1);
+  --shadow-fab:0 4px 16px rgba(20,30,45,0.2);
+  --transition:0.2s cubic-bezier(0.4,0,0.2,1);
+  --transition-slow:0.3s cubic-bezier(0.4,0,0.2,1);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"IBM Plex Sans","Segoe UI",Arial,sans-serif;
+}
+[data-theme="dark"]{
+  --ink:#e2e8f0;
+  --paper:#0f172a;
+  --card:#1e293b;
+  --line:#334155;
+  --navy:#60a5fa;
+  --navy-deep:#3b82f6;
+  --navy-light:#1e3a5f;
+  --amber:#fbbf24;
+  --amber-ink:#fbbf24;
+  --amber-bg:rgba(251,191,36,0.12);
+  --muted:#94a3b8;
+  --success:#34d399;
+  --danger:#f87171;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.2);
+  --shadow-card:0 1px 3px rgba(0,0,0,0.3);
+  --shadow-hover:0 4px 14px rgba(0,0,0,0.4);
+  --shadow-fab:0 4px 16px rgba(0,0,0,0.5);
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]):not([data-theme="dark"]){
+    --ink:#e2e8f0;
+    --paper:#0f172a;
+    --card:#1e293b;
+    --line:#334155;
+    --navy:#60a5fa;
+    --navy-deep:#3b82f6;
+    --navy-light:#1e3a5f;
+    --amber:#fbbf24;
+    --amber-ink:#fbbf24;
+    --amber-bg:rgba(251,191,36,0.12);
+    --muted:#94a3b8;
+    --success:#34d399;
+    --danger:#f87171;
+    --shadow-sm:0 1px 2px rgba(0,0,0,0.2);
+    --shadow-card:0 1px 3px rgba(0,0,0,0.3);
+    --shadow-hover:0 4px 14px rgba(0,0,0,0.4);
+    --shadow-fab:0 4px 16px rgba(0,0,0,0.5);
   }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:"IBM Plex Sans", "Segoe UI", Arial, sans-serif;
-    line-height:1.5;
-  }
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
-  header{
-    background:linear-gradient(135deg,var(--navy-deep),var(--navy));
-    color:#f2ede0;
-    padding:2.6rem 1.5rem 2.2rem;
-    position:relative;
-    overflow:hidden;
-  }
-  header::after{
-    content:"";
-    position:absolute;
-    right:-60px; top:-60px;
-    width:220px; height:220px;
-    border:1px solid rgba(245,195,68,0.35);
-    border-radius:50%;
-  }
-  header::before{
-    content:"";
-    position:absolute;
-    right:20px; bottom:-90px;
-    width:180px; height:180px;
-    border:1px solid rgba(245,195,68,0.2);
-    border-radius:50%;
-  }
-  .eyebrow{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--amber);
-    margin:0 0 0.6rem;
-  }
-  h1{
-    margin:0;
-    font-size:clamp(1.6rem,3.4vw,2.3rem);
-    font-weight:700;
-    max-width:38ch;
-  }
-  .sub{
-    margin:0.6rem 0 0;
-    color:#cdd7e4;
-    max-width:56ch;
-    font-size:0.95rem;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.6;
+  transition:background-color var(--transition-slow),color var(--transition-slow);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--navy);text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{max-width:100%;display:block;}
 
-  .legend{
-    display:flex;
-    gap:1.4rem;
-    margin-top:1.4rem;
-    flex-wrap:wrap;
-    font-size:0.82rem;
-  }
-  .legend span{display:inline-flex; align-items:center; gap:0.5rem;}
-  .swatch{width:14px; height:14px; border-radius:3px; display:inline-block;}
-  .swatch.b{background:var(--amber); border:1px solid #c99a1c;}
-  .swatch.n{background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);}
+/* ═══════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════ */
+.app-header{
+  background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+  color:#f2ede0;
+  padding:0 1.5rem;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.header-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:60px;
+  gap:1rem;
+}
+.header-left{display:flex;align-items:center;gap:0.8rem;min-width:0;}
+.header-logo{
+  font-family:var(--mono);
+  font-weight:700;
+  font-size:1.1rem;
+  letter-spacing:-0.02em;
+  white-space:nowrap;
+}
+.header-meta{font-size:0.75rem;color:rgba(255,255,255,0.7);white-space:nowrap;}
+.header-right{display:flex;align-items:center;gap:0.6rem;flex-shrink:0;}
+.semester-select{
+  font-family:var(--mono);
+  font-size:0.78rem;
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:var(--radius-sm);
+  padding:0.4rem 0.7rem;
+  cursor:pointer;
+  outline:none;
+}
+.semester-select option{background:var(--navy-deep);color:#fff;}
+.theme-toggle{display:flex;gap:2px;background:rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:2px;}
+.theme-btn{
+  width:32px;height:32px;border:none;border-radius:4px;background:transparent;
+  color:rgba(255,255,255,0.5);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+}
+.theme-btn.active{background:rgba(255,255,255,0.2);color:#fff;}
+.theme-btn:hover{color:#fff;}
+.theme-btn svg{width:16px;height:16px;}
 
-  main{
-    max-width:1080px;
-    margin:0 auto;
-    padding:2.2rem 1.5rem 4rem;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   LANDING PAGE
+   ═══════════════════════════════════════════════════════════════ */
+.landing{
+  max-width:1100px;
+  margin:0 auto;
+  padding:3rem 1.5rem;
+}
+.landing-hero{text-align:center;margin-bottom:2.5rem;}
+.landing-hero h2{
+  font-size:clamp(1.5rem,3vw,2rem);font-weight:700;margin-bottom:0.5rem;
+}
+.landing-hero p{color:var(--muted);max-width:50ch;margin:0 auto;}
+.semester-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+.sem-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1.2rem;transition:all var(--transition);cursor:pointer;
+}
+.sem-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);border-color:var(--navy);}
+.sem-card.selected{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-bg);}
+.sem-card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:0.6rem;}
+.sem-card-title{font-weight:700;font-size:1.05rem;}
+.sem-card-badge{
+  font-family:var(--mono);font-size:0.68rem;padding:0.15rem 0.5rem;
+  border-radius:999px;background:var(--amber-bg);color:var(--amber-ink);font-weight:600;
+}
+.sem-card-meta{font-size:0.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:0.8rem;}
+.sem-card-meta span{display:inline-flex;align-items:center;gap:0.3rem;}
+.sem-card-meta svg{width:14px;height:14px;}
+.sem-card-classes{
+  margin-top:0.7rem;display:flex;flex-wrap:wrap;gap:0.3rem;
+}
+.sem-class-tag{
+  font-family:var(--mono);font-size:0.7rem;padding:0.15rem 0.45rem;
+  border-radius:4px;background:var(--navy-light);color:var(--navy-deep);font-weight:600;
+}
+[data-theme="dark"] .sem-class-tag{background:rgba(96,165,250,0.15);color:var(--navy);}
 
-  nav.tabs{
-    display:flex;
-    gap:0.5rem;
-    margin-bottom:1.6rem;
-    border-bottom:1px solid var(--line);
-  }
-  nav.tabs button{
-    font-family:inherit;
-    font-size:0.9rem;
-    font-weight:600;
-    background:none;
-    border:none;
-    padding:0.75rem 1rem;
-    cursor:pointer;
-    color:var(--muted);
-    border-bottom:2px solid transparent;
-    margin-bottom:-1px;
-    transition:color .15s ease, border-color .15s ease;
-  }
-  nav.tabs button.active{
-    color:var(--navy-deep);
-    border-bottom-color:var(--amber);
-  }
-  nav.tabs button:hover{ color:var(--navy-deep); }
+/* ═══════════════════════════════════════════════════════════════
+   TAB BAR
+   ═══════════════════════════════════════════════════════════════ */
+.app-main{max-width:1100px;margin:0 auto;padding:0 1.5rem 3rem;}
+.tab-bar{
+  display:flex;gap:0;border-bottom:1px solid var(--line);
+  margin-bottom:0;position:sticky;top:60px;z-index:90;
+  background:var(--paper);
+}
+.tab-btn{
+  font-family:inherit;font-size:0.88rem;font-weight:600;
+  background:none;border:none;padding:0.8rem 1.2rem;cursor:pointer;
+  color:var(--muted);border-bottom:2px solid transparent;
+  margin-bottom:-1px;transition:all var(--transition);
+  display:flex;align-items:center;gap:0.4rem;
+}
+.tab-btn svg{width:16px;height:16px;}
+.tab-btn.active{color:var(--navy-deep);border-bottom-color:var(--amber);}
+.tab-btn:hover{color:var(--navy-deep);}
 
-  .panel{ display:none; }
-  .panel.active{ display:block; }
+/* ═══════════════════════════════════════════════════════════════
+   PANELS
+   ═══════════════════════════════════════════════════════════════ */
+.panel{display:none;padding-top:1rem;}
+.panel.active{display:block;animation:fadeIn 0.2s ease;}
 
-  .toolbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:0.8rem;
-    margin-bottom:1rem;
-  }
-  .daychips{
-    display:flex;
-    gap:0.4rem;
-    flex-wrap:wrap;
-  }
-  .chip{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-    padding:0.35rem 0.7rem;
-    border-radius:999px;
-    border:1px solid var(--line);
-    background:var(--card);
-    color:var(--muted);
-    cursor:pointer;
-  }
-  .chip.active{
-    background:var(--navy);
-    color:#fff;
-    border-color:var(--navy);
-  }
-  .count{
-    font-family:var(--mono);
-    font-size:0.78rem;
-    color:var(--muted);
-  }
+/* ═══════════════════════════════════════════════════════════════
+   TOOLBAR
+   ═══════════════════════════════════════════════════════════════ */
+.toolbar{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:0.6rem;margin-bottom:1rem;
+}
+.toolbar-left{display:flex;flex-direction:column;gap:0.6rem;flex:1;min-width:0;}
+.toolbar-right{display:flex;align-items:center;gap:0.6rem;flex-shrink:0;}
+.filter-group{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}
+.filter-label{
+  font-family:var(--mono);font-size:0.68rem;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;flex-shrink:0;
+}
+.chip-group{display:flex;gap:0.3rem;flex-wrap:wrap;}
+.chip{
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.03em;
+  text-transform:uppercase;padding:0.3rem 0.65rem;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  cursor:pointer;transition:all var(--transition);white-space:nowrap;
+  user-select:none;
+}
+.chip:hover{border-color:var(--navy);color:var(--navy);}
+.chip.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.chip.multi-active{background:var(--amber-bg);color:var(--amber-ink);border-color:var(--amber);}
+.count{font-family:var(--mono);font-size:0.76rem;color:var(--muted);white-space:nowrap;}
 
-  .table-wrap{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 1px 2px rgba(20,30,45,0.04);
-  }
-  table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:0.88rem;
-  }
-  thead th{
-    background:var(--navy-deep);
-    color:#f2ede0;
-    text-align:left;
-    font-weight:600;
-    font-size:0.74rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    padding:0.7rem 0.9rem;
-    position:sticky;
-    top:0;
-  }
-  tbody td{
-    padding:0.65rem 0.9rem;
-    border-top:1px solid var(--line);
-    vertical-align:top;
-  }
-  tbody tr:hover td{ background:#faf8f2; }
-  tbody tr.classB td{
-    background:var(--amber-bg);
-  }
-  tbody tr.classB:hover td{ background:#fbe9bc; }
-  .kode{ font-family:var(--mono); font-weight:600; color:var(--navy-deep); white-space:nowrap; }
-  .kelas{ font-family:var(--mono); font-weight:600; }
-  .kelas.b{ color:var(--amber-ink); }
-  .jam{ font-family:var(--mono); white-space:nowrap; color:var(--ink); }
-  .day-tag{
-    font-family:var(--mono);
-    font-size:0.72rem;
-    text-transform:uppercase;
-    color:var(--muted);
-    white-space:nowrap;
-  }
-  .badge-b{
-    display:inline-block;
-    margin-left:0.4rem;
-    font-family:var(--mono);
-    font-size:0.65rem;
-    background:var(--amber);
-    color:#513a04;
-    padding:0.05rem 0.35rem;
-    border-radius:4px;
-    vertical-align:middle;
-  }
+.view-subtabs{display:flex;gap:2px;background:var(--navy-light);border-radius:var(--radius-sm);padding:2px;}
+.view-btn{
+  width:32px;height:30px;border:none;border-radius:4px;background:transparent;
+  color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+}
+.view-btn svg{width:15px;height:15px;}
+.view-btn.active{background:var(--card);color:var(--navy-deep);box-shadow:var(--shadow-sm);}
+.view-btn:hover{color:var(--navy-deep);}
 
-  .empty-row td{
-    text-align:center;
-    padding:2rem;
-    color:var(--muted);
-    font-style:italic;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   VIEW CONTAINER
+   ═══════════════════════════════════════════════════════════════ */
+.view-container{
+  animation:fadeSlideIn 0.25s ease;
+  min-height:200px;
+}
 
-  footer{
-    max-width:1080px;
-    margin:0 auto;
-    padding:0 1.5rem 3rem;
-    color:var(--muted);
-    font-size:0.8rem;
-  }
+/* ─── Table ─── */
+.table-wrap{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  overflow:hidden;box-shadow:var(--shadow-card);
+}
+.view-table table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.view-table thead th{
+  background:var(--navy-deep);color:#f2ede0;text-align:left;font-weight:600;
+  font-size:0.72rem;letter-spacing:0.05em;text-transform:uppercase;
+  padding:0.65rem 0.8rem;position:sticky;top:0;z-index:1;
+}
+.view-table tbody td{
+  padding:0.6rem 0.8rem;border-top:1px solid var(--line);vertical-align:top;
+}
+.view-table tbody tr{transition:background var(--transition);}
+.view-table tbody tr:hover td{background:var(--navy-light);}
+.view-table tbody tr.highlight td{background:var(--amber-bg);}
+.view-table tbody tr.highlight:hover td{background:rgba(251,191,36,0.2);}
+.kode{font-family:var(--mono);font-weight:600;color:var(--navy-deep);white-space:nowrap;}
+.kelas-tag{
+  font-family:var(--mono);font-weight:600;font-size:0.82rem;
+}
+.kelas-tag.highlight{color:var(--amber-ink);}
+.jam{font-family:var(--mono);white-space:nowrap;}
+.day-tag{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.badge{
+  display:inline-block;margin-left:0.35rem;font-family:var(--mono);
+  font-size:0.6rem;padding:0.05rem 0.3rem;border-radius:4px;vertical-align:middle;
+  background:var(--amber);color:#513a04;font-weight:600;
+}
+.subject-dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  margin-right:0.4rem;vertical-align:middle;flex-shrink:0;
+}
+.empty-state{
+  text-align:center;padding:3rem 1rem;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+}
+.empty-state svg{width:40px;height:40px;opacity:0.4;}
 
-  @media (max-width:640px){
-    thead th:nth-child(6), tbody td:nth-child(6){ display:none; }
-    .table-wrap{ overflow-x:auto; }
+/* ─── Grid Cards ─── */
+.view-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.8rem;
+}
+.grid-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1rem;transition:all var(--transition);border-left:3px solid transparent;
+}
+.grid-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.grid-card.highlight{border-left-color:var(--amber);background:var(--amber-bg);}
+.grid-card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:0.5rem;}
+.grid-card-kode{font-family:var(--mono);font-weight:700;color:var(--navy-deep);font-size:0.95rem;}
+.grid-card-matkul{font-weight:600;font-size:0.9rem;margin-bottom:0.4rem;line-height:1.3;}
+.grid-card-meta{font-size:0.8rem;color:var(--muted);display:flex;flex-direction:column;gap:0.2rem;}
+.grid-card-meta span{display:flex;align-items:center;gap:0.3rem;}
+.grid-card-meta svg{width:13px;height:13px;}
+
+/* ─── Card List ─── */
+.view-list{display:flex;flex-direction:column;gap:0.6rem;}
+.list-day-header{
+  font-family:var(--mono);font-size:0.75rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:0.08em;color:var(--navy-deep);padding:0.6rem 0 0.3rem;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:0.5rem;
+}
+.list-day-header svg{width:14px;height:14px;}
+.list-day-count{color:var(--muted);font-weight:400;text-transform:none;letter-spacing:normal;}
+.list-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:0.8rem 1rem;display:grid;grid-template-columns:auto 1fr auto;
+  gap:0.6rem 1rem;align-items:center;transition:all var(--transition);
+  border-left:3px solid transparent;
+}
+.list-card:hover{box-shadow:var(--shadow-hover);}
+.list-card.highlight{border-left-color:var(--amber);background:var(--amber-bg);}
+.list-card-time{font-family:var(--mono);font-size:0.82rem;white-space:nowrap;color:var(--ink);min-width:100px;}
+.list-card-info{min-width:0;}
+.list-card-title{font-weight:600;font-size:0.88rem;}
+.list-card-detail{font-size:0.78rem;color:var(--muted);margin-top:0.15rem;}
+.list-card-right{text-align:right;min-width:60px;}
+.list-card-room{font-family:var(--mono);font-size:0.82rem;font-weight:600;color:var(--navy-deep);}
+.list-card-lector{font-size:0.78rem;color:var(--muted);}
+
+/* ─── Compact Table ─── */
+.view-compact table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.view-compact thead th{
+  background:var(--navy-deep);color:#f2ede0;text-align:left;font-weight:600;
+  font-size:0.68rem;letter-spacing:0.05em;text-transform:uppercase;
+  padding:0.5rem 0.6rem;
+}
+.view-compact tbody td{
+  padding:0.4rem 0.6rem;border-top:1px solid var(--line);vertical-align:top;
+}
+.view-compact tbody tr{transition:background var(--transition);}
+.view-compact tbody tr:hover td{background:var(--navy-light);}
+.view-compact tbody tr.highlight td{background:var(--amber-bg);}
+
+/* ═══════════════════════════════════════════════════════════════
+   CALENDAR VIEWS
+   ═══════════════════════════════════════════════════════════════ */
+/* Month Grid */
+.cal-month{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1rem;margin-bottom:1rem;
+}
+.cal-month-title{
+  font-weight:700;font-size:0.95rem;margin-bottom:0.6rem;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.cal-month-title svg{width:16px;height:16px;color:var(--amber);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-day-header{
+  font-size:0.65rem;text-transform:uppercase;text-align:center;
+  padding:0.3rem;color:var(--muted);font-weight:600;
+}
+.cal-day{
+  aspect-ratio:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;border-radius:4px;font-size:0.82rem;
+  cursor:default;position:relative;min-height:36px;
+}
+.cal-day.num{cursor:pointer;}
+.cal-day.num:hover{background:var(--navy-light);}
+.cal-day.today{background:var(--amber);color:var(--amber-ink);font-weight:700;border-radius:50%;}
+.cal-day.holiday{color:var(--danger);font-weight:600;}
+.cal-day.holiday::before{
+  content:'';display:block;width:5px;height:5px;border-radius:50%;
+  background:var(--danger);position:absolute;top:3px;right:3px;
+}
+.cal-day.important{color:var(--success);font-weight:600;}
+.cal-day.important::before{
+  content:'';display:block;width:5px;height:5px;border-radius:50%;
+  background:var(--success);position:absolute;top:3px;right:3px;
+}
+.cal-day.has-class::after{
+  content:'';display:block;width:4px;height:4px;border-radius:50%;
+  background:var(--navy);position:absolute;bottom:4px;
+}
+.cal-day.empty{opacity:0;pointer-events:none;}
+.cal-legend{
+  display:flex;gap:1rem;margin-top:0.8rem;font-size:0.72rem;color:var(--muted);
+  flex-wrap:wrap;
+}
+.cal-legend span{display:inline-flex;align-items:center;gap:0.3rem;}
+.cal-legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+/* Agenda */
+.agenda-day{margin-bottom:1.2rem;}
+.agenda-date{
+  font-family:var(--mono);font-size:0.78rem;font-weight:600;
+  color:var(--navy-deep);padding:0.5rem 0 0.3rem;
+  border-bottom:1px solid var(--line);margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.agenda-date svg{width:14px;height:14px;}
+.agenda-date.today-date{color:var(--amber-ink);}
+.agenda-item{
+  display:flex;gap:0.8rem;padding:0.5rem 0.7rem;
+  border-radius:var(--radius-sm);margin-bottom:0.3rem;
+  transition:background var(--transition);align-items:start;
+}
+.agenda-item:hover{background:var(--navy-light);}
+.agenda-item.highlight{background:var(--amber-bg);}
+.agenda-time{
+  font-family:var(--mono);font-size:0.78rem;white-space:nowrap;
+  min-width:90px;color:var(--muted);padding-top:0.1rem;
+}
+.agenda-info{min-width:0;}
+.agenda-title{font-weight:600;font-size:0.88rem;}
+.agenda-detail{font-size:0.78rem;color:var(--muted);margin-top:0.1rem;}
+.agenda-badge{
+  font-family:var(--mono);font-size:0.65rem;padding:0.1rem 0.35rem;
+  border-radius:4px;background:var(--amber-bg);color:var(--amber-ink);
+  font-weight:600;margin-left:0.3rem;
+}
+
+/* Timeline */
+.timeline-day{margin-bottom:1.5rem;}
+.timeline-day-header{
+  font-family:var(--mono);font-size:0.82rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.06em;color:var(--navy-deep);
+  margin-bottom:0.6rem;padding-bottom:0.3rem;border-bottom:2px solid var(--navy);
+  display:flex;align-items:center;gap:0.5rem;
+}
+.timeline-day-header svg{width:16px;height:16px;}
+.timeline{position:relative;padding-left:1.5rem;}
+.timeline::before{
+  content:'';position:absolute;left:0.55rem;top:0;bottom:0;
+  width:2px;background:var(--line);
+}
+.timeline-item{
+  position:relative;padding:0.5rem 0 0.5rem 1rem;
+  margin-bottom:0.3rem;
+}
+.timeline-item::before{
+  content:'';position:absolute;left:-0.95rem;top:0.85rem;
+  width:10px;height:10px;border-radius:50%;background:var(--card);
+  border:2px solid var(--navy);z-index:1;
+}
+.timeline-item.highlight::before{border-color:var(--amber);background:var(--amber-bg);}
+.timeline-time{
+  font-family:var(--mono);font-size:0.75rem;color:var(--muted);margin-bottom:0.15rem;
+}
+.timeline-content{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:0.5rem 0.7rem;
+}
+.timeline-content.highlight{background:var(--amber-bg);border-color:var(--amber);}
+.timeline-title{font-weight:600;font-size:0.88rem;}
+.timeline-meta{font-size:0.78rem;color:var(--muted);margin-top:0.1rem;}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAB
+   ═══════════════════════════════════════════════════════════════ */
+.fab-wrap{
+  position:fixed;bottom:1.2rem;right:1.2rem;z-index:200;
+  display:flex;flex-direction:column-reverse;align-items:center;gap:0.6rem;
+}
+.fab-main{
+  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--navy-deep);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-fab);transition:all var(--transition);
+}
+.fab-main svg{width:22px;height:22px;transition:transform var(--transition);}
+.fab-main.open svg{transform:rotate(45deg);}
+.fab-main:hover{transform:scale(1.05);}
+.fab-actions{
+  display:flex;flex-direction:column;gap:0.5rem;
+  opacity:0;transform:translateY(8px) scale(0.9);pointer-events:none;
+  transition:all var(--transition);
+}
+.fab-actions.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.fab-action{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-card);transition:all var(--transition);
+}
+.fab-action svg{width:18px;height:18px;}
+.fab-action:hover{box-shadow:var(--shadow-hover);transform:scale(1.08);}
+.fab-action.active{background:var(--amber-bg);border-color:var(--amber);color:var(--amber-ink);}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+.app-footer{
+  max-width:1100px;margin:0 auto;padding:0 1.5rem 2rem;
+  color:var(--muted);font-size:0.78rem;text-align:center;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:0.01ms !important;
+    transition-duration:0.01ms !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile First
+   ═══════════════════════════════════════════════════════════════ */
+@media(max-width:640px){
+  .header-inner{height:52px;}
+  .header-logo{font-size:0.95rem;}
+  .header-meta{display:none;}
+  .semester-select{max-width:100px;font-size:0.72rem;padding:0.3rem 0.5rem;}
+  .theme-toggle{gap:1px;}
+  .theme-btn{width:28px;height:28px;}
+  .theme-btn svg{width:14px;height:14px;}
+  .app-main{padding:0 1rem 3rem;}
+  .toolbar{flex-direction:column;gap:0.5rem;}
+  .toolbar-right{width:100%;justify-content:space-between;}
+  .view-grid{grid-template-columns:1fr;}
+  .view-table table{font-size:0.78rem;}
+  .view-table thead th,.view-table tbody td{padding:0.5rem 0.6rem;}
+  .view-table thead th:nth-child(6),.view-table tbody td:nth-child(6){display:none;}
+  .table-wrap{overflow-x:auto;}
+  .view-compact thead th:nth-child(5),.view-compact tbody td:nth-child(5){display:none;}
+  .list-card{grid-template-columns:1fr;gap:0.3rem;}
+  .list-card-time{min-width:auto;}
+  .list-card-right{text-align:left;}
+  .semester-cards{grid-template-columns:1fr;}
+  .landing{padding:2rem 1rem;}
+  .tab-btn{font-size:0.82rem;padding:0.7rem 0.8rem;}
+  .tab-btn span.tab-label{display:none;}
+}
+@media(min-width:641px) and (max-width:1023px){
+  .view-grid{grid-template-columns:repeat(2,1fr);}
+  .semester-cards{grid-template-columns:repeat(2,1fr);}
+}
+@media(min-width:1024px){
+  .fab-wrap{display:none;}
+  .semester-cards{grid-template-columns:repeat(3,1fr);}
+}
 </style>
 </head>
 <body>
 
-<header>
-  <p class="eyebrow">TI UMY · Semester Gasal 2026</p>
-  <h1>Jadwal Mata Kuliah TI5xx (Semester 5)</h1>
-  <p class="sub">Ringkasan lintas hari dan sorotan khusus Kelas B, disusun dari jadwal pengajaran mingguan.</p>
-  <div class="legend">
-    <span><i class="swatch b"></i> Kelas B</span>
-    <span><i class="swatch n"></i> Kelas lain (referensi)</span>
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="header-logo" id="headerLogo">JadKul</span>
+      <span class="header-meta" id="headerMeta"></span>
+    </div>
+    <div class="header-right">
+      <select id="semesterSelect" class="semester-select"></select>
+      <div class="theme-toggle" id="themeToggle">
+        <button class="theme-btn" data-theme="light" title="Light"><i data-lucide="sun"></i></button>
+        <button class="theme-btn" data-theme="dark" title="Dark"><i data-lucide="moon"></i></button>
+        <button class="theme-btn" data-theme="system" title="System"><i data-lucide="monitor"></i></button>
+      </div>
+    </div>
   </div>
 </header>
 
-<main>
-  <nav class="tabs">
-    <button class="tab-btn active" data-panel="ringkasan">Ringkasan TI5xx</button>
-    <button class="tab-btn" data-panel="fokus">Fokus Kelas B</button>
+<!-- ═══════════════ LANDING PAGE ═══════════════ -->
+<main id="landingPage" class="landing" style="display:none;">
+  <div class="landing-hero">
+    <h2>Pilih Semester</h2>
+    <p>Pilih semester untuk melihat jadwal kuliah. Preferensi akan disimpan otomatis.</p>
+  </div>
+  <div class="semester-cards" id="semesterCards"></div>
+</main>
+
+<!-- ═══════════════ MAIN APP ═══════════════ -->
+<main id="appMain" class="app-main" style="display:none;">
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="schedule"><i data-lucide="calendar-clock"></i><span class="tab-label"> Schedule</span></button>
+    <button class="tab-btn" data-tab="calendar"><i data-lucide="calendar"></i><span class="tab-label"> Calendar</span></button>
   </nav>
 
-  <!-- RINGKASAN PANEL -->
-  <section id="ringkasan" class="panel active">
+  <!-- Schedule Panel -->
+  <section id="schedulePanel" class="panel active">
     <div class="toolbar">
-      <div class="daychips" id="dayFilter">
-        <span class="chip active" data-day="all">Semua Hari</span>
+      <div class="toolbar-left">
+        <div class="filter-group">
+          <span class="filter-label">Hari</span>
+          <div class="chip-group" id="dayFilter"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Kelas</span>
+          <div class="chip-group" id="classFilter"></div>
+        </div>
       </div>
-      <span class="count" id="ringkasanCount"></span>
+      <div class="toolbar-right">
+        <span class="count" id="scheduleCount"></span>
+        <div class="view-subtabs" id="scheduleViewTabs">
+          <button class="view-btn active" data-view="table" title="Tabel"><i data-lucide="table"></i></button>
+          <button class="view-btn" data-view="grid" title="Grid Cards"><i data-lucide="layout-grid"></i></button>
+          <button class="view-btn" data-view="list" title="Card List"><i data-lucide="list"></i></button>
+          <button class="view-btn" data-view="compact" title="Compact"><i data-lucide="panel-left-close"></i></button>
+        </div>
+      </div>
     </div>
-    <div class="table-wrap">
-      <table id="ringkasanTable">
-        <thead>
-          <tr>
-            <th>Hari</th>
-            <th>Kode</th>
-            <th>Matkul</th>
-            <th>Kelas</th>
-            <th>Jam</th>
-            <th>Ruang</th>
-            <th>Dosen</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+    <div class="view-container" id="scheduleContainer"></div>
   </section>
 
-  <!-- FOKUS KELAS B PANEL -->
-  <section id="fokus" class="panel">
+  <!-- Calendar Panel -->
+  <section id="calendarPanel" class="panel">
     <div class="toolbar">
-      <span class="count" id="fokusCount"></span>
+      <div class="toolbar-left">
+        <div class="filter-group">
+          <span class="filter-label">Kelas</span>
+          <div class="chip-group" id="classFilterCal"></div>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <span class="count" id="calendarCount"></span>
+        <div class="view-subtabs" id="calendarViewTabs">
+          <button class="view-btn active" data-view="month" title="Month"><i data-lucide="calendar-days"></i></button>
+          <button class="view-btn" data-view="agenda" title="Agenda"><i data-lucide="calendar-check"></i></button>
+          <button class="view-btn" data-view="timeline" title="Timeline"><i data-lucide="clock"></i></button>
+        </div>
+      </div>
     </div>
-    <div class="table-wrap">
-      <table id="fokusTable">
-        <thead>
-          <tr>
-            <th>Hari</th>
-            <th>Kode</th>
-            <th>Matkul</th>
-            <th>Kelas</th>
-            <th>Jam</th>
-            <th>Ruang</th>
-            <th>Dosen</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+    <div class="view-container" id="calendarContainer"></div>
   </section>
 </main>
 
-<footer>
-  Disusun dari dokumen jadwal pengajaran TI UMY Semester Gasal 2026. Ruang untuk Selasa–Jumat diturunkan dari urutan kolom sumber dan mungkin perlu dicek ulang untuk presisi penuh.
+<!-- ═══════════════ FAB ═══════════════ -->
+<div class="fab-wrap" id="fabWrap">
+  <div class="fab-actions" id="fabActions">
+    <button class="fab-action" id="fabSchedule" title="Schedule View"><i data-lucide="calendar-clock"></i></button>
+    <button class="fab-action" id="fabCalendar" title="Calendar View"><i data-lucide="calendar"></i></button>
+    <button class="fab-action" id="fabTheme" title="Toggle Theme"><i data-lucide="moon"></i></button>
+    <button class="fab-action" id="fabTop" title="Scroll to Top"><i data-lucide="arrow-up"></i></button>
+  </div>
+  <button class="fab-main" id="fabMain" title="Menu"><i data-lucide="plus"></i></button>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="app-footer">
+  <p>Disusun dari dokumen jadwal pengajaran TI UMY Semester Gasal 2026. Data dapat diperbarui melalui file <code>data/jadwal.json</code>.</p>
 </footer>
 
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 <script>
-const DATA = {
-  "Senin": [
-    ["TI506","Manajemen Proyek","D","08.50–11.30","F6.102","HQ/WS",false],
-    ["TI503","Pengembangan Web Service","B","08.50–11.30","F4.002","DP/QA",true],
-    ["TI501","Pengembangan Aplikasi Web","E","08.50–11.30","F4.003","AS",false],
-    ["TI506","Manajemen Proyek","E","12.10–15.00","F6.102","HQ",false],
-    ["TI508","Technopreneurship","D","13.20–15.00","F4.001","FF",false],
-    ["TI503","Pengembangan Web Service","A","13.20–16.20","F4.002","DP",false],
-    ["TI501","Pengembangan Aplikasi Web","C","13.20–16.20","F4.003","AS",false]
-  ],
-  "Selasa": [
-    ["TI506","Manajemen Proyek","A","07.50–10.30","F4.001","HQ",false],
-    ["TI503","Pengembangan Web Service","E","08.50–11.30","F6.102","FF",false],
-    ["TI506","Manajemen Proyek","C","09.40–13.10","F6.202","HQ",false],
-    ["TI503","Pengembangan Web Service","D","13.20–16.20","F6.102","DP/AM",false],
-    ["TI506","Manajemen Proyek","B","13.20–16.20","F6.203","HQ/WS",true],
-    ["TI508","Technopreneurship","A","13.20–15.00","F4.001","FF",false],
-    ["TI504","WAN dan Teknologi Jaringan","C","15.30–17.10","F4.001","FF",false]
-  ],
-  "Rabu": [
-    ["TI501","Pengembangan Aplikasi Web","A","08.50–11.30","-","AS",false],
-    ["TI503","Pengembangan Web Service","C","08.50–11.30","-","DP",false],
-    ["TI508","Technopreneurship","E","08.50–11.30","-","EI",false],
-    ["TI501","Pengembangan Aplikasi Web","B","13.20–16.20","-","AS",true],
-    ["TI504","WAN dan Teknologi Jaringan","A","13.20–15.00","-","EP",false],
-    ["TI508","Technopreneurship","C","13.20–15.00","-","FF",false]
-  ],
-  "Kamis": [
-    ["TI504","WAN dan Teknologi Jaringan","E","07.00–08.40","-","FF",false],
-    ["TI505","Tata Kelola Teknologi Informasi","D,E,F","08.50–11.30","-","CO",false],
-    ["TI502","Pengembangan Aplikasi Mobile","B","08.50–11.30","-","HS",true],
-    ["TI505","Tata Kelola Teknologi Informasi","A,B,C","13.20–16.20","-","CO",true],
-    ["TI501","Pengembangan Aplikasi Web","D","13.20–16.20","-","QA",false],
-    ["TI502","Pengembangan Aplikasi Mobile","E","13.20–16.20","-","RG",false],
-    ["TI504","WAN dan Teknologi Jaringan","B","16.20–18.00","-","EP",true],
-    ["TI502","Pengembangan Aplikasi Mobile","C","16.20–19.20","-","HS",false]
-  ],
-  "Jumat": [
-    ["TI502","Pengembangan Aplikasi Mobile","A","07.50–10.30","-","HS",false],
-    ["TI504","WAN dan Teknologi Jaringan","D","08.50–10.30","-","FF",false],
-    ["TI502","Pengembangan Aplikasi Mobile","D","13.20–16.20","-","HS",false]
-  ],
-  "Sabtu": [
-    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","B","07.00–08.40","-","TW",true],
-    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","F","07.00–08.40","-","-",false],
-    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","D","08.50–10.30","-","TW",false],
-    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","C","08.50–10.30","-","TW",false],
-    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","A","10.40–13.10","-","TW",false],
-    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","E","13.20–15.00","-","TW",false]
-  ]
+/* ═══════════════════════════════════════════════════════════════
+   INLINE FALLBACK DATA
+   ═══════════════════════════════════════════════════════════════ */
+const FALLBACK_DATA = {
+  "semesters": [{
+    "id":"s5-gasal-2026","label":"Semester 5","period":"Gasal","academicYear":"2026/2027",
+    "program":"TI","semester":5,"startDate":"2026-09-01","endDate":"2027-01-15",
+    "subjectColors":{"TI501":"#3b82f6","TI502":"#8b5cf6","TI503":"#06b6d4","TI504":"#10b981","TI505":"#f59e0b","TI506":"#ef4444","TI507":"#ec4899","TI508":"#6366f1"},
+    "holidays":[
+      {"date":"2026-01-01","name":"Tahun Baru Masehi","type":"national"},
+      {"date":"2026-01-16","name":"Isra Mikraj Nabi Muhammad SAW","type":"national"},
+      {"date":"2026-02-17","name":"Tahun Baru Imlek 2577","type":"national"},
+      {"date":"2026-03-19","name":"Hari Raya Nyepi Saka 1950","type":"national"},
+      {"date":"2026-03-20","name":"Hari Raya Idul Fitri 1447 H","type":"national"},
+      {"date":"2026-03-21","name":"Hari Raya Idul Fitri 1447 H","type":"national"},
+      {"date":"2026-04-03","name":"Wafat Yesus Kristus","type":"national"},
+      {"date":"2026-05-01","name":"Hari Buruh Internasional","type":"national"},
+      {"date":"2026-05-14","name":"Kenaikan Yesus Kristus","type":"national"},
+      {"date":"2026-05-27","name":"Hari Raya Idul Adha 1447 H","type":"national"},
+      {"date":"2026-05-31","name":"Hari Raya Waisak 2570","type":"national"},
+      {"date":"2026-06-01","name":"Hari Lahir Pancasila","type":"national"},
+      {"date":"2026-06-16","name":"Tahun Baru Islam 1448 H","type":"national"},
+      {"date":"2026-08-17","name":"Hari Kemerdekaan RI","type":"national"},
+      {"date":"2026-08-25","name":"Maulid Nabi Muhammad SAW","type":"national"},
+      {"date":"2026-12-25","name":"Hari Raya Natal","type":"national"}
+    ],
+    "importantDates":[
+      {"date":"2026-09-07","name":"Awal Perkuliahan","type":"academic"},
+      {"date":"2026-12-15","name":"Awal Ujian Akhir Semester","type":"academic"},
+      {"date":"2027-01-15","name":"Akhir Semester","type":"academic"}
+    ],
+    "schedules":{
+      "Senin":[
+        {"kode":"TI506","matkul":"Manajemen Proyek","kelas":"D","jam":"08.50-11.30","ruang":"F6.102","dosen":"HQ/WS"},
+        {"kode":"TI503","matkul":"Pengembangan Web Service","kelas":"B","jam":"08.50-11.30","ruang":"F4.002","dosen":"DP/QA"},
+        {"kode":"TI501","matkul":"Pengembangan Aplikasi Web","kelas":"E","jam":"08.50-11.30","ruang":"F4.003","dosen":"AS"},
+        {"kode":"TI506","matkul":"Manajemen Proyek","kelas":"E","jam":"12.10-15.00","ruang":"F6.102","dosen":"HQ"},
+        {"kode":"TI508","matkul":"Technopreneurship","kelas":"D","jam":"13.20-15.00","ruang":"F4.001","dosen":"FF"},
+        {"kode":"TI503","matkul":"Pengembangan Web Service","kelas":"A","jam":"13.20-16.20","ruang":"F4.002","dosen":"DP"},
+        {"kode":"TI501","matkul":"Pengembangan Aplikasi Web","kelas":"C","jam":"13.20-16.20","ruang":"F4.003","dosen":"AS"}
+      ],
+      "Selasa":[
+        {"kode":"TI506","matkul":"Manajemen Proyek","kelas":"A","jam":"07.50-10.30","ruang":"F4.001","dosen":"HQ"},
+        {"kode":"TI503","matkul":"Pengembangan Web Service","kelas":"E","jam":"08.50-11.30","ruang":"F6.102","dosen":"FF"},
+        {"kode":"TI506","matkul":"Manajemen Proyek","kelas":"C","jam":"09.40-13.10","ruang":"F6.202","dosen":"HQ"},
+        {"kode":"TI503","matkul":"Pengembangan Web Service","kelas":"D","jam":"13.20-16.20","ruang":"F6.102","dosen":"DP/AM"},
+        {"kode":"TI506","matkul":"Manajemen Proyek","kelas":"B","jam":"13.20-16.20","ruang":"F6.203","dosen":"HQ/WS"},
+        {"kode":"TI508","matkul":"Technopreneurship","kelas":"A","jam":"13.20-15.00","ruang":"F4.001","dosen":"FF"},
+        {"kode":"TI504","matkul":"WAN dan Teknologi Jaringan","kelas":"C","jam":"15.30-17.10","ruang":"F4.001","dosen":"FF"}
+      ],
+      "Rabu":[
+        {"kode":"TI501","matkul":"Pengembangan Aplikasi Web","kelas":"A","jam":"08.50-11.30","ruang":"-","dosen":"AS"},
+        {"kode":"TI503","matkul":"Pengembangan Web Service","kelas":"C","jam":"08.50-11.30","ruang":"-","dosen":"DP"},
+        {"kode":"TI508","matkul":"Technopreneurship","kelas":"E","jam":"08.50-11.30","ruang":"-","dosen":"EI"},
+        {"kode":"TI501","matkul":"Pengembangan Aplikasi Web","kelas":"B","jam":"13.20-16.20","ruang":"-","dosen":"AS"},
+        {"kode":"TI504","matkul":"WAN dan Teknologi Jaringan","kelas":"A","jam":"13.20-15.00","ruang":"-","dosen":"EP"},
+        {"kode":"TI508","matkul":"Technopreneurship","kelas":"C","jam":"13.20-15.00","ruang":"-","dosen":"FF"}
+      ],
+      "Kamis":[
+        {"kode":"TI504","matkul":"WAN dan Teknologi Jaringan","kelas":"E","jam":"07.00-08.40","ruang":"-","dosen":"FF"},
+        {"kode":"TI505","matkul":"Tata Kelola Teknologi Informasi","kelas":"D,E,F","jam":"08.50-11.30","ruang":"-","dosen":"CO"},
+        {"kode":"TI502","matkul":"Pengembangan Aplikasi Mobile","kelas":"B","jam":"08.50-11.30","ruang":"-","dosen":"HS"},
+        {"kode":"TI505","matkul":"Tata Kelola Teknologi Informasi","kelas":"A,B,C","jam":"13.20-16.20","ruang":"-","dosen":"CO"},
+        {"kode":"TI501","matkul":"Pengembangan Aplikasi Web","kelas":"D","jam":"13.20-16.20","ruang":"-","dosen":"QA"},
+        {"kode":"TI502","matkul":"Pengembangan Aplikasi Mobile","kelas":"E","jam":"13.20-16.20","ruang":"-","dosen":"RG"},
+        {"kode":"TI504","matkul":"WAN dan Teknologi Jaringan","kelas":"B","jam":"16.20-18.00","ruang":"-","dosen":"EP"},
+        {"kode":"TI502","matkul":"Pengembangan Aplikasi Mobile","kelas":"C","jam":"16.20-19.20","ruang":"-","dosen":"HS"}
+      ],
+      "Jumat":[
+        {"kode":"TI502","matkul":"Pengembangan Aplikasi Mobile","kelas":"A","jam":"07.50-10.30","ruang":"-","dosen":"HS"},
+        {"kode":"TI504","matkul":"WAN dan Teknologi Jaringan","kelas":"D","jam":"08.50-10.30","ruang":"-","dosen":"FF"},
+        {"kode":"TI502","matkul":"Pengembangan Aplikasi Mobile","kelas":"D","jam":"13.20-16.20","ruang":"-","dosen":"HS"}
+      ],
+      "Sabtu":[
+        {"kode":"TI507","matkul":"Bahasa Inggris untuk Membaca Naskah Akademik","kelas":"B","jam":"07.00-08.40","ruang":"-","dosen":"TW"},
+        {"kode":"TI507","matkul":"Bahasa Inggris untuk Membaca Naskah Akademik","kelas":"F","jam":"07.00-08.40","ruang":"-","dosen":"-"},
+        {"kode":"TI507","matkul":"Bahasa Inggris untuk Membaca Naskah Akademik","kelas":"D","jam":"08.50-10.30","ruang":"-","dosen":"TW"},
+        {"kode":"TI507","matkul":"Bahasa Inggris untuk Membaca Naskah Akademik","kelas":"C","jam":"08.50-10.30","ruang":"-","dosen":"TW"},
+        {"kode":"TI507","matkul":"Bahasa Inggris untuk Membaca Naskah Akademik","kelas":"A","jam":"10.40-13.10","ruang":"-","dosen":"TW"},
+        {"kode":"TI507","matkul":"Bahasa Inggris untuk Membaca Naskah Akademik","kelas":"E","jam":"13.20-15.00","ruang":"-","dosen":"TW"}
+      ]
+    }
+  }]
 };
 
+/* ═══════════════════════════════════════════════════════════════
+   APP STATE
+   ═══════════════════════════════════════════════════════════════ */
 const DAY_ORDER = ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const DAY_SHORT = {Senin:"Sn",Selasa:"Sl",Rabu:"Rb",Kamis:"Km",Jumat:"Jm",Sabtu:"Sb"};
+const DAY_TO_DATE_OFFSET = {Senin:0,Selasa:1,Rabu:2,Kamis:3,Jumat:4,Sabtu:5};
 
-function rowHtml(day, row){
-  const [kode, matkul, kelas, jam, ruang, dosen, isB] = row;
-  return `<tr class="${isB ? 'classB' : ''}" data-day="${day}">
-    <td class="day-tag">${day}</td>
-    <td class="kode">${kode}</td>
-    <td>${matkul}${isB ? '<span class="badge-b">B</span>' : ''}</td>
-    <td class="kelas ${isB ? 'b' : ''}">${kelas}</td>
-    <td class="jam">${jam}</td>
-    <td>${ruang}</td>
-    <td>${dosen}</td>
-  </tr>`;
-}
+const App = {
+  data: null,
+  semester: null,
+  state: {
+    semesterId: null,
+    activeTab: "schedule",
+    scheduleView: "table",
+    calendarView: "month",
+    selectedDay: "all",
+    selectedClasses: [],
+    selectedClassesCal: [],
+    theme: "light",
+  },
 
-// Build Ringkasan table
-const ringkasanBody = document.querySelector("#ringkasanTable tbody");
-let allRows = [];
-DAY_ORDER.forEach(day => {
-  DATA[day].forEach(row => allRows.push({day, row}));
-});
-ringkasanBody.innerHTML = allRows.map(r => rowHtml(r.day, r.row)).join("");
-document.getElementById("ringkasanCount").textContent = allRows.length + " sesi";
+  /* ── Init ── */
+  async init() {
+    this.data = await this.loadData();
+    this.loadPrefs();
+    this.applyTheme(this.state.theme);
+    this.populateSemesterSelect();
+    this.bindEvents();
+    if (this.state.semesterId && this.getSemester(this.state.semesterId)) {
+      this.selectSemester(this.state.semesterId, false);
+    } else {
+      this.showLanding();
+    }
+    lucide.createIcons();
+  },
 
-// Day filter chips
-const dayFilter = document.getElementById("dayFilter");
-DAY_ORDER.forEach(day => {
-  const chip = document.createElement("span");
-  chip.className = "chip";
-  chip.dataset.day = day;
-  chip.textContent = day;
-  dayFilter.appendChild(chip);
-});
+  /* ── Data Loading ── */
+  async loadData() {
+    try {
+      const res = await fetch("data/jadwal.json");
+      if (!res.ok) throw new Error(res.status);
+      return await res.json();
+    } catch (e) {
+      console.warn("Fetch data gagal, pakai fallback:", e.message);
+      return FALLBACK_DATA;
+    }
+  },
 
-dayFilter.addEventListener("click", (e) => {
-  const chip = e.target.closest(".chip");
-  if(!chip) return;
-  dayFilter.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-  chip.classList.add("active");
-  const day = chip.dataset.day;
-  const rows = ringkasanBody.querySelectorAll("tr");
-  let visible = 0;
-  rows.forEach(tr => {
-    const show = day === "all" || tr.dataset.day === day;
-    tr.style.display = show ? "" : "none";
-    if(show) visible++;
-  });
-  document.getElementById("ringkasanCount").textContent = visible + " sesi";
-});
+  /* ── Semester Helpers ── */
+  getSemester(id) { return this.data.semesters.find(s => s.id === id) || null; },
+  getAllClasses(sem) {
+    const cls = new Set();
+    Object.values(sem.schedules).forEach(rows => {
+      rows.forEach(r => r.kelas.split(",").forEach(c => cls.add(c.trim())));
+    });
+    return [...cls].sort();
+  },
+  flattenSchedules(sem, dayFilter, classFilter) {
+    const items = [];
+    const days = dayFilter === "all" ? DAY_ORDER : [dayFilter];
+    days.forEach(day => {
+      (sem.schedules[day] || []).forEach(r => {
+        const rClasses = r.kelas.split(",").map(c => c.trim());
+        if (classFilter.length === 0 || classFilter.some(c => rClasses.includes(c))) {
+          items.push({ day, ...r, rClasses, color: sem.subjectColors[r.kode] || null });
+        }
+      });
+    });
+    return items;
+  },
 
-// Build Fokus Kelas B table
-const fokusBody = document.querySelector("#fokusTable tbody");
-let bRows = [];
-DAY_ORDER.forEach(day => {
-  DATA[day].forEach(row => { if(row[6]) bRows.push({day, row}); });
-});
-fokusBody.innerHTML = bRows.length
-  ? bRows.map(r => rowHtml(r.day, r.row)).join("")
-  : `<tr class="empty-row"><td colspan="7">Tidak ada sesi Kelas B.</td></tr>`;
-document.getElementById("fokusCount").textContent = bRows.length + " sesi Kelas B";
+  /* ── Select Semester ── */
+  selectSemester(id, save = true) {
+    this.semester = this.getSemester(id);
+    if (!this.semester) return;
+    this.state.semesterId = id;
+    this.state.selectedDay = "all";
+    this.state.selectedClasses = [];
+    this.state.selectedClassesCal = [];
+    if (save) this.savePrefs();
+    document.getElementById("semesterSelect").value = id;
+    document.getElementById("headerMeta").textContent =
+      `${this.semester.program} · ${this.semester.label} · ${this.semester.period} ${this.semester.academicYear}`;
+    document.getElementById("headerLogo").textContent = `JadKul ${this.semester.label}`;
+    document.getElementById("landingPage").style.display = "none";
+    document.getElementById("appMain").style.display = "";
+    this.renderToolbar("schedule");
+    this.renderToolbar("calendar");
+    this.renderView("schedule");
+    this.renderView("calendar");
+    document.querySelectorAll(".semester-cards .sem-card").forEach(c => c.classList.toggle("selected", c.dataset.id === id));
+    this.updateFabActive();
+    lucide.createIcons();
+  },
 
-// Tabs
-document.querySelectorAll(".tab-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.panel).classList.add("active");
-  });
-});
+  /* ── Landing ── */
+  showLanding() {
+    document.getElementById("landingPage").style.display = "";
+    document.getElementById("appMain").style.display = "none";
+    const wrap = document.getElementById("semesterCards");
+    wrap.innerHTML = this.data.semesters.map(s => {
+      const classes = this.getAllClasses(s).join(", ");
+      const selected = s.id === this.state.semesterId;
+      return `<div class="sem-card${selected ? " selected" : ""}" data-id="${s.id}">
+        <div class="sem-card-header">
+          <span class="sem-card-title">${s.program} ${s.label}</span>
+          <span class="sem-card-badge">${s.period}</span>
+        </div>
+        <div class="sem-card-meta">
+          <span><i data-lucide="book-open"></i> ${s.academicYear}</span>
+          <span><i data-lucide="users"></i> Kelas: ${classes}</span>
+        </div>
+      </div>`;
+    }).join("");
+    wrap.querySelectorAll(".sem-card").forEach(card => {
+      card.addEventListener("click", () => this.selectSemester(card.dataset.id));
+    });
+    lucide.createIcons();
+  },
+
+  /* ── Semester Select Dropdown ── */
+  populateSemesterSelect() {
+    const sel = document.getElementById("semesterSelect");
+    sel.innerHTML = this.data.semesters.map(s =>
+      `<option value="${s.id}">${s.program} ${s.label} (${s.period} ${s.academicYear})</option>`
+    ).join("");
+  },
+
+  /* ── Toolbar Render ── */
+  renderToolbar(tab) {
+    const sem = this.semester;
+    if (!sem) return;
+    if (tab === "schedule") {
+      const dayWrap = document.getElementById("dayFilter");
+      dayWrap.innerHTML = `<button class="chip active" data-day="all">Semua</button>` +
+        DAY_ORDER.map(d => `<button class="chip" data-day="${d}">${d}</button>`).join("");
+      dayWrap.querySelectorAll(".chip").forEach(c => {
+        c.addEventListener("click", () => {
+          dayWrap.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+          c.classList.add("active");
+          this.state.selectedDay = c.dataset.day;
+          this.renderView("schedule");
+        });
+      });
+      this.renderClassChips("classFilter", this.state.selectedClasses, (cls) => {
+        this.state.selectedClasses = cls;
+        this.renderView("schedule");
+      });
+    } else {
+      this.renderClassChips("classFilterCal", this.state.selectedClassesCal, (cls) => {
+        this.state.selectedClassesCal = cls;
+        this.renderView("calendar");
+      });
+    }
+    lucide.createIcons();
+  },
+
+  renderClassChips(containerId, selected, onChange) {
+    const sem = this.semester;
+    const classes = this.getAllClasses(sem);
+    const wrap = document.getElementById(containerId);
+    const allActive = selected.length === 0;
+    wrap.innerHTML = `<button class="chip${allActive ? " active" : ""}" data-cls="all">Semua</button>` +
+      classes.map(c => `<button class="chip${selected.includes(c) ? " multi-active" : ""}" data-cls="${c}">${c}</button>`).join("");
+    wrap.querySelectorAll(".chip").forEach(ch => {
+      ch.addEventListener("click", () => {
+        const cls = ch.dataset.cls;
+        if (cls === "all") {
+          selected.length = 0;
+        } else {
+          const idx = selected.indexOf(cls);
+          if (idx >= 0) selected.splice(idx, 1); else selected.push(cls);
+        }
+        onChange([...selected]);
+        this.renderClassChips(containerId, selected, onChange);
+      });
+    });
+  },
+
+  /* ── View Render ── */
+  renderView(tab) {
+    const sem = this.semester;
+    if (!sem) return;
+    const clsFilter = tab === "schedule" ? this.state.selectedClasses : this.state.selectedClassesCal;
+    const data = this.flattenSchedules(sem, tab === "schedule" ? this.state.selectedDay : "all", clsFilter);
+    const container = document.getElementById(tab === "schedule" ? "scheduleContainer" : "calendarContainer");
+    const countEl = document.getElementById(tab === "schedule" ? "scheduleCount" : "calendarCount");
+    if (tab === "schedule") {
+      const view = this.state.scheduleView;
+      if (view === "table") this.renderTable(data, container, false);
+      else if (view === "grid") this.renderGrid(data, container);
+      else if (view === "list") this.renderList(data, container);
+      else if (view === "compact") this.renderTable(data, container, true);
+      countEl.textContent = `${data.length} sesi`;
+    } else {
+      const view = this.state.calendarView;
+      if (view === "month") this.renderMonth(sem, clsFilter, container);
+      else if (view === "agenda") this.renderAgenda(data, container);
+      else if (view === "timeline") this.renderTimeline(data, container);
+      const days = new Set(data.map(d => d.day));
+      countEl.textContent = `${data.length} sesi · ${days.size} hari`;
+    }
+    lucide.createIcons();
+  },
+
+  /* ── Table Renderer ── */
+  renderTable(data, container, compact) {
+    if (!data.length) {
+      container.innerHTML = this.emptyState("Tidak ada sesi ditemukan.");
+      return;
+    }
+    const cls = compact ? "view-compact" : "view-table";
+    let html = `<div class="table-wrap ${cls}"><table><thead><tr>`;
+    if (compact) {
+      html += `<th>Kode</th><th>Matkul + Kelas</th><th>Jam</th><th>Ruang</th><th>Dosen</th>`;
+    } else {
+      html += `<th>Hari</th><th>Kode</th><th>Matkul</th><th>Kelas</th><th>Jam</th><th>Ruang</th><th>Dosen</th>`;
+    }
+    html += `</tr></thead><tbody>`;
+    data.forEach(r => {
+      const hl = r.rClasses.some(c => this.state.selectedClasses.includes(c)) ? " highlight" : "";
+      const dot = r.color ? `<span class="subject-dot" style="background:${r.color}"></span>` : "";
+      if (compact) {
+        html += `<tr class="${hl}">
+          <td class="kode">${r.kode}</td>
+          <td>${dot}${r.matkul} <span class="kelas-tag">${r.kelas}</span></td>
+          <td class="jam">${r.jam}</td>
+          <td>${r.ruang}</td>
+          <td>${r.dosen}</td>
+        </tr>`;
+      } else {
+        html += `<tr class="${hl}">
+          <td class="day-tag">${r.day}</td>
+          <td class="kode">${dot}${r.kode}</td>
+          <td>${r.matkul}</td>
+          <td class="kelas-tag">${r.kelas}</td>
+          <td class="jam">${r.jam}</td>
+          <td>${r.ruang}</td>
+          <td>${r.dosen}</td>
+        </tr>`;
+      }
+    });
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── Grid Renderer ── */
+  renderGrid(data, container) {
+    if (!data.length) {
+      container.innerHTML = this.emptyState("Tidak ada sesi ditemukan.");
+      return;
+    }
+    let html = `<div class="view-grid">`;
+    data.forEach((r, i) => {
+      const hl = r.rClasses.some(c => this.state.selectedClasses.includes(c)) ? " highlight" : "";
+      const dot = r.color ? `<span class="subject-dot" style="background:${r.color}"></span>` : "";
+      html += `<div class="grid-card${hl}" style="animation-delay:${i * 30}ms">
+        <div class="grid-card-header">
+          <span class="grid-card-kode">${dot}${r.kode}</span>
+          <span class="kelas-tag${hl ? " highlight" : ""}">${r.kelas}</span>
+        </div>
+        <div class="grid-card-matkul">${r.matkul}</div>
+        <div class="grid-card-meta">
+          <span><i data-lucide="calendar"></i> ${r.day}</span>
+          <span><i data-lucide="clock"></i> ${r.jam}</span>
+          <span><i data-lucide="map-pin"></i> ${r.ruang}</span>
+          <span><i data-lucide="user"></i> ${r.dosen}</span>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── List Renderer ── */
+  renderList(data, container) {
+    if (!data.length) {
+      container.innerHTML = this.emptyState("Tidak ada sesi ditemukan.");
+      return;
+    }
+    let html = `<div class="view-list">`;
+    const grouped = {};
+    data.forEach(r => {
+      if (!grouped[r.day]) grouped[r.day] = [];
+      grouped[r.day].push(r);
+    });
+    DAY_ORDER.forEach(day => {
+      const items = grouped[day];
+      if (!items) return;
+      html += `<div class="list-day-header"><i data-lucide="calendar"></i> ${day} <span class="list-day-count">(${items.length})</span></div>`;
+      items.forEach((r, i) => {
+        const hl = r.rClasses.some(c => this.state.selectedClasses.includes(c)) ? " highlight" : "";
+        html += `<div class="list-card${hl}" style="animation-delay:${i * 30}ms">
+          <div class="list-card-time">${r.jam}</div>
+          <div class="list-card-info">
+            <div class="list-card-title">${r.kode} — ${r.matkul}${hl ? '<span class="agenda-badge">B</span>' : ""}</div>
+            <div class="list-card-detail">Kelas ${r.kelas}</div>
+          </div>
+          <div class="list-card-right">
+            <div class="list-card-room">${r.ruang}</div>
+            <div class="list-card-lector">${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── Month Calendar Renderer ── */
+  renderMonth(sem, clsFilter, container) {
+    const start = new Date(sem.startDate + "T00:00:00");
+    const end = new Date(sem.endDate + "T00:00:00");
+    const holidayMap = {};
+    (sem.holidays || []).forEach(h => { holidayMap[h.date] = h.name; });
+    const importantMap = {};
+    (sem.importantDates || []).forEach(d => { importantMap[d.date] = d.name; });
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+
+    const classDayMap = {};
+    const allData = this.flattenSchedules(sem, "all", clsFilter);
+    allData.forEach(r => {
+      if (!classDayMap[r.day]) classDayMap[r.day] = new Set();
+      classDayMap[r.day].add(r.kode);
+    });
+
+    const months = [];
+    let cur = new Date(start);
+    while (cur <= end) {
+      const y = cur.getFullYear(), m = cur.getMonth();
+      const monthData = { year: y, month: m, days: [] };
+      const firstDay = new Date(y, m, 1);
+      const lastDay = new Date(y, m + 1, 0);
+      const startOffset = (firstDay.getDay() + 6) % 7;
+      for (let i = 0; i < startOffset; i++) monthData.days.push({ empty: true });
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const dateStr = `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        const dayOfWeek = new Date(y, m, d).getDay();
+        const dayName = dayOfWeek >= 1 && dayOfWeek <= 6 ? DAY_ORDER[dayOfWeek - 1] : null;
+        const isHoliday = !!holidayMap[dateStr];
+        const isImportant = !!importantMap[dateStr];
+        const hasClass = !isHoliday && dayName && classDayMap[dayName] && classDayMap[dayName].size > 0;
+        const isToday = dateStr === todayStr;
+        monthData.days.push({
+          num: d, dateStr, isHoliday, isImportant, hasClass, isToday,
+          holidayName: holidayMap[dateStr] || null,
+          importantName: importantMap[dateStr] || null,
+        });
+      }
+      months.push(monthData);
+      cur.setMonth(cur.getMonth() + 1);
+      cur.setDate(1);
+    }
+
+    const MONTH_NAMES = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+    const DAY_NAMES = ["Sen","Sel","Rab","Kam","Jum","Sab","Min"];
+    let html = "";
+    months.forEach(m => {
+      html += `<div class="cal-month">
+        <div class="cal-month-title"><i data-lucide="calendar"></i> ${MONTH_NAMES[m.month]} ${m.year}</div>
+        <div class="cal-grid">`;
+      DAY_NAMES.forEach(d => { html += `<div class="cal-day-header">${d}</div>`; });
+      m.days.forEach(day => {
+        if (day.empty) { html += `<div class="cal-day empty"></div>`; return; }
+        let cls = "cal-day num";
+        if (day.isToday) cls += " today";
+        if (day.isHoliday) cls += " holiday";
+        if (day.isImportant) cls += " important";
+        if (day.hasClass) cls += " has-class";
+        const title = day.holidayName || day.importantName || "";
+        html += `<div class="${cls}" title="${title}">${day.num}</div>`;
+      });
+      html += `</div></div>`;
+    });
+    html += `<div class="cal-legend">
+      <span><span class="cal-legend-dot" style="background:var(--amber)"></span> Hari ini</span>
+      <span><span class="cal-legend-dot" style="background:var(--danger)"></span> Libur Nasional</span>
+      <span><span class="cal-legend-dot" style="background:var(--success)"></span> Tanggal Penting</span>
+      <span><span class="cal-legend-dot" style="background:var(--navy)"></span> Ada Kuliah</span>
+    </div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── Agenda Renderer ── */
+  renderAgenda(data, container) {
+    if (!data.length) {
+      container.innerHTML = this.emptyState("Tidak ada sesi ditemukan.");
+      return;
+    }
+    const grouped = {};
+    data.forEach(r => {
+      if (!grouped[r.day]) grouped[r.day] = [];
+      grouped[r.day].push(r);
+    });
+    const today = new Date();
+    const todayDay = DAY_ORDER[(today.getDay() === 0 ? 6 : today.getDay() - 1)];
+    let html = "";
+    DAY_ORDER.forEach(day => {
+      const items = grouped[day];
+      if (!items) return;
+      const isToday = day === todayDay;
+      html += `<div class="agenda-day">
+        <div class="agenda-date${isToday ? " today-date" : ""}">
+          <i data-lucide="calendar"></i> ${day}${isToday ? " (Hari Ini)" : ""}
+        </div>`;
+      items.forEach(r => {
+        const hl = r.rClasses.some(c => this.state.selectedClasses.includes(c)) ? " highlight" : "";
+        html += `<div class="agenda-item${hl}">
+          <div class="agenda-time">${r.jam}</div>
+          <div class="agenda-info">
+            <div class="agenda-title">${r.kode} — ${r.matkul}${r.kelas.includes(",") ? "" : ` <span class="agenda-badge">${r.kelas}</span>`}</div>
+            <div class="agenda-detail">Ruang ${r.ruang} · ${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+  },
+
+  /* ── Timeline Renderer ── */
+  renderTimeline(data, container) {
+    if (!data.length) {
+      container.innerHTML = this.emptyState("Tidak ada sesi ditemukan.");
+      return;
+    }
+    const grouped = {};
+    data.forEach(r => {
+      if (!grouped[r.day]) grouped[r.day] = [];
+      grouped[r.day].push(r);
+    });
+    let html = "";
+    DAY_ORDER.forEach(day => {
+      const items = grouped[day];
+      if (!items) return;
+      const sorted = items.sort((a, b) => {
+        const tA = parseInt(a.jam.split("-")[0].replace(".", ""));
+        const tB = parseInt(b.jam.split("-")[0].replace(".", ""));
+        return tA - tB;
+      });
+      html += `<div class="timeline-day">
+        <div class="timeline-day-header"><i data-lucide="calendar"></i> ${day}</div>
+        <div class="timeline">`;
+      sorted.forEach(r => {
+        const hl = r.rClasses.some(c => this.state.selectedClasses.includes(c)) ? " highlight" : "";
+        html += `<div class="timeline-item${hl}">
+          <div class="timeline-time">${r.jam}</div>
+          <div class="timeline-content${hl}">
+            <div class="timeline-title">${r.kode} — ${r.matkul}</div>
+            <div class="timeline-meta">Kelas ${r.kelas} · ${r.ruang} · ${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    });
+    container.innerHTML = html;
+  },
+
+  /* ── Empty State ── */
+  emptyState(msg) {
+    return `<div class="empty-state"><i data-lucide="calendar-x"></i><p>${msg}</p></div>`;
+  },
+
+  /* ── Theme ── */
+  applyTheme(theme) {
+    this.state.theme = theme;
+    if (theme === "system") {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+    document.querySelectorAll(".theme-btn").forEach(b => b.classList.toggle("active", b.dataset.theme === theme));
+    this.savePrefs();
+    this.updateFabActive();
+  },
+  cycleTheme() {
+    const order = ["light", "dark", "system"];
+    const next = order[(order.indexOf(this.state.theme) + 1) % order.length];
+    this.applyTheme(next);
+  },
+  updateFabActive() {
+    const themeIcon = { light: "sun", dark: "moon", system: "monitor" };
+    const btn = document.getElementById("fabTheme");
+    if (btn) btn.innerHTML = `<i data-lucide="${themeIcon[this.state.theme]}"></i>`;
+    document.getElementById("fabSchedule")?.classList.toggle("active", this.state.activeTab === "schedule");
+    document.getElementById("fabCalendar")?.classList.toggle("active", this.state.activeTab === "calendar");
+    lucide.createIcons();
+  },
+
+  /* ── localStorage ── */
+  savePrefs() {
+    const prefs = {
+      semesterId: this.state.semesterId,
+      scheduleView: this.state.scheduleView,
+      calendarView: this.state.calendarView,
+      theme: this.state.theme,
+      mainClass: this.state.selectedClasses[0] || "",
+    };
+    try { localStorage.setItem("jadkul_prefs", JSON.stringify(prefs)); } catch(e) {}
+  },
+  loadPrefs() {
+    try {
+      const raw = localStorage.getItem("jadkul_prefs");
+      if (!raw) return;
+      const p = JSON.parse(raw);
+      if (p.semesterId) this.state.semesterId = p.semesterId;
+      if (p.scheduleView) this.state.scheduleView = p.scheduleView;
+      if (p.calendarView) this.state.calendarView = p.calendarView;
+      if (p.theme) this.state.theme = p.theme;
+      if (p.mainClass) this.state.selectedClasses = [p.mainClass];
+    } catch(e) {}
+  },
+
+  /* ── Events ── */
+  bindEvents() {
+    document.getElementById("semesterSelect").addEventListener("change", (e) => {
+      this.selectSemester(e.target.value);
+      this.showLanding();
+      setTimeout(() => this.selectSemester(e.target.value), 10);
+    });
+
+    document.querySelectorAll(".theme-btn").forEach(btn => {
+      btn.addEventListener("click", () => this.applyTheme(btn.dataset.theme));
+    });
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        this.state.activeTab = btn.dataset.tab;
+        document.getElementById(btn.dataset.tab + "Panel").classList.add("active");
+        this.updateFabActive();
+        lucide.createIcons();
+      });
+    });
+
+    document.querySelectorAll("#scheduleViewTabs .view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#scheduleViewTabs .view-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        this.state.scheduleView = btn.dataset.view;
+        this.renderView("schedule");
+        this.savePrefs();
+      });
+    });
+
+    document.querySelectorAll("#calendarViewTabs .view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#calendarViewTabs .view-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        this.state.calendarView = btn.dataset.view;
+        this.renderView("calendar");
+        this.savePrefs();
+      });
+    });
+
+    document.getElementById("fabMain").addEventListener("click", () => {
+      const actions = document.getElementById("fabActions");
+      const main = document.getElementById("fabMain");
+      const isOpen = actions.classList.toggle("open");
+      main.classList.toggle("open", isOpen);
+    });
+
+    document.getElementById("fabTheme").addEventListener("click", () => this.cycleTheme());
+    document.getElementById("fabTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.getElementById("fabSchedule").addEventListener("click", () => {
+      document.querySelector('.tab-btn[data-tab="schedule"]').click();
+    });
+    document.getElementById("fabCalendar").addEventListener("click", () => {
+      document.querySelector('.tab-btn[data-tab="calendar"]').click();
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if (this.state.theme === "system") this.applyTheme("system");
+    });
+
+    document.addEventListener("click", (e) => {
+      const fab = document.getElementById("fabWrap");
+      if (fab && !fab.contains(e.target)) {
+        document.getElementById("fabActions").classList.remove("open");
+        document.getElementById("fabMain").classList.remove("open");
+      }
+    });
+  },
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   BOOTSTRAP
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener("DOMContentLoaded", () => App.init());
 </script>
-
 </body>
 </html>
