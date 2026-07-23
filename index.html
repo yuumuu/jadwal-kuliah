@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jadwal TI5xx — Semester 5</title>
+<style>
+  :root{
+    --ink:#1c2b3a;
+    --paper:#f6f4ef;
+    --card:#ffffff;
+    --line:#dcd6c8;
+    --navy:#1f3a5f;
+    --navy-deep:#132840;
+    --amber:#f5c344;
+    --amber-ink:#6b4a05;
+    --amber-bg:#fff3d6;
+    --muted:#6b7280;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+    line-height:1.5;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  header{
+    background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+    color:#f2ede0;
+    padding:2.6rem 1.5rem 2.2rem;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    right:-60px; top:-60px;
+    width:220px; height:220px;
+    border:1px solid rgba(245,195,68,0.35);
+    border-radius:50%;
+  }
+  header::before{
+    content:"";
+    position:absolute;
+    right:20px; bottom:-90px;
+    width:180px; height:180px;
+    border:1px solid rgba(245,195,68,0.2);
+    border-radius:50%;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin:0 0 0.6rem;
+  }
+  h1{
+    margin:0;
+    font-size:clamp(1.6rem,3.4vw,2.3rem);
+    font-weight:700;
+    max-width:38ch;
+  }
+  .sub{
+    margin:0.6rem 0 0;
+    color:#cdd7e4;
+    max-width:56ch;
+    font-size:0.95rem;
+  }
+
+  .legend{
+    display:flex;
+    gap:1.4rem;
+    margin-top:1.4rem;
+    flex-wrap:wrap;
+    font-size:0.82rem;
+  }
+  .legend span{display:inline-flex; align-items:center; gap:0.5rem;}
+  .swatch{width:14px; height:14px; border-radius:3px; display:inline-block;}
+  .swatch.b{background:var(--amber); border:1px solid #c99a1c;}
+  .swatch.n{background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);}
+
+  main{
+    max-width:1080px;
+    margin:0 auto;
+    padding:2.2rem 1.5rem 4rem;
+  }
+
+  nav.tabs{
+    display:flex;
+    gap:0.5rem;
+    margin-bottom:1.6rem;
+    border-bottom:1px solid var(--line);
+  }
+  nav.tabs button{
+    font-family:inherit;
+    font-size:0.9rem;
+    font-weight:600;
+    background:none;
+    border:none;
+    padding:0.75rem 1rem;
+    cursor:pointer;
+    color:var(--muted);
+    border-bottom:2px solid transparent;
+    margin-bottom:-1px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.tabs button.active{
+    color:var(--navy-deep);
+    border-bottom-color:var(--amber);
+  }
+  nav.tabs button:hover{ color:var(--navy-deep); }
+
+  .panel{ display:none; }
+  .panel.active{ display:block; }
+
+  .toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0.8rem;
+    margin-bottom:1rem;
+  }
+  .daychips{
+    display:flex;
+    gap:0.4rem;
+    flex-wrap:wrap;
+  }
+  .chip{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    padding:0.35rem 0.7rem;
+    border-radius:999px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--muted);
+    cursor:pointer;
+  }
+  .chip.active{
+    background:var(--navy);
+    color:#fff;
+    border-color:var(--navy);
+  }
+  .count{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--muted);
+  }
+
+  .table-wrap{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(20,30,45,0.04);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.88rem;
+  }
+  thead th{
+    background:var(--navy-deep);
+    color:#f2ede0;
+    text-align:left;
+    font-weight:600;
+    font-size:0.74rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:0.7rem 0.9rem;
+    position:sticky;
+    top:0;
+  }
+  tbody td{
+    padding:0.65rem 0.9rem;
+    border-top:1px solid var(--line);
+    vertical-align:top;
+  }
+  tbody tr:hover td{ background:#faf8f2; }
+  tbody tr.classB td{
+    background:var(--amber-bg);
+  }
+  tbody tr.classB:hover td{ background:#fbe9bc; }
+  .kode{ font-family:var(--mono); font-weight:600; color:var(--navy-deep); white-space:nowrap; }
+  .kelas{ font-family:var(--mono); font-weight:600; }
+  .kelas.b{ color:var(--amber-ink); }
+  .jam{ font-family:var(--mono); white-space:nowrap; color:var(--ink); }
+  .day-tag{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    text-transform:uppercase;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .badge-b{
+    display:inline-block;
+    margin-left:0.4rem;
+    font-family:var(--mono);
+    font-size:0.65rem;
+    background:var(--amber);
+    color:#513a04;
+    padding:0.05rem 0.35rem;
+    border-radius:4px;
+    vertical-align:middle;
+  }
+
+  .empty-row td{
+    text-align:center;
+    padding:2rem;
+    color:var(--muted);
+    font-style:italic;
+  }
+
+  footer{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 1.5rem 3rem;
+    color:var(--muted);
+    font-size:0.8rem;
+  }
+
+  @media (max-width:640px){
+    thead th:nth-child(6), tbody td:nth-child(6){ display:none; }
+    .table-wrap{ overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">TI UMY · Semester Gasal 2026</p>
+  <h1>Jadwal Mata Kuliah TI5xx (Semester 5)</h1>
+  <p class="sub">Ringkasan lintas hari dan sorotan khusus Kelas B, disusun dari jadwal pengajaran mingguan.</p>
+  <div class="legend">
+    <span><i class="swatch b"></i> Kelas B</span>
+    <span><i class="swatch n"></i> Kelas lain (referensi)</span>
+  </div>
+</header>
+
+<main>
+  <nav class="tabs">
+    <button class="tab-btn active" data-panel="ringkasan">Ringkasan TI5xx</button>
+    <button class="tab-btn" data-panel="fokus">Fokus Kelas B</button>
+  </nav>
+
+  <!-- RINGKASAN PANEL -->
+  <section id="ringkasan" class="panel active">
+    <div class="toolbar">
+      <div class="daychips" id="dayFilter">
+        <span class="chip active" data-day="all">Semua Hari</span>
+      </div>
+      <span class="count" id="ringkasanCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="ringkasanTable">
+        <thead>
+          <tr>
+            <th>Hari</th>
+            <th>Kode</th>
+            <th>Matkul</th>
+            <th>Kelas</th>
+            <th>Jam</th>
+            <th>Ruang</th>
+            <th>Dosen</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FOKUS KELAS B PANEL -->
+  <section id="fokus" class="panel">
+    <div class="toolbar">
+      <span class="count" id="fokusCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="fokusTable">
+        <thead>
+          <tr>
+            <th>Hari</th>
+            <th>Kode</th>
+            <th>Matkul</th>
+            <th>Kelas</th>
+            <th>Jam</th>
+            <th>Ruang</th>
+            <th>Dosen</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Disusun dari dokumen jadwal pengajaran TI UMY Semester Gasal 2026. Ruang untuk Selasa–Jumat diturunkan dari urutan kolom sumber dan mungkin perlu dicek ulang untuk presisi penuh.
+</footer>
+
+<script>
+const DATA = {
+  "Senin": [
+    ["TI506","Manajemen Proyek","D","08.50–11.30","F6.102","HQ/WS",false],
+    ["TI503","Pengembangan Web Service","B","08.50–11.30","F4.002","DP/QA",true],
+    ["TI501","Pengembangan Aplikasi Web","E","08.50–11.30","F4.003","AS",false],
+    ["TI506","Manajemen Proyek","E","12.10–15.00","F6.102","HQ",false],
+    ["TI508","Technopreneurship","D","13.20–15.00","F4.001","FF",false],
+    ["TI503","Pengembangan Web Service","A","13.20–16.20","F4.002","DP",false],
+    ["TI501","Pengembangan Aplikasi Web","C","13.20–16.20","F4.003","AS",false]
+  ],
+  "Selasa": [
+    ["TI506","Manajemen Proyek","A","07.50–10.30","F4.001","HQ",false],
+    ["TI503","Pengembangan Web Service","E","08.50–11.30","F6.102","FF",false],
+    ["TI506","Manajemen Proyek","C","09.40–13.10","F6.202","HQ",false],
+    ["TI503","Pengembangan Web Service","D","13.20–16.20","F6.102","DP/AM",false],
+    ["TI506","Manajemen Proyek","B","13.20–16.20","F6.203","HQ/WS",true],
+    ["TI508","Technopreneurship","A","13.20–15.00","F4.001","FF",false],
+    ["TI504","WAN dan Teknologi Jaringan","C","15.30–17.10","F4.001","FF",false]
+  ],
+  "Rabu": [
+    ["TI501","Pengembangan Aplikasi Web","A","08.50–11.30","-","AS",false],
+    ["TI503","Pengembangan Web Service","C","08.50–11.30","-","DP",false],
+    ["TI508","Technopreneurship","E","08.50–11.30","-","EI",false],
+    ["TI501","Pengembangan Aplikasi Web","B","13.20–16.20","-","AS",true],
+    ["TI504","WAN dan Teknologi Jaringan","A","13.20–15.00","-","EP",false],
+    ["TI508","Technopreneurship","C","13.20–15.00","-","FF",false]
+  ],
+  "Kamis": [
+    ["TI504","WAN dan Teknologi Jaringan","E","07.00–08.40","-","FF",false],
+    ["TI505","Tata Kelola Teknologi Informasi","D,E,F","08.50–11.30","-","CO",false],
+    ["TI502","Pengembangan Aplikasi Mobile","B","08.50–11.30","-","HS",true],
+    ["TI505","Tata Kelola Teknologi Informasi","A,B,C","13.20–16.20","-","CO",true],
+    ["TI501","Pengembangan Aplikasi Web","D","13.20–16.20","-","QA",false],
+    ["TI502","Pengembangan Aplikasi Mobile","E","13.20–16.20","-","RG",false],
+    ["TI504","WAN dan Teknologi Jaringan","B","16.20–18.00","-","EP",true],
+    ["TI502","Pengembangan Aplikasi Mobile","C","16.20–19.20","-","HS",false]
+  ],
+  "Jumat": [
+    ["TI502","Pengembangan Aplikasi Mobile","A","07.50–10.30","-","HS",false],
+    ["TI504","WAN dan Teknologi Jaringan","D","08.50–10.30","-","FF",false],
+    ["TI502","Pengembangan Aplikasi Mobile","D","13.20–16.20","-","HS",false]
+  ],
+  "Sabtu": [
+    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","B","07.00–08.40","-","TW",true],
+    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","F","07.00–08.40","-","-",false],
+    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","D","08.50–10.30","-","TW",false],
+    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","C","08.50–10.30","-","TW",false],
+    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","A","10.40–13.10","-","TW",false],
+    ["TI507","Bahasa Inggris untuk Membaca Naskah Akademik","E","13.20–15.00","-","TW",false]
+  ]
+};
+
+const DAY_ORDER = ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+
+function rowHtml(day, row){
+  const [kode, matkul, kelas, jam, ruang, dosen, isB] = row;
+  return `<tr class="${isB ? 'classB' : ''}" data-day="${day}">
+    <td class="day-tag">${day}</td>
+    <td class="kode">${kode}</td>
+    <td>${matkul}${isB ? '<span class="badge-b">B</span>' : ''}</td>
+    <td class="kelas ${isB ? 'b' : ''}">${kelas}</td>
+    <td class="jam">${jam}</td>
+    <td>${ruang}</td>
+    <td>${dosen}</td>
+  </tr>`;
+}
+
+// Build Ringkasan table
+const ringkasanBody = document.querySelector("#ringkasanTable tbody");
+let allRows = [];
+DAY_ORDER.forEach(day => {
+  DATA[day].forEach(row => allRows.push({day, row}));
+});
+ringkasanBody.innerHTML = allRows.map(r => rowHtml(r.day, r.row)).join("");
+document.getElementById("ringkasanCount").textContent = allRows.length + " sesi";
+
+// Day filter chips
+const dayFilter = document.getElementById("dayFilter");
+DAY_ORDER.forEach(day => {
+  const chip = document.createElement("span");
+  chip.className = "chip";
+  chip.dataset.day = day;
+  chip.textContent = day;
+  dayFilter.appendChild(chip);
+});
+
+dayFilter.addEventListener("click", (e) => {
+  const chip = e.target.closest(".chip");
+  if(!chip) return;
+  dayFilter.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+  chip.classList.add("active");
+  const day = chip.dataset.day;
+  const rows = ringkasanBody.querySelectorAll("tr");
+  let visible = 0;
+  rows.forEach(tr => {
+    const show = day === "all" || tr.dataset.day === day;
+    tr.style.display = show ? "" : "none";
+    if(show) visible++;
+  });
+  document.getElementById("ringkasanCount").textContent = visible + " sesi";
+});
+
+// Build Fokus Kelas B table
+const fokusBody = document.querySelector("#fokusTable tbody");
+let bRows = [];
+DAY_ORDER.forEach(day => {
+  DATA[day].forEach(row => { if(row[6]) bRows.push({day, row}); });
+});
+fokusBody.innerHTML = bRows.length
+  ? bRows.map(r => rowHtml(r.day, r.row)).join("")
+  : `<tr class="empty-row"><td colspan="7">Tidak ada sesi Kelas B.</td></tr>`;
+document.getElementById("fokusCount").textContent = bRows.length + " sesi Kelas B";
+
+// Tabs
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.panel).classList.add("active");
+  });
+});
+</script>
+
+</body>
+</html>
