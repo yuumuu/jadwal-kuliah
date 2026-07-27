@@ -1322,12 +1322,8 @@ const App = {
       (classDayMap[r.day] = classDayMap[r.day] || new Set()).add(r.kode);
     });
 
-    const todayMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-    const semStartMonth = new Date(start.getFullYear(), start.getMonth(), 1);
-    const effectiveStart = todayMonth < semStartMonth ? todayMonth : semStartMonth;
-
     const months = [];
-    let cur = new Date(effectiveStart);
+    let cur = new Date(start);
     while (cur <= end) {
       const y = cur.getFullYear(), m = cur.getMonth();
       const monthData = { year: y, month: m, days: [] };

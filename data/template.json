@@ -1,0 +1,67 @@
+{
+  "semesters": [
+    {
+      "id": "",
+      "label": "",
+      "period": "",
+      "academicYear": "",
+      "program": "",
+      "semester": 0,
+      "file": ""
+    }
+  ]
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TEMPLATE: Salin bagian di atas, lalu isi field-field berikut.
+// Buat file data terpisah untuk setiap semester.
+//
+// Contoh:
+//   id           : "s7-gasal-2027"
+//   label        : "Semester 7"
+//   period       : "Gasal" atau "Genap"
+//   academicYear : "2027/2028"
+//   program      : "TI"
+//   semester     : 7
+//   file         : "data/s7-gasal-2027.json"
+//
+// ═══════════════════════════════════════════════════════════════
+//
+// STRUKTUR FILE SEMESTER (data/s7-gasal-2027.json):
+//
+// {
+//   "id": "s7-gasal-2027",
+//   "label": "Semester 7",
+//   "period": "Gasal",
+//   "academicYear": "2027/2028",
+//   "program": "TI",
+//   "semester": 7,
+//   "startDate": "2027-09-01",
+//   "endDate": "2028-01-15",
+//   "subjectColors": {
+//     "TI701": "#3b82f6"
+//   },
+//   "holidays": [
+//     { "date": "2027-01-01", "name": "Tahun Baru Masehi", "type": "national" }
+//   ],
+//   "importantDates": [
+//     { "date": "2027-09-07", "name": "Awal Perkuliahan", "type": "academic" }
+//   ],
+//   "schedules": {
+//     "Senin": [
+//       {
+//         "kode": "TI701",
+//         "matkul": "Nama Mata Kuliah",
+//         "kelas": "A",
+//         "jam": "08.50-11.30",
+//         "ruang": "F4.001",
+//         "dosen": "XX"
+//       }
+//     ],
+//     "Selasa": [],
+//     "Rabu": [],
+//     "Kamis": [],
+//     "Jumat": [],
+//     "Sabtu": []
+//   }
+// }

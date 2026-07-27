@@ -5,13 +5,15 @@ Aplikasi web statis untuk melihat jadwal kuliah program studi Teknologi Informas
 ## Fitur
 
 - **7 View Mode** — Table, Grid Cards, Card List, Compact, Calendar Month, Agenda, Timeline
-- **Multi-Semester** — Semua semester dalam satu file JSON, pilih via landing page atau dropdown
+- **Multi-Semester** — Setiap semester punya file JSON sendiri, pilih via landing page atau dropdown
+- **Class Picker** — Dialog pemilihan kelas default muncul saat ganti semester
 - **Filter Kelas** — Multi-select chip, bisa pilih beberapa kelas sekaligus
 - **Filter Hari** — Single-select chip, filter per hari
 - **Dark Mode** — Toggle Dark / Light / System, tersimpan ke localStorage
+- **5 Style Themes** — Default, Playful, Elegant, Minimal, Bento, Formal
 - **Preferensi Tersimpan** — View mode, tema, semester, dan kelas utama disimpan otomatis
 - **Mobile-First** — Responsive design, FAB untuk navigasi cepat di mobile
-- **Data Eksternal** — Data jadwal di `data/jadwal.json`, mudah diperbarui
+- **Lazy Loading** — Data semester dimuat saat dipilih, tidak semua sekaligus
 - **Fallback Offline** — Jika JSON gagal dimuat, app tetap jalan dengan data inline
 - **Libur Nasional 2026** — Kalender menandai hari libur nasional & tanggal penting
 - **Zero Dependencies** — Hanya HTML + CSS + JS, tanpa framework
@@ -62,15 +64,39 @@ Aktifkan GitHub Pages di Settings → Source → Main branch.
 jadwal-kuliah/
 ├── index.html              # Aplikasi utama (single-page)
 ├── data/
-│   └── jadwal.json         # Data semua semester
+│   ├── jadwal.json         # Index file (metadata semester + path ke file detail)
+│   ├── s5-gasal-2026.json  # Data detail semester 5
+│   └── template.json       # Template kosong untuk semester baru
 └── README.md               # Dokumentasi ini
 ```
 
 ## Format Data JSON
 
-Edit `data/jadwal.json` untuk menambah/memperbarui jadwal.
+### Index File (`data/jadwal.json`)
 
-### Struktur Lengkap
+File index berisi metadata semua semester dan path ke file detail:
+
+```json
+{
+  "semesters": [
+    {
+      "id": "s5-gasal-2026",
+      "label": "Semester 5",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "TI",
+      "semester": 5,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/s5-gasal-2026.json"
+    }
+  ]
+}
+```
+
+### Detail File (`data/s5-gasal-2026.json`)
+
+File detail berisi jadwal kuliah, libur, dan tanggal penting:
 
 ```jsonc
 {
@@ -225,13 +251,48 @@ S5-Gasal-2026,TI507,Bahasa Inggris untuk Membaca Naskah Akademik,E,Sabtu,13.20-1
 
 ## Cara Menambah Semester Baru
 
-1. Buka `data/jadwal.json`
-2. Tambah objek baru di array `semesters` (copy dari yang sudah ada)
-3. Isi field-field yang diperlukan:
-   - `id` harus unik
-   - `schedules` harus ada untuk minimal 1 hari
-   - `holidays` dan `importantDates` opsional
-4. Save, refresh browser
+1. Copy `data/template.json` ke `data/s{N}-{period}-{year}.json` (contoh: `data/s3-gasal-2025.json`)
+2. Isi file detail dengan jadwal, libur, dan tanggal penting
+3. Buka `data/jadwal.json` (index file)
+4. Tambah objek baru di array `semesters`:
+   ```json
+   {
+     "id": "s3-gasal-2025",
+     "label": "Semester 3",
+     "period": "Gasal",
+     "academicYear": "2025/2026",
+     "program": "TI",
+     "semester": 3,
+     "startDate": "2025-09-01",
+     "endDate": "2026-01-15",
+     "file": "data/s3-gasal-2025.json"
+   }
+   ```
+5. Save semua file, refresh browser
+
+### Menambah Semester via Index
+
+Untuk menambah semester baru, cukup tambahkan entry di `data/jadwal.json` dan buat file detail-nya:
+
+```jsonc
+// data/jadwal.json
+{
+  "semesters": [
+    // ... semester yang sudah ada
+    {
+      "id": "s3-gasal-2025",
+      "label": "Semester 3",
+      "period": "Gasal",
+      "academicYear": "2025/2026",
+      "program": "TI",
+      "semester": 3,
+      "startDate": "2025-09-01",
+      "endDate": "2026-01-15",
+      "file": "data/s3-gasal-2025.json"  // ← file detail
+    }
+  ]
+}
+```
 
 ## localStorage Keys
 
@@ -246,6 +307,7 @@ Object preferences:
   "scheduleView": "table",        // table / grid / list / compact
   "calendarView": "month",        // month / agenda / timeline
   "theme": "system",              // light / dark / system
+  "style": "default",             // default / playful / elegant / minimal / bento / formal
   "mainClass": "B"                // Kelas utama (default filter)
 }
 ```
