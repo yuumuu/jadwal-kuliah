@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dokumentasi & Panduan Kontribusi — JadKul TI UMY</title>
+
+<!-- Multi-Style Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM & TOKENS (MATCHING MAIN APP)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-hover: #e2e8f0;
+
+  --border-color: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+
+  --primary: #1e3a8a;
+  --primary-light: #dbeafe;
+  --primary-text: #1e40af;
+
+  --accent: #d97706;
+  --accent-light: #fef3c7;
+  --accent-text: #92400e;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+
+  --transition-main: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-main: #0b0f19;
+  --bg-card: #151c2c;
+  --bg-subtle: #1e293b;
+  --bg-hover: #334155;
+
+  --border-color: #1e293b;
+  --border-strong: #334155;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  --primary: #3b82f6;
+  --primary-light: rgba(59, 130, 246, 0.15);
+  --primary-text: #60a5fa;
+
+  --accent: #f59e0b;
+  --accent-light: rgba(245, 158, 11, 0.15);
+  --accent-text: #fbbf24;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  transition: background-color var(--transition-main), color var(--transition-main);
+}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); color: var(--text-main); }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* HEADER */
+.docs-header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+.header-inner {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.brand-group { display: flex; align-items: center; gap: 0.75rem; }
+.brand-badge {
+  background: var(--primary); color: #ffffff;
+  font-weight: 800; font-size: 0.82rem; padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm); font-family: var(--font-mono);
+}
+.brand-title { font-weight: 800; font-size: 1.15rem; }
+.nav-actions { display: flex; align-items: center; gap: 0.6rem; }
+.nav-link-btn {
+  background: var(--bg-subtle); border: 1px solid var(--border-color);
+  color: var(--text-main); padding: 0.4rem 0.8rem; border-radius: var(--radius-sm);
+  font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.35rem;
+  transition: all var(--transition-main);
+}
+.nav-link-btn:hover { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+
+.theme-btn {
+  border: 1px solid var(--border-color); background: var(--bg-subtle);
+  color: var(--text-muted); width: 34px; height: 34px; border-radius: var(--radius-sm);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.theme-btn svg { width: 16px; height: 16px; }
+
+/* CONTAINER & LAYOUT */
+.docs-container {
+  max-width: 1100px; margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: grid; grid-template-columns: 240px 1fr; gap: 2rem;
+}
+@media (max-width: 860px) {
+  .docs-container { grid-template-columns: 1fr; }
+  .docs-sidebar { display: none; }
+}
+
+/* SIDEBAR NAV */
+.docs-sidebar {
+  position: sticky; top: 4.5rem; align-self: start;
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 1.1rem; box-shadow: var(--shadow-card);
+}
+.sidebar-title {
+  font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 0.75rem;
+}
+.sidebar-menu { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.sidebar-menu a {
+  font-size: 0.85rem; font-weight: 600; color: var(--text-muted);
+  padding: 0.4rem 0.6rem; border-radius: var(--radius-sm); display: block;
+  transition: all var(--transition-main);
+}
+.sidebar-menu a:hover { background: var(--bg-subtle); color: var(--primary); text-decoration: none; }
+
+/* CONTENT MAIN */
+.docs-content { display: flex; flex-direction: column; gap: 2rem; }
+.docs-section {
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 1.75rem; box-shadow: var(--shadow-card);
+}
+.docs-section h2 {
+  font-size: 1.4rem; font-weight: 800; margin-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem; color: var(--primary);
+}
+.docs-section h3 { font-size: 1.1rem; font-weight: 700; margin: 1.25rem 0 0.5rem; }
+.docs-section p { font-size: 0.92rem; color: var(--text-main); margin-bottom: 0.85rem; }
+
+/* STEPS CARDS */
+.step-card {
+  background: var(--bg-subtle); border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary); border-radius: var(--radius-sm);
+  padding: 1rem 1.1rem; margin-bottom: 0.85rem;
+}
+.step-number {
+  font-family: var(--font-mono); font-weight: 800; font-size: 0.8rem;
+  color: var(--primary); text-transform: uppercase; margin-bottom: 0.2rem;
+}
+.step-title { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.35rem; }
+
+/* CODE BLOCKS */
+pre {
+  background: #090d16; color: #f8fafc; font-family: var(--font-mono);
+  font-size: 0.82rem; padding: 1rem; border-radius: var(--radius-sm);
+  overflow-x: auto; margin: 0.75rem 0 1rem; border: 1px solid #1e293b;
+}
+code { font-family: var(--font-mono); background: var(--bg-subtle); color: var(--primary); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
+
+/* ALERT BOX */
+.alert-box {
+  background: var(--accent-light); color: var(--accent-text); border: 1px solid var(--accent);
+  border-radius: var(--radius-sm); padding: 0.85rem 1rem; font-size: 0.88rem; margin: 1rem 0; font-weight: 600;
+}
+
+/* FOOTER */
+.docs-footer {
+  text-align: center; font-size: 0.82rem; color: var(--text-muted);
+  border-top: 1px solid var(--border-color); padding-top: 1.5rem; margin-top: 2rem;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="docs-header">
+  <div class="header-inner">
+    <div class="brand-group">
+      <div class="brand-badge">DOCS</div>
+      <span class="brand-title">JadKul Documentation</span>
+    </div>
+    <div class="nav-actions">
+      <a href="../" class="nav-link-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+        Buka Aplikasi
+      </a>
+      <a href="https://github.com/yuumuu/jadwal-kuliah" target="_blank" rel="noopener noreferrer" class="nav-link-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub Repo
+      </a>
+      <button class="theme-btn" id="docsThemeBtn" title="Toggle Mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ MAIN CONTAINER ═══════════════ -->
+<div class="docs-container">
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="docs-sidebar">
+    <div class="sidebar-title">Daftar Isi</div>
+    <ul class="sidebar-menu">
+      <li><a href="#overview">Overview & Arsitektur</a></li>
+      <li><a href="#user-guide">Panduan Pengguna</a></li>
+      <li><a href="#contribute">Panduan Kontribusi</a></li>
+      <li><a href="#schema">Spesifikasi JSON</a></li>
+      <li><a href="#contact">Kontak & Bantuan</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN DOCUMENTATION CONTENT -->
+  <main class="docs-content">
+    <!-- OVERVIEW -->
+    <section id="overview" class="docs-section">
+      <h2>📌 Overview & Arsitektur</h2>
+      <p><strong>JadKul</strong> adalah aplikasi Single Page Application (SPA) berbasis web statis untuk mengelola dan menampilkan jadwal kuliah serta kalender akademik Prodi Teknologi Informasi Universitas Muhammadiyah Yogyakarta (UMY).</p>
+      <p>Aplikasi ini dirancang khusus untuk berjalan langsung melalui <strong>GitHub Pages</strong> tanpa memerlukan server backend atau database relasional tambahan.</p>
+      
+      <h3>Prinsip Desain Utama:</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; margin-top:0.75rem;">
+        <div style="background:var(--bg-subtle); padding:0.85rem; border-radius:var(--radius-sm);">
+          <strong>⚡ Zero Dependencies</strong>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Murni HTML5, CSS3, dan Vanilla JS (ES2020+).</p>
+        </div>
+        <div style="background:var(--bg-subtle); padding:0.85rem; border-radius:var(--radius-sm);">
+          <strong>📱 Mobile-First UX</strong>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Antarmuka responsif dan ramah perangkat seluler.</p>
+        </div>
+        <div style="background:var(--bg-subtle); padding:0.85rem; border-radius:var(--radius-sm);">
+          <strong>🗂️ JSON Data Driven</strong>
+          <p style="font-size:0.82rem; color:var(--text-muted); margin:0;">Seluruh jadwal disimpan dalam format file JSON terpisah.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- USER GUIDE -->
+    <section id="user-guide" class="docs-section">
+      <h2>📱 Panduan Pengguna</h2>
+      <p>Berikut adalah fitur-fitur utama yang dapat dimanfaatkan pengguna saat membuka aplikasi:</p>
+      
+      <div class="step-card">
+        <div class="step-title">1. Pemilihan Semester & Kelas Utama</div>
+        <p>Saat pertama kali membuka situs, pop-up konfigurasi akan muncul. Anda dapat memilih Semester Aktif atau melihat Arsip Semester lama, lalu menentukan Kelas Utama Anda (misal: Kelas A, B, C) untuk memberikan sorotan visual otomatis pada setiap sesi kuliah.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-title">2. Mode Tampilan (Table, Grid, List, Timeline)</div>
+        <p>Gunakan tombol pemilih mode tampilan di kanan atas filter card untuk mengganti tampilan jadwal sesuai preferensi Anda.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-title">3. Filter Cepat "Hari Ini" & Pencarian Instant</div>
+        <p>Klik chip <code>Hari Ini</code> untuk langsung menampilkan sesi kuliah hari ini, atau ketik nama dosen, ruang (contoh: <code>F4.001</code>), atau kode mata kuliah pada kotak pencarian.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-title">4. Salin Ringkasan untuk Grup WhatsApp / Telegram</div>
+        <p>Klik tombol <code>Salin Ringkasan</code> di pojok kanan bawah toolbar untuk menyalin ringkasan jadwal dalam format teks rapi yang siap dibagikan ke grup obrolan.</p>
+      </div>
+    </section>
+
+    <!-- CONTRIBUTOR GUIDE -->
+    <section id="contribute" class="docs-section">
+      <h2>🤝 Panduan Kontribusi (Fork & PR)</h2>
+      <p>Siapa saja dapat berkontribusi menambah data jadwal semester baru atau memperbaiki informasi dosen dan ruangan. Ikuti 5 langkah berikut:</p>
+
+      <div class="step-card">
+        <div class="step-number">Langkah 1</div>
+        <div class="step-title">Fork Repository</div>
+        <p>Buka repository GitHub <a href="https://github.com/yuumuu/jadwal-kuliah" target="_blank">github.com/yuumuu/jadwal-kuliah</a> lalu klik tombol <strong>Fork</strong> di kanan atas.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">Langkah 2</div>
+        <div class="step-title">Clone ke Perangkat Lokal</div>
+        <pre>git clone https://github.com/USERNAME_ANDA/jadwal-kuliah.git
+cd jadwal-kuliah</pre>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">Langkah 3</div>
+        <div class="step-title">Tambah File Detail JSON di Folder <code>data/</code></div>
+        <p>Salin <code>data/template.json</code> dan buat file baru, contoh: <code>data/ti-s3-gasal-2026.json</code>. Isi data sesi kuliah, jam, ruang, dosen, dan libur nasional.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">Langkah 4</div>
+        <div class="step-title">Daftarkan di Index Master (<code>data/jadwal.json</code>)</div>
+        <p>Buka <code>data/jadwal.json</code> dan tambahkan objek semester baru:</p>
+<pre>{
+  "id": "ti-s3-gasal-2026",
+  "label": "Semester 3",
+  "period": "Gasal",
+  "academicYear": "2026/2027",
+  "program": "TI",
+  "semester": 3,
+  "status": "active",
+  "active": true,
+  "startDate": "2026-09-01",
+  "endDate": "2027-01-15",
+  "file": "data/ti-s3-gasal-2026.json"
+}</pre>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">Langkah 5</div>
+        <div class="step-title">Commit, Push, & Buat Pull Request</div>
+<pre>git add .
+git commit -m "feat: tambah data jadwal Semester 3 Gasal 2026/2027"
+git push origin main</pre>
+        <p>Buka repo asal lalu klik tombol <strong>Compare & Pull Request</strong>.</p>
+      </div>
+    </section>
+
+    <!-- JSON SCHEMA -->
+    <section id="schema" class="docs-section">
+      <h2>📄 Spesifikasi Skema JSON</h2>
+      <p>Struktur data jadwal dibagi menjadi 2 jenis file:</p>
+
+      <h3>1. Index Master (<code>data/jadwal.json</code>)</h3>
+      <p>Berisi daftar metadata seluruh semester yang terdaftar di aplikasi:</p>
+<pre>{
+  "semesters": [
+    {
+      "id": "ti-s5-gasal-2026",          // Unique ID (snake_case)
+      "label": "Semester 5",          // Label nama yang tampil
+      "period": "Gasal",              // Gasal / Genap
+      "academicYear": "2026/2027",    // Tahun ajaran
+      "program": "TI",                // Program Studi (TI / AI)
+      "semester": 5,                  // Angka semester
+      "status": "active",             // "active" atau "archived"
+      "active": true,                 // boolean status
+      "startDate": "2026-09-01",      // YYYY-MM-DD
+      "endDate": "2027-01-15",
+      "file": "data/ti-s5-gasal-2026.json" // Path file detail
+    }
+  ]
+}</pre>
+
+      <h3>2. Detail Semester (<code>data/ti-sX-gasal-YYYY.json</code>)</h3>
+      <p>Berisi perincian sesi perkuliahan per hari, libur nasional, dan agenda penting:</p>
+<pre>{
+  "subjectColors": {
+    "TI501": "#3b82f6",
+    "TI502": "#8b5cf6"
+  },
+  "holidays": [
+    { "date": "2026-01-01", "name": "Tahun Baru Masehi" }
+  ],
+  "importantDates": [
+    { "date": "2026-09-07", "name": "Awal Perkuliahan" }
+  ],
+  "schedules": {
+    "Senin": [
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "D",                 // Bisa multi-kelas: "D,E,F"
+        "jam": "08.50-11.30",
+        "ruang": "F6.102",
+        "dosen": "HQ/WS"
+      }
+    ]
+  }
+}</pre>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="docs-section">
+      <h2>📩 Kontak & Diskusi</h2>
+      <p>Punya pertanyaan, usulan fitur, atau butuh bantuan saat membuat Pull Request?</p>
+      <div class="alert-box">
+        📲 Hubungi via Instagram: <a href="https://instagram.com/haidaryuum" target="_blank"><strong>@haidaryuum</strong></a><br>
+        💻 Laporkan kendala di GitHub: <a href="https://github.com/yuumuu/jadwal-kuliah/issues" target="_blank"><strong>GitHub Issues</strong></a>
+      </div>
+    </section>
+
+    <footer class="docs-footer">
+      &copy; 2026 JadKul — Jadwal Pengajaran Teknologi Informasi UMY. Released under MIT License.
+    </footer>
+  </main>
+</div>
+
+<script>
+// Simple Theme Toggle JS for Docs Page
+const docsThemeBtn = document.getElementById("docsThemeBtn");
+docsThemeBtn.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme");
+  const next = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+});
+</script>
+</body>
+</html>
