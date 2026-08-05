@@ -6,7 +6,7 @@
 
 Sistem Informasi Jadwal Kuliah & Kalender Akademik untuk Program Studi **Teknologi Informasi, Universitas Muhammadiyah Yogyakarta (UMY)**.
 
-Didesain dengan arsitektur **Mobile-First**, tanpa *dependencies/framework* berat, serta mendukung **8 Style Themes**, **Dark Mode**, dan **Pengelolaan Arsip Semester**.
+Didesain dengan arsitektur **Mobile-First**, tanpa *dependencies/framework* berat, serta mendukung **15 Style Themes**, **Dark Mode**, dan **Pengelolaan Arsip Semester**.
 
 ---
 
@@ -26,7 +26,7 @@ Didesain dengan arsitektur **Mobile-First**, tanpa *dependencies/framework* bera
 ## ✨ Fitur Unggulan
 
 - **📱 Mobile-First Responsive Design**: Didesain dari bawah untuk peramban smartphone dengan *horizontal touch-scroll filter* dan tombol akses ramah sentuhan.
-- **🎨 8 Style Themes**: Pilihan gaya antarmuka dinamis (*Default*, *Playful*, *Elegant*, *Minimal*, *Bento*, *Formal*, *Neumorphism*, dan *Neobrutalism*).
+- **🎨 15 Style Themes**: Pilihan gaya antarmuka dinamis (*Default*, *Playful*, *Elegant*, *Minimal*, *Bento*, *Formal*, *Neumorphism*, *Neobrutalism*, *Cyberpunk*, *Glassmorphism*, *Claymorphism*, *Retro Terminal*, *Nordic*, *Y2K Retro*, dan *Paper Journal*).
 - **🌙 Dark Theme Readiness 100%**: Dukungan Dark Mode menyeluruh untuk semua gaya tema, modal, dan elemen native HTML.
 - **🗂️ Semester Aktif vs Arsip Jadwal**: Pemisahan otomatis semester aktif tahun ajaran berjalan dengan arsip jadwal tahun-tahun sebelumnya.
 - **🔢 Kalender Akademik Interaktif**: Tampilan kalender bulan dengan angka hari yang diperbesar, penanda libur nasional, dan detail modal agenda.
