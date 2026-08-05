@@ -632,11 +632,42 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: all var(--transition-main); min-height: 42px; margin-top: 0.5rem;
 }
 
-.empty-box {
-  text-align: center; padding: 2.5rem 1rem; color: var(--text-muted);
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+.dosen-chip {
+  cursor: pointer; font-weight: 700; color: var(--primary);
+  background: var(--primary-light); padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.78rem;
+  display: inline-block; transition: all var(--transition-main);
+  border: 1px solid transparent;
 }
-.empty-box svg { width: 38px; height: 38px; opacity: 0.5; }
+.dosen-chip:hover {
+  background: var(--primary); color: var(--text-inverse, #ffffff);
+  border-color: var(--primary); transform: translateY(-1px);
+}
+
+.print-header { display: none; }
+
+@media print {
+  .app-header, .stat-container, .tabs-nav, .toolbar-card, .header-actions,
+  .copy-summary-btn, .modal-overlay, #printScheduleBtn, .cal-nav-bar, .theme-toggle-group {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important; color: #000000 !important; font-size: 10pt;
+  }
+  .app-container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
+  .view-panel { display: block !important; }
+  .table-wrap { box-shadow: none !important; border: 1px solid #000000 !important; }
+  table.schedule-table th, table.schedule-table td {
+    border-bottom: 1px solid #cccccc !important; color: #000000 !important; padding: 6px 8px !important;
+  }
+  table.schedule-table th { background-color: #f0f0f0 !important; }
+  .print-header {
+    display: block !important; text-align: center; margin-bottom: 1rem;
+    border-bottom: 2px solid #000000; padding-bottom: 0.5rem;
+  }
+  .print-header h2 { font-size: 14pt; margin-bottom: 4px; }
+  .print-header p { font-size: 10pt; color: #333333; }
+}
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -736,12 +767,23 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
         </div>
         <div class="session-count-bar">
           <span id="scheduleCount">0 sesi</span>
-          <button class="copy-summary-btn" id="copySummaryBtn">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Salin Ringkasan
-          </button>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="copy-summary-btn" id="printScheduleBtn" title="Cetak / Simpan sebagai PDF">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak PDF
+            </button>
+            <button class="copy-summary-btn" id="copySummaryBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Salin Ringkasan
+            </button>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="print-header">
+      <h2 id="printTitle">Jadwal Kuliah Teknologi Informasi UMY</h2>
+      <p id="printMeta">Semester Gasal 2026/2027</p>
     </div>
 
     <div id="scheduleContainer"></div>
@@ -815,6 +857,15 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   </div>
 </div>
 
+<!-- ═══════════════ LECTURER DETAIL MODAL (POIN 5) ═══════════════ -->
+<div id="lecturerModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <h3 class="modal-title" id="lecturerModalTitle">Detail Pengampu Dosen</h3>
+    <div id="lecturerModalContent" style="margin-top: 0.85rem;"></div>
+    <button class="btn-secondary" style="margin-top: 1rem;" onclick="document.getElementById('lecturerModal').style.display='none'">Tutup</button>
+  </div>
+</div>
+
 <script>
 /* ═══════════════════════════════════════════════════════════════
    HEROICONS SVG STRINGS
@@ -861,6 +912,22 @@ const FALLBACK_DETAIL = {
 
 const DAY_ORDER = ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
 const MONTH_NAMES = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+
+const LECTURER_MAP = {
+  "HQ": { name: "Haidar Qudratullah, M.T.", dept: "Teknologi Informasi UMY", email: "haidar@umy.ac.id" },
+  "WS": { name: "Wisnu Susanto, M.Eng.", dept: "Teknologi Informasi UMY", email: "wisnu@umy.ac.id" },
+  "DP": { name: "Dwi Permadi, M.Kom.", dept: "Teknologi Informasi UMY", email: "dwi.permadi@umy.ac.id" },
+  "AS": { name: "Agus Suprianto, M.T.", dept: "Teknologi Informasi UMY", email: "agus.s@umy.ac.id" },
+  "FF": { name: "Fifi Fitriani, M.T.", dept: "Teknologi Informasi UMY", email: "fifi@umy.ac.id" },
+  "CO": { name: "Cahyo Oktaviani, M.T.", dept: "Teknologi Informasi UMY", email: "cahyo@umy.ac.id" },
+  "HS": { name: "Hardi Santoso, M.Eng.", dept: "Teknologi Informasi UMY", email: "hardi@umy.ac.id" },
+  "TW": { name: "Tri Wibowo, M.Pd.", dept: "Bahasa & Sastra UMY", email: "tri.wibowo@umy.ac.id" },
+  "EI": { name: "Eko Indarto, M.Kom.", dept: "Teknologi Informasi UMY", email: "eko.indarto@umy.ac.id" },
+  "EP": { name: "Eka Prasetya, M.T.", dept: "Teknologi Informasi UMY", email: "eka.prasetya@umy.ac.id" },
+  "QA": { name: "Qoirul Anam, M.T.", dept: "Teknologi Informasi UMY", email: "qoirul.anam@umy.ac.id" },
+  "RG": { name: "Rizky Gumilar, M.T.", dept: "Teknologi Informasi UMY", email: "rizky.g@umy.ac.id" },
+  "AM": { name: "Ahmad Mufid, M.T.", dept: "Teknologi Informasi UMY", email: "ahmad.mufid@umy.ac.id" }
+};
 
 /* ═══════════════════════════════════════════════════════════════
    APPLICATION CORE
@@ -1234,6 +1301,54 @@ const App = {
     }
   },
 
+  formatDosenBadges(dosenStr) {
+    if (!dosenStr || dosenStr === "-") return "-";
+    const initials = dosenStr.split("/").map(s => s.trim());
+    return initials.map(init => `<span class="dosen-chip" data-dosen="${init}" title="Klik detail pengampu ${init}">${init}</span>`).join(" / ");
+  },
+
+  showLecturerModal(initial) {
+    const info = LECTURER_MAP[initial] || { name: `Dosen (${initial})`, dept: "Teknologi Informasi UMY", email: "-" };
+    document.getElementById("lecturerModalTitle").textContent = `Detail Pengampu — ${initial}`;
+    
+    const all = this.flattenSchedules("all", []);
+    const taught = all.filter(r => (r.dosen || "").split("/").map(s => s.trim()).includes(initial));
+
+    let html = `
+      <div style="background:var(--bg-subtle); padding:0.85rem; border-radius:var(--radius-sm); margin-bottom:1rem; border-left:4px solid var(--primary);">
+        <div style="font-size:1.05rem; font-weight:800; color:var(--text-main);">${info.name}</div>
+        <div style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem; font-family:var(--font-mono);">${info.dept}</div>
+        ${info.email !== '-' ? `<div style="font-size:0.78rem; color:var(--primary); margin-top:0.2rem; font-family:var(--font-mono);">${info.email}</div>` : ''}
+      </div>
+      <h4 style="font-size:0.85rem; margin-bottom:0.5rem; font-weight:700;">Mata Kuliah Diampu Semester Ini (${taught.length} Sesi):</h4>
+    `;
+
+    if (taught.length) {
+      html += `<div style="display:flex; flex-direction:column; gap:0.4rem; max-height:240px; overflow-y:auto;">`;
+      taught.forEach(s => {
+        html += `<div style="background:var(--bg-card); border:1px solid var(--border-color); padding:0.55rem 0.75rem; border-radius:var(--radius-sm);">
+          <div style="font-weight:700; font-size:0.84rem;"><span style="color:var(--primary); font-family:var(--font-mono);">${s.kode}</span> — ${s.matkul}</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.15rem; font-family:var(--font-mono);">${s.day} · ${s.jam} · Kelas ${s.kelas} · Ruang ${s.ruang}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div style="font-size:0.8rem; color:var(--text-muted);">Tidak ada data sesi untuk dosen ini pada semester aktif.</div>`;
+    }
+
+    document.getElementById("lecturerModalContent").innerHTML = html;
+    document.getElementById("lecturerModal").style.display = "flex";
+  },
+
+  bindDosenChipListeners(container) {
+    container.querySelectorAll(".dosen-chip[data-dosen]").forEach(chip => {
+      chip.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.showLecturerModal(chip.dataset.dosen);
+      });
+    });
+  },
+
   /* ── RENDERERS ── */
   renderTable(data, container) {
     if (!data.length) { container.innerHTML = this.emptyState(); return; }
@@ -1245,6 +1360,7 @@ const App = {
       const hl = this.isHighlighted(r) ? "highlight" : "";
       const dot = r.color ? `<span class="subject-dot" style="background:${r.color}"></span>` : "";
       const star = r.rClasses.includes(this.state.mainClass) ? `<span class="star-badge">${ICONS.star} Kelas Saya</span>` : "";
+      const dosenBadges = this.formatDosenBadges(r.dosen);
       html += `<tr class="${hl}">
         <td style="font-weight:700;">${r.day}</td>
         <td class="code-tag">${dot}${r.kode}</td>
@@ -1252,12 +1368,13 @@ const App = {
         <td><span class="class-tag">${r.kelas}</span></td>
         <td style="font-family:var(--font-mono);">${r.jam}</td>
         <td><strong>${r.ruang}</strong></td>
-        <td style="color:var(--text-muted);">${r.dosen}</td>
+        <td>${dosenBadges}</td>
       </tr>`;
     });
 
     html += `</tbody></table></div>`;
     container.innerHTML = html;
+    this.bindDosenChipListeners(container);
   },
 
   renderGrid(data, container) {
@@ -1267,6 +1384,7 @@ const App = {
     data.forEach(r => {
       const hl = this.isHighlighted(r) ? "highlight" : "";
       const star = r.rClasses.includes(this.state.mainClass) ? `<span class="star-badge">${ICONS.star}</span>` : "";
+      const dosenBadges = this.formatDosenBadges(r.dosen);
       html += `<div class="grid-card ${hl}">
         <div class="grid-card-header">
           <span class="grid-card-code" style="color:${r.color || 'var(--primary)'}">${r.kode}</span>
@@ -1276,13 +1394,14 @@ const App = {
         <div class="grid-card-meta">
           <span>${ICONS.calendar} ${r.day}, ${r.jam}</span>
           <span>${ICONS.location} Ruang ${r.ruang}</span>
-          <span>${ICONS.teacher} Dosen: ${r.dosen}</span>
+          <span>${ICONS.teacher} Dosen: ${dosenBadges}</span>
         </div>
       </div>`;
     });
 
     html += `</div>`;
     container.innerHTML = html;
+    this.bindDosenChipListeners(container);
   },
 
   renderList(data, container) {
@@ -1298,11 +1417,12 @@ const App = {
       items.forEach(r => {
         const hl = this.isHighlighted(r) ? "highlight" : "";
         const star = r.rClasses.includes(this.state.mainClass) ? `<span class="star-badge">${ICONS.star}</span>` : "";
+        const dosenBadges = this.formatDosenBadges(r.dosen);
         html += `<div class="list-item-card ${hl}">
           <div class="list-time">${r.jam}</div>
           <div>
             <div class="list-info-title">${r.kode} — ${r.matkul} ${star}</div>
-            <div class="list-info-sub">Kelas ${r.kelas} · Dosen ${r.dosen}</div>
+            <div class="list-info-sub">Kelas ${r.kelas} · Dosen ${dosenBadges}</div>
           </div>
           <div class="list-location">${r.ruang}</div>
         </div>`;
@@ -1311,6 +1431,7 @@ const App = {
 
     html += `</div>`;
     container.innerHTML = html;
+    this.bindDosenChipListeners(container);
   },
 
   renderTimeline(data, container) {
@@ -1318,16 +1439,18 @@ const App = {
     let html = `<div class="timeline-wrap">`;
     data.forEach(r => {
       const hl = this.isHighlighted(r) ? "highlight" : "";
+      const dosenBadges = this.formatDosenBadges(r.dosen);
       html += `<div class="timeline-item ${hl}">
         <div class="timeline-card ${hl}">
           <div style="font-size:0.78rem; font-family:var(--font-mono); color:var(--text-muted); font-weight:700;">${r.day} | ${r.jam}</div>
           <div style="font-weight:700; font-size:0.95rem; margin-top:0.2rem;">${r.kode} — ${r.matkul}</div>
-          <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Kelas ${r.kelas} · Ruang ${r.ruang} · Dosen ${r.dosen}</div>
+          <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.2rem;">Kelas ${r.kelas} · Ruang ${r.ruang} · Dosen ${dosenBadges}</div>
         </div>
       </div>`;
     });
     html += `</div>`;
     container.innerHTML = html;
+    this.bindDosenChipListeners(container);
   },
 
   /* ── CALENDAR MONTH RENDERER ── */
@@ -1543,6 +1666,18 @@ const App = {
     document.querySelectorAll(".theme-btn").forEach(btn => btn.addEventListener("click", () => this.applyTheme(btn.dataset.theme)));
     document.getElementById("styleSelect").addEventListener("change", (e) => this.applyStyle(e.target.value));
     document.getElementById("copySummaryBtn").addEventListener("click", () => this.copyScheduleSummary());
+
+    const printBtn = document.getElementById("printScheduleBtn");
+    if (printBtn) {
+      printBtn.addEventListener("click", () => {
+        const meta = this.getSemesterMeta(this.state.semesterId);
+        if (meta) {
+          document.getElementById("printTitle").textContent = `JADWAL PERKULIAHAN — ${meta.program} ${meta.label}`;
+          document.getElementById("printMeta").textContent = `Tahun Ajaran ${meta.academicYear} | Filter: ${this.state.selectedDay === 'all' ? 'Semua Hari' : this.state.selectedDay} (${this.state.mainClass ? 'Kelas ' + this.state.mainClass : 'Semua Kelas'})`;
+        }
+        window.print();
+      });
+    }
 
     document.querySelectorAll(".tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
