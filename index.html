@@ -1737,10 +1737,10 @@ const App = {
       document.getElementById("scheduleCount").textContent = `${data.length} sesi ditemukan`;
 
       const view = this.state.scheduleView;
-      if (view === "table") this.renderTable(data, container);
-      else if (view === "grid") this.renderGrid(data, container);
+      if (view === "grid") this.renderGrid(data, container);
       else if (view === "list") this.renderList(data, container);
       else if (view === "timeline") this.renderTimeline(data, container);
+      else this.renderTable(data, container);
     } else {
       const container = document.getElementById("calendarContainer");
       this.renderCalendarView(container);
@@ -2027,7 +2027,9 @@ const App = {
       if (!raw) return;
       const p = JSON.parse(raw);
       if (p.semesterId) this.state.semesterId = p.semesterId;
-      if (p.scheduleView) this.state.scheduleView = p.scheduleView;
+      if (p.scheduleView) {
+        this.state.scheduleView = ["table", "grid", "list", "timeline"].includes(p.scheduleView) ? p.scheduleView : "table";
+      }
       if (p.theme) this.state.theme = p.theme;
       if (p.style) this.state.style = p.style;
       if (p.mainClass) this.state.mainClass = p.mainClass;
