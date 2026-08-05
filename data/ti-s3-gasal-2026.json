@@ -1,0 +1,484 @@
+{
+  "subjectColors": {
+    "TI305": "#2f6f4f",
+    "TI306": "#8a4b6b",
+    "TI302": "#1f6f78",
+    "TI304": "#7a4a1f",
+    "TI301": "#4a5d8a",
+    "TI303": "#9c3b2e",
+    "TI308": "#5c6b23"
+  },
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru Masehi",
+      "type": "national"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Isra Mikraj Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baru Imlek 2577",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Hari Raya Nyepi Saka 1950",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Wafat Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh Internasional",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Kenaikan Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Idul Adha 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Raya Waisak 2570",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Tahun Baru Islam 1448 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan RI",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulid Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national"
+    }
+  ],
+  "importantDates": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan",
+      "type": "academic"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester",
+      "type": "academic"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester",
+      "type": "academic"
+    }
+  ],
+  "schedules": {
+    "Senin": [
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "E",
+        "jam": "08.50-11.30",
+        "ruang": "F6.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "D",
+        "jam": "08.50-11.30",
+        "ruang": "F6.004",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "C",
+        "jam": "08.50-11.30",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F4.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "E",
+        "jam": "13.20-15.00",
+        "ruang": "F6.004",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F4.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "E",
+        "jam": "15.30-16.20",
+        "ruang": "F6.004",
+        "dosen": "AS"
+      }
+    ],
+    "Selasa": [
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "C",
+        "jam": "08.50-11.30",
+        "ruang": "F6.101",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "E",
+        "jam": "08.50-11.30",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F6.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.101",
+        "dosen": "NA"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "B",
+        "jam": "13.20-15.00",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "C",
+        "jam": "15.30-16.20",
+        "ruang": "F6.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.101",
+        "dosen": "NA"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "B",
+        "jam": "15.30-16.20",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "D",
+        "jam": "15.30-18.00",
+        "ruang": "F4.003",
+        "dosen": "NA"
+      }
+    ],
+    "Rabu": [
+      {
+        "kode": "TI301",
+        "matkul": "Probabilitas dan Statistika",
+        "kelas": "D,E",
+        "jam": "08.50-11.30",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F6.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.004",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "C",
+        "jam": "08.50-11.30",
+        "ruang": "F4.003",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "B",
+        "jam": "13.20-15.00",
+        "ruang": "F6.004",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F6.101",
+        "dosen": "NA"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "D",
+        "jam": "13.20-15.00",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F4.003",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI306",
+        "matkul": "Perancangan Berorientasi Objek",
+        "kelas": "B",
+        "jam": "15.30-16.20",
+        "ruang": "F6.004",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "C",
+        "jam": "15.30-16.20",
+        "ruang": "F6.101",
+        "dosen": "NA"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "D",
+        "jam": "15.30-16.20",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F4.003",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "E",
+        "jam": "15.30-18.00",
+        "ruang": "F6.003",
+        "dosen": "NA"
+      }
+    ],
+    "Kamis": [
+      {
+        "kode": "TI308",
+        "matkul": "Bahasa Inggris Lanjut",
+        "kelas": "E",
+        "jam": "07.00-08.40",
+        "ruang": "F6.202",
+        "dosen": "Miss Rina"
+      },
+      {
+        "kode": "TI305",
+        "matkul": "Teknologi Server",
+        "kelas": "D",
+        "jam": "08.50-11.30",
+        "ruang": "F6.003",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F6.004",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI302",
+        "matkul": "Pemrograman Multiplatform",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.103",
+        "dosen": "CD"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "B",
+        "jam": "13.20-15.00",
+        "ruang": "F6.002",
+        "dosen": "NA"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "E",
+        "jam": "13.20-15.00",
+        "ruang": "F6.004",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI304",
+        "matkul": "Switching dan Wireless",
+        "kelas": "B",
+        "jam": "15.30-16.20",
+        "ruang": "F6.002",
+        "dosen": "NA"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "E",
+        "jam": "15.30-16.20",
+        "ruang": "F6.004",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "D",
+        "jam": "16.20-18.00",
+        "ruang": "F6.004",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI303",
+        "matkul": "Implementasi Basis Data",
+        "kelas": "D",
+        "jam": "18.30-19.20",
+        "ruang": "F6.004",
+        "dosen": "AK"
+      }
+    ],
+    "Jumat": [
+      {
+        "kode": "TI301",
+        "matkul": "Probabilitas dan Statistika",
+        "kelas": "A,B,C",
+        "jam": "07.50-10.30",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "SR"
+      }
+    ],
+    "Sabtu": [
+      {
+        "kode": "TI308",
+        "matkul": "Bahasa Inggris Lanjut",
+        "kelas": "B",
+        "jam": "07.00-08.40",
+        "ruang": "F6.101",
+        "dosen": "Mister Ipank"
+      },
+      {
+        "kode": "TI308",
+        "matkul": "Bahasa Inggris Lanjut",
+        "kelas": "A",
+        "jam": "08.50-10.30",
+        "ruang": "F6.101",
+        "dosen": "Mister Ipank"
+      },
+      {
+        "kode": "TI308",
+        "matkul": "Bahasa Inggris Lanjut",
+        "kelas": "D",
+        "jam": "10.40-11.30",
+        "ruang": "F6.101",
+        "dosen": "Mister Ipank"
+      },
+      {
+        "kode": "TI308",
+        "matkul": "Bahasa Inggris Lanjut",
+        "kelas": "D",
+        "jam": "12.10-13.10",
+        "ruang": "F6.101",
+        "dosen": "Mister Ipank"
+      },
+      {
+        "kode": "TI308",
+        "matkul": "Bahasa Inggris Lanjut",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F6.101",
+        "dosen": "Mister Ipank"
+      }
+    ]
+  }
+}

@@ -1,0 +1,613 @@
+{
+  "subjectColors": {
+    "TI504": "#2f6f4f",
+    "TI506": "#8a4b6b",
+    "TI508": "#1f6f78",
+    "TI503": "#7a4a1f",
+    "TI501": "#4a5d8a",
+    "TI505": "#9c3b2e",
+    "TI502": "#5c6b23",
+    "TI507": "#a1731f"
+  },
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru Masehi",
+      "type": "national"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Isra Mikraj Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baru Imlek 2577",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Hari Raya Nyepi Saka 1950",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Wafat Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh Internasional",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Kenaikan Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Idul Adha 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Raya Waisak 2570",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Tahun Baru Islam 1448 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan RI",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulid Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national"
+    }
+  ],
+  "importantDates": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan",
+      "type": "academic"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester",
+      "type": "academic"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester",
+      "type": "academic"
+    }
+  ],
+  "schedules": {
+    "Senin": [
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "A",
+        "jam": "07.00-08.40",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "E",
+        "jam": "08.50-10.30",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI508",
+        "matkul": "Technopreneurship",
+        "kelas": "F",
+        "jam": "08.50-10.30",
+        "ruang": "F4.001",
+        "dosen": "WS"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "D",
+        "jam": "08.50-11.30",
+        "ruang": "F6.102",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F4.002",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "F",
+        "jam": "10.40-11.30",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "F",
+        "jam": "12.10-13.10",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "E",
+        "jam": "13.20-15.00",
+        "ruang": "F6.102",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI508",
+        "matkul": "Technopreneurship",
+        "kelas": "D",
+        "jam": "13.20-15.00",
+        "ruang": "F4.001",
+        "dosen": "WS"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "E",
+        "jam": "15.30-16.20",
+        "ruang": "F6.102",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F4.002",
+        "dosen": "DP"
+      }
+    ],
+    "Selasa": [
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "C",
+        "jam": "08.50-10.30",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "E",
+        "jam": "08.50-11.30",
+        "ruang": "F6.102",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "D",
+        "jam": "10.40-11.30",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "D",
+        "jam": "12.10-13.10",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "D",
+        "jam": "13.20-15.00",
+        "ruang": "F6.102",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F4.001",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI508",
+        "matkul": "Technopreneurship",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "WS"
+      },
+      {
+        "kode": "TI504",
+        "matkul": "WAN dan Teknologi Jaringan",
+        "kelas": "B",
+        "jam": "13.20-15.00",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "D",
+        "jam": "15.30-16.20",
+        "ruang": "F6.102",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "C",
+        "jam": "15.30-16.20",
+        "ruang": "F4.001",
+        "dosen": "TA"
+      }
+    ],
+    "Rabu": [
+      {
+        "kode": "TI508",
+        "matkul": "Technopreneurship",
+        "kelas": "E",
+        "jam": "07.50-09.40",
+        "ruang": "F4.002",
+        "dosen": "WS"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "E",
+        "jam": "08.50-11.30",
+        "ruang": "F6.101",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "C",
+        "jam": "08.50-11.30",
+        "ruang": "F6.102",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI508",
+        "matkul": "Technopreneurship",
+        "kelas": "B",
+        "jam": "09.40-11.30",
+        "ruang": "F4.002",
+        "dosen": "WS"
+      },
+      {
+        "kode": "TI508",
+        "matkul": "Technopreneurship",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "WS"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "F",
+        "jam": "13.20-15.00",
+        "ruang": "F6.102",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TI503",
+        "matkul": "Pengembangan Web Service",
+        "kelas": "F",
+        "jam": "15.30-16.20",
+        "ruang": "F6.102",
+        "dosen": "DP"
+      }
+    ],
+    "Kamis": [
+      {
+        "kode": "TI505",
+        "matkul": "Tata Kelola Teknologi Informasi",
+        "kelas": "D,E,F",
+        "jam": "08.50-11.30",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "CO"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.102",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI505",
+        "matkul": "Tata Kelola Teknologi Informasi",
+        "kelas": "A,B,C",
+        "jam": "13.20-15.00",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "CO"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "D",
+        "jam": "13.20-15.00",
+        "ruang": "F6.102",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "F",
+        "jam": "13.20-15.00",
+        "ruang": "F6.103",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "E",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI505",
+        "matkul": "Tata Kelola Teknologi Informasi",
+        "kelas": "A,B,C",
+        "jam": "15.30-16.20",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "CO"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "D",
+        "jam": "15.30-16.20",
+        "ruang": "F6.102",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "F",
+        "jam": "15.30-16.20",
+        "ruang": "F6.103",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "E",
+        "jam": "15.30-16.20",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "C",
+        "jam": "16.20-18.00",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "C",
+        "jam": "18.30-19.20",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      }
+    ],
+    "Jumat": [
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "B",
+        "jam": "07.00-09.40",
+        "ruang": "F6.101",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.103",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "D",
+        "jam": "08.50-11.30",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "B",
+        "jam": "13.20-15.00",
+        "ruang": "F6.103",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI506",
+        "matkul": "Manajemen Proyek",
+        "kelas": "B",
+        "jam": "15.30-16.20",
+        "ruang": "F6.103",
+        "dosen": "TA"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "F",
+        "jam": "16.20-18.00",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI502",
+        "matkul": "Pengembangan Aplikasi Mobile",
+        "kelas": "F",
+        "jam": "18.30-19.20",
+        "ruang": "F4.002",
+        "dosen": "HS"
+      }
+    ],
+    "Sabtu": [
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "B",
+        "jam": "07.00-08.40",
+        "ruang": "F6.102",
+        "dosen": "Mister Susant"
+      },
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "F",
+        "jam": "07.00-08.40",
+        "ruang": "F6.103",
+        "dosen": "Miss Kiki"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "C",
+        "jam": "07.00-09.40",
+        "ruang": "F6.002",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "D",
+        "jam": "08.50-10.30",
+        "ruang": "F6.102",
+        "dosen": "Mister Susant"
+      },
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "C",
+        "jam": "08.50-10.30",
+        "ruang": "F6.103",
+        "dosen": "Miss Kiki"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "F",
+        "jam": "09.40-11.30",
+        "ruang": "F6.002",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "A",
+        "jam": "10.40-11.30",
+        "ruang": "F6.102",
+        "dosen": "Mister Susant"
+      },
+      {
+        "kode": "TI501",
+        "matkul": "Pengembangan Aplikasi Web",
+        "kelas": "F",
+        "jam": "12.10-13.10",
+        "ruang": "F6.002",
+        "dosen": "AS"
+      },
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "A",
+        "jam": "12.10-13.10",
+        "ruang": "F6.102",
+        "dosen": "Mister Susant"
+      },
+      {
+        "kode": "TI507",
+        "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+        "kelas": "E",
+        "jam": "13.20-15.00",
+        "ruang": "F6.102",
+        "dosen": "Mister Susant"
+      }
+    ]
+  }
+}

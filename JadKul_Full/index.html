@@ -1,0 +1,3697 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JadKul — Jadwal Kuliah TI UMY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS — "Kartu Registrasi" theme: maroon ink, gold stamp, parchment paper
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#251f19;
+  --paper:#eeeadf;
+  --card:#faf8f2;
+  --line:#d9d2bf;
+  --navy:#7c2430;          /* primary (maroon) — kept var name for style-theme compatibility */
+  --navy-deep:#5a1922;
+  --navy-light:#f3e1e1;
+  --amber:#c98a26;         /* accent (gold / stamp ink) */
+  --amber-ink:#6b4a05;
+  --amber-bg:#faedcf;
+  --muted:#8a8073;
+  --success:#3f7d5c;
+  --danger:#b23a3a;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --shadow-sm:0 1px 2px rgba(37,31,25,0.08);
+  --shadow-card:0 1px 3px rgba(37,31,25,0.08),0 1px 2px rgba(37,31,25,0.05);
+  --shadow-hover:0 6px 18px rgba(37,31,25,0.12);
+  --shadow-fab:0 6px 20px rgba(37,31,25,0.22);
+  --transition:0.2s cubic-bezier(0.4,0,0.2,1);
+  --transition-slow:0.3s cubic-bezier(0.4,0,0.2,1);
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"Plus Jakarta Sans","Segoe UI",Arial,sans-serif;
+  --display:"Fraunces",Georgia,serif;
+}
+[data-theme="dark"]{
+  --ink:#f1ebdd;
+  --paper:#1a1611;
+  --card:#241e17;
+  --line:#3a3225;
+  --navy:#e0707c;
+  --navy-deep:#c9515e;
+  --navy-light:rgba(224,112,124,0.14);
+  --amber:#e8b355;
+  --amber-ink:#f2c874;
+  --amber-bg:rgba(232,179,85,0.14);
+  --muted:#93876f;
+  --success:#4fbf8c;
+  --danger:#f0736e;
+  --shadow-sm:0 1px 2px rgba(0,0,0,0.25);
+  --shadow-card:0 1px 3px rgba(0,0,0,0.3);
+  --shadow-hover:0 6px 18px rgba(0,0,0,0.4);
+  --shadow-fab:0 6px 20px rgba(0,0,0,0.55);
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]):not([data-theme="dark"]){
+    --ink:#f1ebdd;--paper:#1a1611;--card:#241e17;--line:#3a3225;
+    --navy:#e0707c;--navy-deep:#c9515e;--navy-light:rgba(224,112,124,0.14);
+    --amber:#e8b355;--amber-ink:#f2c874;--amber-bg:rgba(232,179,85,0.14);
+    --muted:#93876f;--success:#4fbf8c;--danger:#f0736e;
+    --shadow-sm:0 1px 2px rgba(0,0,0,0.25);--shadow-card:0 1px 3px rgba(0,0,0,0.3);
+    --shadow-hover:0 6px 18px rgba(0,0,0,0.4);--shadow-fab:0 6px 20px rgba(0,0,0,0.55);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(1000px 420px at 6% -8%, var(--navy-light), transparent 60%),
+    var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.6;
+  transition:background-color var(--transition-slow),color var(--transition-slow);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--navy);text-decoration:none;}
+a:hover{text-decoration:underline;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;}
+::selection{background:var(--amber-bg);color:var(--ink);}
+
+/* ═══════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════ */
+.app-header{
+  background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+  color:#f6ece2;
+  padding:0 1.5rem;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 10px rgba(0,0,0,0.18);
+}
+.header-inner{
+  max-width:1140px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:62px;
+  gap:1rem;
+}
+.header-left{display:flex;align-items:center;gap:0.7rem;min-width:0;}
+.brand-mark{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:var(--amber);color:var(--navy-deep);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-weight:900;font-size:0.95rem;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,0.35);
+}
+.header-logo{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:1.12rem;
+  letter-spacing:-0.01em;
+  white-space:nowrap;
+  line-height:1.1;
+}
+.header-meta{font-size:0.73rem;color:rgba(246,236,226,0.75);white-space:nowrap;font-family:var(--mono);}
+.header-right{display:flex;align-items:center;gap:0.5rem;flex-shrink:0;}
+.header-edit-btn{
+  width:32px;height:32px;border-radius:50%;border:1px solid rgba(246,236,226,0.28);
+  background:rgba(255,255,255,0.08);color:#f6ece2;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:background var(--transition);
+}
+.header-edit-btn:hover{background:rgba(255,255,255,0.18);}
+.header-edit-btn svg{width:14px;height:14px;}
+.semester-select{
+  font-family:var(--mono);
+  font-size:0.76rem;
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:var(--radius-sm);
+  padding:0.4rem 0.6rem;
+  cursor:pointer;
+  outline:none;
+  max-width:150px;
+}
+.semester-select option{background:var(--navy-deep);color:#fff;}
+.style-select{
+  font-family:var(--mono);font-size:0.72rem;
+  background:rgba(255,255,255,0.12);color:#fff;
+  border:1px solid rgba(255,255,255,0.22);border-radius:var(--radius-sm);
+  padding:0.4rem 0.55rem;cursor:pointer;outline:none;
+}
+.style-select option{background:var(--navy-deep);color:#fff;}
+.theme-toggle{display:flex;gap:2px;background:rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:2px;}
+.theme-btn{
+  width:30px;height:30px;border:none;border-radius:4px;background:transparent;
+  color:rgba(255,255,255,0.55);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+}
+.theme-btn.active{background:rgba(255,255,255,0.22);color:#fff;}
+.theme-btn:hover{color:#fff;}
+.theme-btn svg{width:15px;height:15px;}
+
+/* ═══════════════════════════════════════════════════════════════
+   STAT STRIP
+   ═══════════════════════════════════════════════════════════════ */
+.stat-strip{
+  max-width:1140px;margin:1.1rem auto 0;padding:0 1.5rem;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.6rem;
+}
+.stat-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:0.7rem 0.85rem;box-shadow:var(--shadow-sm);
+}
+.stat-num{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--navy);line-height:1;}
+.stat-num.small{font-size:1.05rem;}
+.stat-label{font-size:0.68rem;color:var(--muted);margin-top:0.2rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:0.04em;}
+.stat-card.gold .stat-num{color:var(--amber-ink);}
+
+/* ═══════════════════════════════════════════════════════════════
+   LANDING PAGE
+   ═══════════════════════════════════════════════════════════════ */
+.landing{
+  max-width:1100px;
+  margin:0 auto;
+  padding:3.2rem 1.5rem;
+}
+.landing-hero{text-align:center;margin-bottom:2.5rem;}
+.landing-hero h2{
+  font-family:var(--display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;margin-bottom:0.5rem;
+}
+.landing-hero p{color:var(--muted);max-width:50ch;margin:0 auto;}
+.semester-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem;}
+.sem-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1.2rem;transition:all var(--transition);cursor:pointer;
+}
+.sem-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);border-color:var(--navy);}
+.sem-card.selected{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-bg);}
+.sem-card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:0.6rem;}
+.sem-card-title{font-family:var(--display);font-weight:700;font-size:1.08rem;}
+.sem-card-badge{
+  font-family:var(--mono);font-size:0.66rem;padding:0.15rem 0.5rem;
+  border-radius:999px;background:var(--amber-bg);color:var(--amber-ink);font-weight:600;
+}
+.sem-card-meta{font-size:0.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:0.8rem;}
+.sem-card-meta span{display:inline-flex;align-items:center;gap:0.3rem;}
+.sem-card-meta svg{width:14px;height:14px;}
+
+/* ═══════════════════════════════════════════════════════════════
+   TAB BAR
+   ═══════════════════════════════════════════════════════════════ */
+.app-main{max-width:1140px;margin:0 auto;padding:0 1.5rem 3rem;}
+.tab-bar{
+  display:flex;gap:0;border-bottom:1px solid var(--line);
+  margin-bottom:0;position:sticky;top:62px;z-index:90;
+  background:var(--paper);
+}
+.tab-btn{
+  font-family:inherit;font-size:0.88rem;font-weight:700;
+  background:none;border:none;padding:0.85rem 1.2rem;cursor:pointer;
+  color:var(--muted);border-bottom:3px solid transparent;
+  margin-bottom:-1px;transition:all var(--transition);
+  display:flex;align-items:center;gap:0.4rem;
+}
+.tab-btn svg{width:16px;height:16px;}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--amber);}
+.tab-btn:hover{color:var(--navy);}
+
+/* ═══════════════════════════════════════════════════════════════
+   PANELS
+   ═══════════════════════════════════════════════════════════════ */
+.panel{display:none;padding-top:1.1rem;}
+.panel.active{display:block;animation:fadeIn 0.2s ease;}
+
+/* ═══════════════════════════════════════════════════════════════
+   TOOLBAR
+   ═══════════════════════════════════════════════════════════════ */
+.toolbar{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:0.6rem;margin-bottom:1rem;
+}
+.toolbar-left{display:flex;flex-direction:column;gap:0.6rem;flex:1;min-width:0;}
+.toolbar-right{display:flex;align-items:center;gap:0.6rem;flex-shrink:0;}
+.filter-group{display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;}
+.filter-label{
+  font-family:var(--mono);font-size:0.66rem;letter-spacing:0.05em;
+  text-transform:uppercase;color:var(--muted);font-weight:600;flex-shrink:0;
+}
+.chip-group{display:flex;gap:0.3rem;flex-wrap:wrap;}
+.chip{
+  font-family:var(--mono);font-size:0.72rem;letter-spacing:0.02em;
+  padding:0.32rem 0.65rem;border-radius:999px;
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  cursor:pointer;transition:all var(--transition);white-space:nowrap;
+  user-select:none;font-weight:600;
+}
+.chip:hover{border-color:var(--navy);color:var(--navy);}
+.chip.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.chip.multi-active{background:var(--amber-bg);color:var(--amber-ink);border-color:var(--amber);}
+.count{font-family:var(--mono);font-size:0.76rem;color:var(--muted);white-space:nowrap;}
+
+.view-subtabs{display:flex;gap:2px;background:var(--navy-light);border-radius:var(--radius-sm);padding:2px;}
+.view-btn{
+  width:32px;height:30px;border:none;border-radius:4px;background:transparent;
+  color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+}
+.view-btn svg{width:15px;height:15px;}
+.view-btn.active{background:var(--card);color:var(--navy);box-shadow:var(--shadow-sm);}
+.view-btn:hover{color:var(--navy);}
+
+.mainclass-pill{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  font-family:var(--mono);font-size:0.72rem;font-weight:700;
+  background:var(--amber-bg);color:var(--amber-ink);
+  border:1px dashed var(--amber);border-radius:999px;
+  padding:0.28rem 0.6rem 0.28rem 0.5rem;cursor:pointer;
+}
+.mainclass-pill svg{width:12px;height:12px;}
+
+/* ═══════════════════════════════════════════════════════════════
+   VIEW CONTAINER
+   ═══════════════════════════════════════════════════════════════ */
+.view-container{animation:fadeSlideIn 0.25s ease;min-height:200px;}
+
+/* ─── Table ─── */
+.table-wrap{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  overflow:hidden;box-shadow:var(--shadow-card);overflow-x:auto;
+}
+.view-table table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.view-table thead th{
+  background:var(--navy-deep);color:#f6ece2;text-align:left;font-weight:700;
+  font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;
+  padding:0.65rem 0.8rem;position:sticky;top:0;z-index:1;font-family:var(--mono);
+}
+.view-table tbody td{
+  padding:0.6rem 0.8rem;border-top:1px solid var(--line);vertical-align:top;
+}
+.view-table tbody tr{transition:background var(--transition);}
+.view-table tbody tr:hover td{background:var(--navy-light);}
+.view-table tbody tr.highlight td{background:var(--amber-bg);}
+.view-table tbody tr.highlight:hover td{background:#f7e2ab;}
+.kode{font-family:var(--mono);font-weight:700;color:var(--navy);white-space:nowrap;}
+.kelas-tag{font-family:var(--mono);font-weight:700;font-size:0.82rem;}
+.kelas-tag.highlight{color:var(--amber-ink);}
+.jam{font-family:var(--mono);white-space:nowrap;}
+.day-tag{font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.badge{
+  display:inline-flex;align-items:center;gap:0.2rem;margin-left:0.35rem;font-family:var(--mono);
+  font-size:0.6rem;padding:0.06rem 0.4rem;border-radius:999px;vertical-align:middle;
+  background:var(--amber);color:#4a3300;font-weight:700;border:1px dashed rgba(74,51,0,0.4);
+}
+.subject-dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  margin-right:0.4rem;vertical-align:middle;flex-shrink:0;
+}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.empty-state svg{width:40px;height:40px;opacity:0.4;}
+
+/* ─── Grid Cards ─── */
+.view-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.8rem;}
+.grid-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1rem;transition:all var(--transition);border-left:3px solid transparent;
+  animation:fadeSlideIn 0.3s ease both;
+}
+.grid-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);}
+.grid-card.highlight{border-left-color:var(--amber);background:var(--amber-bg);}
+.grid-card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:0.5rem;}
+.grid-card-kode{font-family:var(--mono);font-weight:700;color:var(--navy);font-size:0.95rem;display:flex;align-items:center;}
+.grid-card-matkul{font-weight:700;font-size:0.92rem;margin-bottom:0.4rem;line-height:1.3;}
+.grid-card-meta{font-size:0.8rem;color:var(--muted);display:flex;flex-direction:column;gap:0.25rem;}
+.grid-card-meta span{display:flex;align-items:center;gap:0.35rem;}
+.grid-card-meta svg{width:13px;height:13px;flex-shrink:0;}
+
+/* ─── Card List ─── */
+.view-list{display:flex;flex-direction:column;gap:0.6rem;}
+.list-day-header{
+  font-family:var(--display);font-size:1.05rem;font-weight:700;
+  color:var(--navy);padding:0.6rem 0 0.35rem;
+  border-bottom:2px solid var(--navy);display:flex;align-items:baseline;gap:0.5rem;
+}
+.list-day-header svg{width:14px;height:14px;}
+.list-day-count{color:var(--muted);font-weight:500;font-size:0.74rem;font-family:var(--mono);}
+.list-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:0.8rem 1rem;display:grid;grid-template-columns:auto 1fr auto;
+  gap:0.6rem 1rem;align-items:center;transition:all var(--transition);
+  border-left:3px solid transparent;animation:fadeSlideIn 0.3s ease both;
+}
+.list-card:hover{box-shadow:var(--shadow-hover);}
+.list-card.highlight{border-left-color:var(--amber);background:var(--amber-bg);}
+.list-card-time{font-family:var(--mono);font-size:0.82rem;white-space:nowrap;color:var(--ink);min-width:100px;}
+.list-card-info{min-width:0;}
+.list-card-title{font-weight:700;font-size:0.88rem;}
+.list-card-detail{font-size:0.78rem;color:var(--muted);margin-top:0.15rem;}
+.list-card-right{text-align:right;min-width:60px;}
+.list-card-room{font-family:var(--mono);font-size:0.82rem;font-weight:700;color:var(--navy);}
+.list-card-lector{font-size:0.78rem;color:var(--muted);}
+
+/* ─── Compact Table ─── */
+.view-compact table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.view-compact thead th{
+  background:var(--navy-deep);color:#f6ece2;text-align:left;font-weight:700;
+  font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.5rem 0.6rem;font-family:var(--mono);
+}
+.view-compact tbody td{padding:0.4rem 0.6rem;border-top:1px solid var(--line);vertical-align:top;}
+.view-compact tbody tr{transition:background var(--transition);}
+.view-compact tbody tr:hover td{background:var(--navy-light);}
+.view-compact tbody tr.highlight td{background:var(--amber-bg);}
+
+/* ═══════════════════════════════════════════════════════════════
+   CALENDAR VIEWS
+   ═══════════════════════════════════════════════════════════════ */
+.cal-month{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);
+  padding:1rem;margin-bottom:1rem;
+}
+.cal-month-title{
+  font-family:var(--display);font-weight:700;font-size:1.05rem;margin-bottom:0.6rem;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.cal-month-title svg{width:16px;height:16px;color:var(--amber);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day-header{font-size:0.65rem;text-transform:uppercase;text-align:center;padding:0.3rem;color:var(--muted);font-weight:700;font-family:var(--mono);}
+.cal-day{
+  aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-radius:6px;font-size:0.82rem;cursor:default;position:relative;min-height:38px;
+  border:1px solid var(--line);background:var(--card);transition:all var(--transition);font-family:var(--mono);
+}
+.cal-day.num{cursor:pointer;}
+.cal-day.num:hover{background:var(--navy-light);border-color:var(--navy);transform:scale(1.05);}
+.cal-day.num.selected{background:var(--navy);color:#fff;border-color:var(--navy);transform:scale(1.08);box-shadow:var(--shadow-hover);}
+.cal-day.today{background:var(--amber);color:#4a3300;font-weight:700;border-color:var(--amber);}
+.cal-day.holiday{color:var(--danger);font-weight:700;background:rgba(178,58,58,0.07);}
+.cal-day.holiday::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--danger);position:absolute;top:3px;right:3px;}
+.cal-day.important{color:var(--success);font-weight:700;background:rgba(63,125,92,0.08);}
+.cal-day.important::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--success);position:absolute;top:3px;right:3px;}
+.cal-day.has-class::after{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--navy);position:absolute;bottom:4px;}
+.cal-day.empty{opacity:0;pointer-events:none;border-color:transparent;}
+
+.cal-detail{
+  margin-top:0.8rem;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius-md);overflow:hidden;animation:fadeSlideIn 0.25s ease;
+}
+.cal-detail-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.8rem 1rem;border-bottom:1px solid var(--line);background:var(--navy-light);
+}
+.cal-detail-title{font-family:var(--display);font-weight:700;font-size:0.98rem;display:flex;align-items:center;gap:0.4rem;}
+.cal-detail-title svg{width:16px;height:16px;color:var(--navy);}
+.cal-detail-close{background:none;border:none;cursor:pointer;color:var(--muted);padding:0.3rem;border-radius:4px;display:flex;align-items:center;}
+.cal-detail-close:hover{background:var(--line);color:var(--ink);}
+.cal-detail-close svg{width:16px;height:16px;}
+.cal-detail-body{padding:0.8rem 1rem;}
+.cal-detail-section{margin-bottom:0.8rem;}
+.cal-detail-section:last-child{margin-bottom:0;}
+.cal-detail-section-title{
+  font-family:var(--mono);font-size:0.7rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.06em;color:var(--muted);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.3rem;
+}
+.cal-detail-section-title svg{width:12px;height:12px;}
+.cal-detail-item{display:flex;gap:0.6rem;padding:0.4rem 0.6rem;border-radius:var(--radius-sm);font-size:0.84rem;align-items:start;}
+.cal-detail-item+.cal-detail-item{border-top:1px solid var(--line);}
+.cal-detail-item-time{font-family:var(--mono);font-size:0.78rem;color:var(--muted);min-width:90px;white-space:nowrap;}
+.cal-detail-item-info{min-width:0;}
+.cal-detail-item-title{font-weight:700;}
+.cal-detail-item-sub{font-size:0.78rem;color:var(--muted);margin-top:0.1rem;}
+.cal-detail-holiday{padding:0.5rem 0.7rem;border-radius:var(--radius-sm);background:rgba(178,58,58,0.1);color:var(--danger);font-weight:700;display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;}
+.cal-detail-holiday svg{width:14px;height:14px;}
+.cal-detail-important{padding:0.5rem 0.7rem;border-radius:var(--radius-sm);background:rgba(63,125,92,0.1);color:var(--success);font-weight:700;display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;}
+.cal-detail-important svg{width:14px;height:14px;}
+.cal-detail-empty{color:var(--muted);font-style:italic;font-size:0.84rem;padding:0.5rem 0;text-align:center;}
+.cal-legend{display:flex;gap:1rem;margin-top:0.8rem;font-size:0.72rem;color:var(--muted);flex-wrap:wrap;}
+.cal-legend span{display:inline-flex;align-items:center;gap:0.3rem;}
+.cal-legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+
+/* Agenda */
+.agenda-day{margin-bottom:1.3rem;}
+.agenda-date{
+  font-family:var(--display);font-size:1.02rem;font-weight:700;
+  color:var(--navy);padding:0.5rem 0 0.3rem;border-bottom:2px solid var(--navy);margin-bottom:0.5rem;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.agenda-date svg{width:14px;height:14px;}
+.agenda-date.today-date{color:var(--amber-ink);border-bottom-color:var(--amber);}
+.agenda-item{display:flex;gap:0.8rem;padding:0.5rem 0.7rem;border-radius:var(--radius-sm);margin-bottom:0.3rem;transition:background var(--transition);align-items:start;}
+.agenda-item:hover{background:var(--navy-light);}
+.agenda-item.highlight{background:var(--amber-bg);}
+.agenda-time{font-family:var(--mono);font-size:0.78rem;white-space:nowrap;min-width:90px;color:var(--muted);padding-top:0.1rem;}
+.agenda-info{min-width:0;}
+.agenda-title{font-weight:700;font-size:0.88rem;}
+.agenda-detail{font-size:0.78rem;color:var(--muted);margin-top:0.1rem;}
+.agenda-badge{
+  font-family:var(--mono);font-size:0.63rem;padding:0.08rem 0.4rem;border-radius:999px;
+  background:var(--amber);color:#4a3300;font-weight:700;margin-left:0.35rem;border:1px dashed rgba(74,51,0,.35);
+}
+
+/* Timeline */
+.timeline-day{margin-bottom:1.6rem;}
+.timeline-day-header{
+  font-family:var(--display);font-size:1rem;font-weight:700;color:var(--navy);
+  margin-bottom:0.6rem;padding-bottom:0.3rem;border-bottom:2px solid var(--navy);
+  display:flex;align-items:center;gap:0.5rem;
+}
+.timeline-day-header svg{width:16px;height:16px;}
+.timeline{position:relative;padding-left:1.5rem;}
+.timeline::before{content:'';position:absolute;left:0.55rem;top:0;bottom:0;width:2px;background:var(--line);}
+.timeline-item{position:relative;padding:0.5rem 0 0.5rem 1rem;margin-bottom:0.3rem;}
+.timeline-item::before{content:'';position:absolute;left:-0.95rem;top:0.85rem;width:10px;height:10px;border-radius:50%;background:var(--card);border:2px solid var(--navy);z-index:1;}
+.timeline-item.highlight::before{border-color:var(--amber);background:var(--amber-bg);}
+.timeline-time{font-family:var(--mono);font-size:0.75rem;color:var(--muted);margin-bottom:0.15rem;}
+.timeline-content{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0.5rem 0.7rem;}
+.timeline-content.highlight{background:var(--amber-bg);border-color:var(--amber);}
+.timeline-title{font-weight:700;font-size:0.88rem;}
+.timeline-meta{font-size:0.78rem;color:var(--muted);margin-top:0.1rem;}
+
+/* ═══════════════════════════════════════════════════════════════
+   FAB
+   ═══════════════════════════════════════════════════════════════ */
+.fab-wrap{position:fixed;bottom:1.2rem;right:1.2rem;z-index:200;display:flex;flex-direction:column-reverse;align-items:center;gap:0.6rem;}
+.fab-main{
+  width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--navy-deep);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-fab);transition:all var(--transition);
+}
+.fab-main svg{width:22px;height:22px;transition:transform var(--transition);}
+.fab-main.open svg{transform:rotate(45deg);}
+.fab-main:hover{transform:scale(1.05);}
+.fab-actions{display:flex;flex-direction:column;gap:0.5rem;opacity:0;transform:translateY(8px) scale(0.9);pointer-events:none;transition:all var(--transition);}
+.fab-actions.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+.fab-action{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-card);transition:all var(--transition);
+}
+.fab-action svg{width:18px;height:18px;}
+.fab-action:hover{box-shadow:var(--shadow-hover);transform:scale(1.08);}
+.fab-action.active{background:var(--amber-bg);border-color:var(--amber);color:var(--amber-ink);}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+.app-footer{max-width:1140px;margin:0 auto;padding:0 1.5rem 2rem;color:var(--muted);font-size:0.78rem;text-align:center;}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media(max-width:640px){
+  .header-inner{height:56px;}
+  .header-logo{font-size:0.98rem;}
+  .header-meta{display:none;}
+  .semester-select{max-width:96px;font-size:0.7rem;padding:0.35rem 0.5rem;}
+  .style-select{display:none;}
+  .theme-toggle{gap:1px;}
+  .theme-btn{width:28px;height:28px;}
+  .theme-btn svg{width:14px;height:14px;}
+  .app-main{padding:0 1rem 3rem;}
+  .stat-strip{padding:0 1rem;grid-template-columns:repeat(3,1fr);}
+  .toolbar{flex-direction:column;gap:0.5rem;}
+  .toolbar-right{width:100%;justify-content:space-between;}
+  .view-grid{grid-template-columns:1fr;}
+  .view-table table{font-size:0.78rem;}
+  .view-table thead th,.view-table tbody td{padding:0.5rem 0.6rem;}
+  .view-table thead th:nth-child(6),.view-table tbody td:nth-child(6){display:none;}
+  .view-compact thead th:nth-child(5),.view-compact tbody td:nth-child(5){display:none;}
+  .list-card{grid-template-columns:1fr;gap:0.3rem;}
+  .list-card-time{min-width:auto;}
+  .list-card-right{text-align:left;}
+  .semester-cards{grid-template-columns:1fr;}
+  .landing{padding:2rem 1rem;}
+  .tab-btn{font-size:0.82rem;padding:0.7rem 0.8rem;}
+  .tab-btn span.tab-label{display:none;}
+}
+@media(min-width:641px) and (max-width:1023px){
+  .view-grid{grid-template-columns:repeat(2,1fr);}
+  .semester-cards{grid-template-columns:repeat(2,1fr);}
+}
+@media(min-width:1024px){
+  .fab-wrap{display:none;}
+  .semester-cards{grid-template-columns:repeat(3,1fr);}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STYLE THEMES (unchanged mechanics — same variable contract)
+   ═══════════════════════════════════════════════════════════════ */
+[data-style="playful"]{
+  --radius-sm:10px;--radius-md:16px;--radius-lg:20px;
+  --shadow-card:0 2px 8px rgba(236,72,153,0.08),0 1px 3px rgba(0,0,0,0.04);
+  --shadow-hover:0 8px 24px rgba(236,72,153,0.15);
+  --shadow-fab:0 4px 20px rgba(236,72,153,0.25);
+}
+[data-style="playful"] .app-header{background:linear-gradient(135deg,#ec4899,#8b5cf6,#3b82f6);}
+[data-style="playful"] .chip.active{background:linear-gradient(135deg,#ec4899,#8b5cf6);border-color:transparent;}
+[data-style="playful"] .grid-card{border-radius:var(--radius-md);border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,#ec4899,#8b5cf6) border-box;}
+[data-style="playful"] .grid-card.highlight{border:2px solid var(--amber);background:linear-gradient(var(--amber-bg),var(--amber-bg)) padding-box,linear-gradient(135deg,#f59e0b,#f97316) border-box;}
+[data-style="playful"] .grid-card:hover{transform:translateY(-4px) rotate(-0.5deg);}
+[data-style="playful"] .sem-card{border-radius:var(--radius-md);border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,#ec4899,#8b5cf6) border-box;}
+[data-style="playful"] .sem-card:hover{transform:translateY(-4px) scale(1.02);}
+[data-style="playful"] .fab-main{background:linear-gradient(135deg,#ec4899,#8b5cf6);}
+[data-style="playful"] .tab-btn.active{border-bottom-color:#ec4899;}
+[data-style="playful"] .view-btn.active{background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;}
+
+[data-style="elegant"]{
+  --ink:#1a1a2e;--paper:#faf8f5;--card:#ffffff;--line:#e8e4de;
+  --navy:#2c3e50;--navy-deep:#1a252f;--navy-light:#f0ece6;
+  --amber:#c9a96e;--amber-ink:#6b5a3e;--amber-bg:#f9f3e8;
+  --muted:#8a8578;--radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+  --shadow-card:0 1px 4px rgba(0,0,0,0.04),0 0 0 1px rgba(0,0,0,0.02);
+  --shadow-hover:0 4px 16px rgba(0,0,0,0.08);
+}
+[data-style="elegant"] .app-header{background:linear-gradient(135deg,#1a252f,#2c3e50);}
+[data-style="elegant"] body{font-family:Georgia,"Times New Roman",serif;}
+[data-style="elegant"] .chip{border-radius:4px;font-family:Georgia,serif;letter-spacing:0;}
+[data-style="elegant"] .chip.active{background:var(--navy);font-weight:700;}
+[data-style="elegant"] .grid-card{border-radius:var(--radius-sm);border:1px solid var(--line);box-shadow:0 1px 2px rgba(0,0,0,0.03);}
+[data-style="elegant"] .grid-card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.06);transform:none;}
+[data-style="elegant"] .sem-card{border-radius:var(--radius-sm);border:1px solid var(--line);}
+[data-style="elegant"] .sem-card:hover{box-shadow:0 2px 8px rgba(0,0,0,0.06);transform:none;}
+[data-style="elegant"] .cal-day{border-radius:var(--radius-sm);border:1px solid var(--line);}
+[data-style="elegant"] .cal-day.today{border-radius:var(--radius-sm);}
+[data-style="elegant"] .tab-btn.active{font-style:italic;}
+
+[data-style="minimal"]{
+  --ink:#111;--paper:#fff;--card:#fff;--line:#e5e5e5;
+  --navy:#111;--navy-deep:#000;--navy-light:#f5f5f5;
+  --amber:#111;--amber-ink:#fff;--amber-bg:#f5f5f5;
+  --muted:#888;--radius-sm:2px;--radius-md:4px;--radius-lg:6px;
+  --shadow-card:none;--shadow-hover:none;--shadow-fab:0 2px 8px rgba(0,0,0,0.15);
+}
+[data-style="minimal"] .app-header{background:#000;color:#fff;}
+[data-style="minimal"] .app-header .header-meta{color:#999;}
+[data-style="minimal"] .chip{border-radius:2px;border-color:#ddd;font-weight:500;}
+[data-style="minimal"] .chip.active{background:#000;color:#fff;border-color:#000;}
+[data-style="minimal"] .grid-card{border-radius:2px;border:1px solid #e5e5e5;box-shadow:none;}
+[data-style="minimal"] .grid-card:hover{box-shadow:none;transform:none;border-color:#000;}
+[data-style="minimal"] .sem-card{border-radius:2px;border:1px solid #e5e5e5;box-shadow:none;}
+[data-style="minimal"] .sem-card:hover{box-shadow:none;transform:none;border-color:#000;}
+[data-style="minimal"] .cal-day{border-radius:2px;border:1px solid #e5e5e5;}
+[data-style="minimal"] .cal-day.today{border-radius:50%;}
+[data-style="minimal"] .table-wrap{border-radius:2px;box-shadow:none;}
+[data-style="minimal"] .fab-main{border-radius:50%;background:#000;}
+[data-style="minimal"] .badge{border-radius:2px;}
+[data-style="minimal"] .view-btn.active{background:#000;color:#fff;}
+[data-style="minimal"] .view-subtabs{background:#f0f0f0;}
+[data-style="minimal"] .theme-toggle{background:#f0f0f0;}
+
+[data-style="bento"]{
+  --radius-sm:12px;--radius-md:16px;--radius-lg:20px;
+  --shadow-card:0 1px 3px rgba(0,0,0,0.04);
+  --shadow-hover:0 8px 30px rgba(0,0,0,0.08);
+  --shadow-fab:0 4px 20px rgba(0,0,0,0.12);
+}
+[data-style="bento"] .app-header{background:linear-gradient(180deg,#1a1a2e 0%,#16213e 100%);border-bottom:1px solid rgba(255,255,255,0.06);}
+[data-style="bento"] .app-main{padding-top:1rem;}
+[data-style="bento"] .view-grid{gap:1rem;}
+[data-style="bento"] .grid-card{border-radius:var(--radius-md);border:none;box-shadow:var(--shadow-card);padding:1.2rem;}
+[data-style="bento"] .grid-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
+[data-style="bento"] .grid-card.highlight{border-left:4px solid var(--amber);background:var(--amber-bg);}
+[data-style="bento"] .sem-card{border-radius:var(--radius-md);border:none;box-shadow:var(--shadow-card);padding:1.4rem;}
+[data-style="bento"] .sem-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
+[data-style="bento"] .cal-month{border-radius:var(--radius-md);border:none;box-shadow:var(--shadow-card);padding:1.2rem;}
+[data-style="bento"] .cal-day{border-radius:var(--radius-sm);border:1px solid var(--line);}
+[data-style="bento"] .cal-day:hover{box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+[data-style="bento"] .cal-detail{border-radius:var(--radius-md);border:none;box-shadow:var(--shadow-card);}
+[data-style="bento"] .table-wrap{border-radius:var(--radius-md);box-shadow:var(--shadow-card);}
+[data-style="bento"] .chip{border-radius:var(--radius-sm);font-weight:500;}
+[data-style="bento"] .chip.active{box-shadow:0 2px 8px rgba(31,58,95,0.2);}
+[data-style="bento"] .fab-main{border-radius:var(--radius-md);width:52px;height:52px;}
+[data-style="bento"] .fab-action{border-radius:var(--radius-sm);}
+
+[data-style="formal"]{
+  --ink:#1e293b;--paper:#f8fafc;--card:#ffffff;--line:#cbd5e1;
+  --navy:#1e3a5f;--navy-deep:#0f172a;--navy-light:#e2e8f0;
+  --amber:#d97706;--amber-ink:#92400e;--amber-bg:#fef3c7;
+  --muted:#64748b;--radius-sm:4px;--radius-md:6px;--radius-lg:8px;
+  --shadow-card:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-hover:0 4px 12px rgba(0,0,0,0.08);
+  --shadow-fab:0 4px 12px rgba(0,0,0,0.15);
+}
+[data-style="formal"] .app-header{background:linear-gradient(135deg,#0f172a,#1e3a5f);padding:0 2rem;}
+[data-style="formal"] .header-inner{max-width:1200px;}
+[data-style="formal"] body{font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;}
+[data-style="formal"] .chip{border-radius:var(--radius-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+[data-style="formal"] .chip.active{background:var(--navy-deep);border-color:var(--navy-deep);}
+[data-style="formal"] .grid-card{border-radius:var(--radius-sm);border:1px solid var(--line);border-left:3px solid var(--navy);}
+[data-style="formal"] .grid-card.highlight{border-left-color:var(--amber);background:var(--amber-bg);}
+[data-style="formal"] .grid-card:hover{box-shadow:var(--shadow-hover);transform:none;}
+[data-style="formal"] .sem-card{border-radius:var(--radius-sm);border:1px solid var(--line);}
+[data-style="formal"] .sem-card:hover{box-shadow:var(--shadow-hover);transform:none;}
+[data-style="formal"] .cal-day{border-radius:var(--radius-sm);border:1px solid var(--line);}
+[data-style="formal"] .cal-day.today{border-radius:var(--radius-sm);}
+[data-style="formal"] .table-wrap{border-radius:var(--radius-sm);}
+[data-style="formal"] .badge{border-radius:var(--radius-sm);text-transform:uppercase;font-size:0.6rem;letter-spacing:0.05em;}
+[data-style="formal"] .tab-btn{font-weight:700;text-transform:uppercase;letter-spacing:0.04em;font-size:0.82rem;}
+[data-style="formal"] .fab-main{border-radius:var(--radius-sm);}
+
+/* ═══════════════════════════════════════════════════════════════
+   CLASS SELECTION MODAL
+   ═══════════════════════════════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;background:rgba(20,15,10,0.55);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:1rem;animation:fadeIn 0.2s ease;
+}
+.modal{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);padding:2rem;
+  max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:fadeSlideIn 0.3s ease;
+}
+.modal-stamp{
+  width:56px;height:56px;margin:0 auto 0.8rem;border-radius:50%;border:2px dashed var(--amber);
+  display:flex;align-items:center;justify-content:center;transform:rotate(-6deg);
+  font-family:var(--display);font-weight:900;color:var(--amber-ink);font-size:1.4rem;
+}
+.modal-header{text-align:center;margin-bottom:1.5rem;}
+.modal-header h3{font-family:var(--display);font-size:1.25rem;margin-bottom:0.3rem;}
+.modal-header p{color:var(--muted);font-size:0.85rem;line-height:1.5;}
+.modal-classes{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:1.5rem;}
+.modal-class-btn{
+  width:56px;height:56px;border-radius:var(--radius-md);border:2px solid var(--line);background:var(--card);
+  font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--ink);cursor:pointer;
+  transition:all var(--transition);display:flex;align-items:center;justify-content:center;
+}
+.modal-class-btn:hover{border-color:var(--navy);color:var(--navy);transform:scale(1.05);}
+.modal-class-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 2px 8px rgba(124,36,48,0.3);}
+.modal-skip{
+  display:block;margin:0 auto;padding:0.6rem 1.5rem;border:1px solid var(--line);border-radius:var(--radius-sm);
+  background:transparent;color:var(--muted);font-size:0.85rem;cursor:pointer;transition:all var(--transition);
+}
+.modal-skip:hover{border-color:var(--ink);color:var(--ink);}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="brand-mark">TI</div>
+      <div>
+        <div class="header-logo" id="headerLogo">JadKul</div>
+        <div class="header-meta" id="headerMeta"></div>
+      </div>
+      <button class="header-edit-btn" id="editMainClassBtn" title="Ganti kelas utama" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      </button>
+    </div>
+    <div class="header-right">
+      <select id="semesterSelect" class="semester-select"></select>
+      <select id="styleSelect" class="style-select" title="Style Theme">
+        <option value="default">Default</option>
+        <option value="playful">Playful</option>
+        <option value="elegant">Elegant</option>
+        <option value="minimal">Minimal</option>
+        <option value="bento">Bento</option>
+        <option value="formal">Formal</option>
+      </select>
+      <div class="theme-toggle" id="themeToggle">
+        <button class="theme-btn" data-theme="light" title="Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <button class="theme-btn" data-theme="dark" title="Dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z"/></svg></button>
+        <button class="theme-btn" data-theme="system" title="System"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stat-strip" id="statStrip" style="display:none"></div>
+
+<!-- ═══════════════ LANDING PAGE ═══════════════ -->
+<main id="landingPage" class="landing" style="display:none;">
+  <div class="landing-hero">
+    <h2>Pilih Semester</h2>
+    <p>Pilih semester untuk melihat jadwal kuliah. Preferensi kamu tersimpan otomatis di perangkat ini.</p>
+  </div>
+  <div class="semester-cards" id="semesterCards"></div>
+</main>
+
+<!-- ═══════════════ MAIN APP ═══════════════ -->
+<main id="appMain" class="app-main" style="display:none;">
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="schedule">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+      <span class="tab-label"> Jadwal</span>
+    </button>
+    <button class="tab-btn" data-tab="calendar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+      <span class="tab-label"> Kalender</span>
+    </button>
+  </nav>
+
+  <!-- Schedule Panel -->
+  <section id="schedulePanel" class="panel active">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="filter-group">
+          <span class="filter-label">Hari</span>
+          <div class="chip-group" id="dayFilter"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Kelas</span>
+          <div class="chip-group" id="classFilter"></div>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <span class="count" id="scheduleCount"></span>
+        <div class="view-subtabs" id="scheduleViewTabs">
+          <button class="view-btn active" data-view="table" title="Tabel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></button>
+          <button class="view-btn" data-view="grid" title="Grid Cards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+          <button class="view-btn" data-view="list" title="Card List"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></button>
+          <button class="view-btn" data-view="compact" title="Compact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="view-container" id="scheduleContainer"></div>
+  </section>
+
+  <!-- Calendar Panel -->
+  <section id="calendarPanel" class="panel">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="filter-group">
+          <span class="filter-label">Kelas</span>
+          <div class="chip-group" id="classFilterCal"></div>
+        </div>
+      </div>
+      <div class="toolbar-right">
+        <span class="count" id="calendarCount"></span>
+        <div class="view-subtabs" id="calendarViewTabs">
+          <button class="view-btn active" data-view="month" title="Month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></button>
+          <button class="view-btn" data-view="agenda" title="Agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></button>
+          <button class="view-btn" data-view="timeline" title="Timeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="view-container" id="calendarContainer"></div>
+  </section>
+</main>
+
+<!-- ═══════════════ FAB ═══════════════ -->
+<div class="fab-wrap" id="fabWrap">
+  <div class="fab-actions" id="fabActions">
+    <button class="fab-action" id="fabSchedule" title="Schedule View"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
+    <button class="fab-action" id="fabCalendar" title="Calendar View"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></button>
+    <button class="fab-action" id="fabTheme" title="Toggle Theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z"/></svg></button>
+    <button class="fab-action" id="fabTop" title="Scroll to Top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+  </div>
+  <button class="fab-main" id="fabMain" title="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+</div>
+
+<!-- ═══════════════ CLASS SELECTION MODAL ═══════════════ -->
+<div id="classModal" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div class="modal-stamp">TI</div>
+    <div class="modal-header">
+      <h3 id="classModalTitle">Pilih Kelas Kamu</h3>
+      <p id="classModalDesc">Kelas ini akan selalu ditandai stempel di jadwal, kelas lain tetap tampil sebagai referensi.</p>
+    </div>
+    <div class="modal-classes" id="classModalChips"></div>
+    <button class="modal-skip" id="classModalSkip">Lewati, tampilkan semua tanpa sorotan</button>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="app-footer">
+  <p>Disusun dari jadwal pengajaran TI UMY. Data dimuat dari <code>data/jadwal.json</code> (indeks semester) dan <code>data/&lt;semester&gt;.json</code> (detail) — otomatis memakai data cadangan bila berkas tidak ditemukan.</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   INLINE FALLBACK DATA
+   ═══════════════════════════════════════════════════════════════ */
+const FALLBACK_INDEX = {
+  "semesters": [
+    {
+      "id": "ti-s1-gasal-2026",
+      "label": "Semester 1",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "TI",
+      "semester": 1,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/ti-s1-gasal-2026.json"
+    },
+    {
+      "id": "ti-s3-gasal-2026",
+      "label": "Semester 3",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "TI",
+      "semester": 3,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/ti-s3-gasal-2026.json"
+    },
+    {
+      "id": "ti-s5-gasal-2026",
+      "label": "Semester 5",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "TI",
+      "semester": 5,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/ti-s5-gasal-2026.json"
+    },
+    {
+      "id": "ti-s7-gasal-2026",
+      "label": "Semester 7",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "TI",
+      "semester": 7,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/ti-s7-gasal-2026.json"
+    },
+    {
+      "id": "ai-s1-gasal-2026",
+      "label": "Semester 1",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "AI",
+      "semester": 1,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/ai-s1-gasal-2026.json"
+    },
+    {
+      "id": "ti-peminatan-gasal-2026",
+      "label": "Peminatan / Lintas Semester",
+      "period": "Gasal",
+      "academicYear": "2026/2027",
+      "program": "TI",
+      "semester": 0,
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/ti-peminatan-gasal-2026.json"
+    }
+  ]
+};
+const FALLBACK_DETAILS = {
+  "ti-s1-gasal-2026": {
+    "subjectColors": {
+      "TI101": "#2f6f4f",
+      "TI102": "#8a4b6b",
+      "TI106": "#1f6f78",
+      "TI105": "#7a4a1f",
+      "TI103": "#4a5d8a",
+      "TI109": "#9c3b2e",
+      "TI104": "#5c6b23"
+    },
+    "holidays": [
+      {
+        "date": "2026-01-01",
+        "name": "Tahun Baru Masehi",
+        "type": "national"
+      },
+      {
+        "date": "2026-01-16",
+        "name": "Isra Mikraj Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-02-17",
+        "name": "Tahun Baru Imlek 2577",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-19",
+        "name": "Hari Raya Nyepi Saka 1950",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-20",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-21",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-04-03",
+        "name": "Wafat Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Hari Buruh Internasional",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-14",
+        "name": "Kenaikan Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-27",
+        "name": "Hari Raya Idul Adha 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-31",
+        "name": "Hari Raya Waisak 2570",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-01",
+        "name": "Hari Lahir Pancasila",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-16",
+        "name": "Tahun Baru Islam 1448 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-17",
+        "name": "Hari Kemerdekaan RI",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-25",
+        "name": "Maulid Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Hari Raya Natal",
+        "type": "national"
+      }
+    ],
+    "importantDates": [
+      {
+        "date": "2026-09-07",
+        "name": "Awal Perkuliahan",
+        "type": "academic"
+      },
+      {
+        "date": "2026-12-15",
+        "name": "Awal Ujian Akhir Semester",
+        "type": "academic"
+      },
+      {
+        "date": "2027-01-15",
+        "name": "Akhir Semester",
+        "type": "academic"
+      }
+    ],
+    "schedules": {
+      "Senin": [
+        {
+          "kode": "TI101",
+          "matkul": "Fisika dan Elektronika Teknologi Informasi",
+          "kelas": "A,B,C",
+          "jam": "07.00-08.40",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI102",
+          "matkul": "Matematika Teknologi Informasi 1",
+          "kelas": "A,B,C",
+          "jam": "08.50-11.30",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "D",
+          "jam": "08.50-11.30",
+          "ruang": "F6.101",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI102",
+          "matkul": "Matematika Teknologi Informasi 1",
+          "kelas": "D,E,F",
+          "jam": "13.20-15.00",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F6.002",
+          "dosen": "AG"
+        },
+        {
+          "kode": "TI102",
+          "matkul": "Matematika Teknologi Informasi 1",
+          "kelas": "D,E,F",
+          "jam": "15.30-16.20",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F6.002",
+          "dosen": "AG"
+        }
+      ],
+      "Selasa": [
+        {
+          "kode": "TI101",
+          "matkul": "Fisika dan Elektronika Teknologi Informasi",
+          "kelas": "D,E,F",
+          "jam": "07.00-08.40",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI105",
+          "matkul": "Perancangan Basis Data",
+          "kelas": "A,B,C",
+          "jam": "08.50-10.30",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "F",
+          "jam": "08.50-11.30",
+          "ruang": "F6.003",
+          "dosen": "AG"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "D",
+          "jam": "08.50-11.30",
+          "ruang": "F4.001",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "E",
+          "jam": "08.50-11.30",
+          "ruang": "F4.002",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI105",
+          "matkul": "Perancangan Basis Data",
+          "kelas": "D,E,F",
+          "jam": "13.20-15.00",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F6.002",
+          "dosen": "AG"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F6.203",
+          "dosen": "Miss Rina"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "B",
+          "jam": "15.30-16.20",
+          "ruang": "F6.002",
+          "dosen": "AG"
+        }
+      ],
+      "Rabu": [
+        {
+          "kode": "TI104",
+          "matkul": "Logika Teknik Pemrograman",
+          "kelas": "A,B,C",
+          "jam": "07.00-08.40",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "F",
+          "jam": "07.00-08.40",
+          "ruang": "F6.202",
+          "dosen": "Miss Rina"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "E",
+          "jam": "08.50-10.30",
+          "ruang": "F6.202",
+          "dosen": "Mister Wisnu"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "D",
+          "jam": "08.50-10.30",
+          "ruang": "F6.203",
+          "dosen": "Mister Wisnu"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.103",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "C",
+          "jam": "10.40-11.30",
+          "ruang": "F6.203",
+          "dosen": "Mister Wisnu"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "C",
+          "jam": "12.10-13.10",
+          "ruang": "F6.203",
+          "dosen": "Mister Wisnu"
+        },
+        {
+          "kode": "TI104",
+          "matkul": "Logika Teknik Pemrograman",
+          "kelas": "D,E,F",
+          "jam": "13.20-15.00",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "C",
+          "jam": "13.20-15.00",
+          "ruang": "F6.002",
+          "dosen": "AG"
+        },
+        {
+          "kode": "TI109",
+          "matkul": "Bahasa Inggris Dasar",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F6.203",
+          "dosen": "Miss Rina"
+        },
+        {
+          "kode": "TI106",
+          "matkul": "Rekayasa Kebutuhan",
+          "kelas": "C",
+          "jam": "15.30-16.20",
+          "ruang": "F6.002",
+          "dosen": "AG"
+        }
+      ],
+      "Kamis": [],
+      "Jumat": [
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "E",
+          "jam": "07.50-10.30",
+          "ruang": "F6.003",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "C",
+          "jam": "09.40-11.30",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "C",
+          "jam": "13.20-14.10",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "F",
+          "jam": "13.20-15.00",
+          "ruang": "F6.003",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "B",
+          "jam": "14.10-15.00",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "F",
+          "jam": "15.30-16.20",
+          "ruang": "F6.003",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI103",
+          "matkul": "Dasar Teknologi Informasi",
+          "kelas": "B",
+          "jam": "15.30-17.10",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        }
+      ],
+      "Sabtu": []
+    }
+  },
+  "ti-s3-gasal-2026": {
+    "subjectColors": {
+      "TI305": "#2f6f4f",
+      "TI306": "#8a4b6b",
+      "TI302": "#1f6f78",
+      "TI304": "#7a4a1f",
+      "TI301": "#4a5d8a",
+      "TI303": "#9c3b2e",
+      "TI308": "#5c6b23"
+    },
+    "holidays": [
+      {
+        "date": "2026-01-01",
+        "name": "Tahun Baru Masehi",
+        "type": "national"
+      },
+      {
+        "date": "2026-01-16",
+        "name": "Isra Mikraj Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-02-17",
+        "name": "Tahun Baru Imlek 2577",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-19",
+        "name": "Hari Raya Nyepi Saka 1950",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-20",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-21",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-04-03",
+        "name": "Wafat Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Hari Buruh Internasional",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-14",
+        "name": "Kenaikan Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-27",
+        "name": "Hari Raya Idul Adha 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-31",
+        "name": "Hari Raya Waisak 2570",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-01",
+        "name": "Hari Lahir Pancasila",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-16",
+        "name": "Tahun Baru Islam 1448 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-17",
+        "name": "Hari Kemerdekaan RI",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-25",
+        "name": "Maulid Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Hari Raya Natal",
+        "type": "national"
+      }
+    ],
+    "importantDates": [
+      {
+        "date": "2026-09-07",
+        "name": "Awal Perkuliahan",
+        "type": "academic"
+      },
+      {
+        "date": "2026-12-15",
+        "name": "Awal Ujian Akhir Semester",
+        "type": "academic"
+      },
+      {
+        "date": "2027-01-15",
+        "name": "Akhir Semester",
+        "type": "academic"
+      }
+    ],
+    "schedules": {
+      "Senin": [
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "E",
+          "jam": "08.50-11.30",
+          "ruang": "F6.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "D",
+          "jam": "08.50-11.30",
+          "ruang": "F6.004",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "C",
+          "jam": "08.50-11.30",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "E",
+          "jam": "13.20-15.00",
+          "ruang": "F6.004",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "E",
+          "jam": "15.30-16.20",
+          "ruang": "F6.004",
+          "dosen": "AS"
+        }
+      ],
+      "Selasa": [
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "C",
+          "jam": "08.50-11.30",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "E",
+          "jam": "08.50-11.30",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "C",
+          "jam": "13.20-15.00",
+          "ruang": "F6.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F6.101",
+          "dosen": "NA"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "C",
+          "jam": "15.30-16.20",
+          "ruang": "F6.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F6.101",
+          "dosen": "NA"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "B",
+          "jam": "15.30-16.20",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "D",
+          "jam": "15.30-18.00",
+          "ruang": "F4.003",
+          "dosen": "NA"
+        }
+      ],
+      "Rabu": [
+        {
+          "kode": "TI301",
+          "matkul": "Probabilitas dan Statistika",
+          "kelas": "D,E",
+          "jam": "08.50-11.30",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "AG"
+        },
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "B",
+          "jam": "08.50-11.30",
+          "ruang": "F6.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.004",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "C",
+          "jam": "08.50-11.30",
+          "ruang": "F4.003",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F6.004",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "C",
+          "jam": "13.20-15.00",
+          "ruang": "F6.101",
+          "dosen": "NA"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "D",
+          "jam": "13.20-15.00",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.003",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI306",
+          "matkul": "Perancangan Berorientasi Objek",
+          "kelas": "B",
+          "jam": "15.30-16.20",
+          "ruang": "F6.004",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "C",
+          "jam": "15.30-16.20",
+          "ruang": "F6.101",
+          "dosen": "NA"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "D",
+          "jam": "15.30-16.20",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.003",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "E",
+          "jam": "15.30-18.00",
+          "ruang": "F6.003",
+          "dosen": "NA"
+        }
+      ],
+      "Kamis": [
+        {
+          "kode": "TI308",
+          "matkul": "Bahasa Inggris Lanjut",
+          "kelas": "E",
+          "jam": "07.00-08.40",
+          "ruang": "F6.202",
+          "dosen": "Miss Rina"
+        },
+        {
+          "kode": "TI305",
+          "matkul": "Teknologi Server",
+          "kelas": "D",
+          "jam": "08.50-11.30",
+          "ruang": "F6.003",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "B",
+          "jam": "08.50-11.30",
+          "ruang": "F6.004",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI302",
+          "matkul": "Pemrograman Multiplatform",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.103",
+          "dosen": "CD"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F6.002",
+          "dosen": "NA"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "E",
+          "jam": "13.20-15.00",
+          "ruang": "F6.004",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI304",
+          "matkul": "Switching dan Wireless",
+          "kelas": "B",
+          "jam": "15.30-16.20",
+          "ruang": "F6.002",
+          "dosen": "NA"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "E",
+          "jam": "15.30-16.20",
+          "ruang": "F6.004",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "D",
+          "jam": "16.20-18.00",
+          "ruang": "F6.004",
+          "dosen": "AK"
+        },
+        {
+          "kode": "TI303",
+          "matkul": "Implementasi Basis Data",
+          "kelas": "D",
+          "jam": "18.30-19.20",
+          "ruang": "F6.004",
+          "dosen": "AK"
+        }
+      ],
+      "Jumat": [
+        {
+          "kode": "TI301",
+          "matkul": "Probabilitas dan Statistika",
+          "kelas": "A,B,C",
+          "jam": "07.50-10.30",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "SR"
+        }
+      ],
+      "Sabtu": [
+        {
+          "kode": "TI308",
+          "matkul": "Bahasa Inggris Lanjut",
+          "kelas": "B",
+          "jam": "07.00-08.40",
+          "ruang": "F6.101",
+          "dosen": "Mister Ipank"
+        },
+        {
+          "kode": "TI308",
+          "matkul": "Bahasa Inggris Lanjut",
+          "kelas": "A",
+          "jam": "08.50-10.30",
+          "ruang": "F6.101",
+          "dosen": "Mister Ipank"
+        },
+        {
+          "kode": "TI308",
+          "matkul": "Bahasa Inggris Lanjut",
+          "kelas": "D",
+          "jam": "10.40-11.30",
+          "ruang": "F6.101",
+          "dosen": "Mister Ipank"
+        },
+        {
+          "kode": "TI308",
+          "matkul": "Bahasa Inggris Lanjut",
+          "kelas": "D",
+          "jam": "12.10-13.10",
+          "ruang": "F6.101",
+          "dosen": "Mister Ipank"
+        },
+        {
+          "kode": "TI308",
+          "matkul": "Bahasa Inggris Lanjut",
+          "kelas": "C",
+          "jam": "13.20-15.00",
+          "ruang": "F6.101",
+          "dosen": "Mister Ipank"
+        }
+      ]
+    }
+  },
+  "ti-s5-gasal-2026": {
+    "subjectColors": {
+      "TI504": "#2f6f4f",
+      "TI506": "#8a4b6b",
+      "TI508": "#1f6f78",
+      "TI503": "#7a4a1f",
+      "TI501": "#4a5d8a",
+      "TI505": "#9c3b2e",
+      "TI502": "#5c6b23",
+      "TI507": "#a1731f"
+    },
+    "holidays": [
+      {
+        "date": "2026-01-01",
+        "name": "Tahun Baru Masehi",
+        "type": "national"
+      },
+      {
+        "date": "2026-01-16",
+        "name": "Isra Mikraj Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-02-17",
+        "name": "Tahun Baru Imlek 2577",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-19",
+        "name": "Hari Raya Nyepi Saka 1950",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-20",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-21",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-04-03",
+        "name": "Wafat Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Hari Buruh Internasional",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-14",
+        "name": "Kenaikan Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-27",
+        "name": "Hari Raya Idul Adha 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-31",
+        "name": "Hari Raya Waisak 2570",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-01",
+        "name": "Hari Lahir Pancasila",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-16",
+        "name": "Tahun Baru Islam 1448 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-17",
+        "name": "Hari Kemerdekaan RI",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-25",
+        "name": "Maulid Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Hari Raya Natal",
+        "type": "national"
+      }
+    ],
+    "importantDates": [
+      {
+        "date": "2026-09-07",
+        "name": "Awal Perkuliahan",
+        "type": "academic"
+      },
+      {
+        "date": "2026-12-15",
+        "name": "Awal Ujian Akhir Semester",
+        "type": "academic"
+      },
+      {
+        "date": "2027-01-15",
+        "name": "Akhir Semester",
+        "type": "academic"
+      }
+    ],
+    "schedules": {
+      "Senin": [
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "A",
+          "jam": "07.00-08.40",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "E",
+          "jam": "08.50-10.30",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI508",
+          "matkul": "Technopreneurship",
+          "kelas": "F",
+          "jam": "08.50-10.30",
+          "ruang": "F4.001",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "D",
+          "jam": "08.50-11.30",
+          "ruang": "F6.102",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "B",
+          "jam": "08.50-11.30",
+          "ruang": "F4.002",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "F",
+          "jam": "10.40-11.30",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "F",
+          "jam": "12.10-13.10",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "E",
+          "jam": "13.20-15.00",
+          "ruang": "F6.102",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI508",
+          "matkul": "Technopreneurship",
+          "kelas": "D",
+          "jam": "13.20-15.00",
+          "ruang": "F4.001",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.002",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "E",
+          "jam": "15.30-16.20",
+          "ruang": "F6.102",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.002",
+          "dosen": "DP"
+        }
+      ],
+      "Selasa": [
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "C",
+          "jam": "08.50-10.30",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "E",
+          "jam": "08.50-11.30",
+          "ruang": "F6.102",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "D",
+          "jam": "10.40-11.30",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "D",
+          "jam": "12.10-13.10",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "D",
+          "jam": "13.20-15.00",
+          "ruang": "F6.102",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "C",
+          "jam": "13.20-15.00",
+          "ruang": "F4.001",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI508",
+          "matkul": "Technopreneurship",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.002",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI504",
+          "matkul": "WAN dan Teknologi Jaringan",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F4.003",
+          "dosen": "HQ"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "D",
+          "jam": "15.30-16.20",
+          "ruang": "F6.102",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "C",
+          "jam": "15.30-16.20",
+          "ruang": "F4.001",
+          "dosen": "TA"
+        }
+      ],
+      "Rabu": [
+        {
+          "kode": "TI508",
+          "matkul": "Technopreneurship",
+          "kelas": "E",
+          "jam": "07.50-09.40",
+          "ruang": "F4.002",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "E",
+          "jam": "08.50-11.30",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "C",
+          "jam": "08.50-11.30",
+          "ruang": "F6.102",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI508",
+          "matkul": "Technopreneurship",
+          "kelas": "B",
+          "jam": "09.40-11.30",
+          "ruang": "F4.002",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI508",
+          "matkul": "Technopreneurship",
+          "kelas": "C",
+          "jam": "13.20-15.00",
+          "ruang": "F4.002",
+          "dosen": "WS"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "F",
+          "jam": "13.20-15.00",
+          "ruang": "F6.102",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TI503",
+          "matkul": "Pengembangan Web Service",
+          "kelas": "F",
+          "jam": "15.30-16.20",
+          "ruang": "F6.102",
+          "dosen": "DP"
+        }
+      ],
+      "Kamis": [
+        {
+          "kode": "TI505",
+          "matkul": "Tata Kelola Teknologi Informasi",
+          "kelas": "D,E,F",
+          "jam": "08.50-11.30",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.102",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "B",
+          "jam": "08.50-11.30",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI505",
+          "matkul": "Tata Kelola Teknologi Informasi",
+          "kelas": "A,B,C",
+          "jam": "13.20-15.00",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "D",
+          "jam": "13.20-15.00",
+          "ruang": "F6.102",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "F",
+          "jam": "13.20-15.00",
+          "ruang": "F6.103",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "E",
+          "jam": "13.20-15.00",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI505",
+          "matkul": "Tata Kelola Teknologi Informasi",
+          "kelas": "A,B,C",
+          "jam": "15.30-16.20",
+          "ruang": "RKBesar/F6.001",
+          "dosen": "CO"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "D",
+          "jam": "15.30-16.20",
+          "ruang": "F6.102",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "F",
+          "jam": "15.30-16.20",
+          "ruang": "F6.103",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "E",
+          "jam": "15.30-16.20",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "C",
+          "jam": "16.20-18.00",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "C",
+          "jam": "18.30-19.20",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        }
+      ],
+      "Jumat": [
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "B",
+          "jam": "07.00-09.40",
+          "ruang": "F6.101",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.103",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "D",
+          "jam": "08.50-11.30",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "B",
+          "jam": "13.20-15.00",
+          "ruang": "F6.103",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI506",
+          "matkul": "Manajemen Proyek",
+          "kelas": "B",
+          "jam": "15.30-16.20",
+          "ruang": "F6.103",
+          "dosen": "TA"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "F",
+          "jam": "16.20-18.00",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        },
+        {
+          "kode": "TI502",
+          "matkul": "Pengembangan Aplikasi Mobile",
+          "kelas": "F",
+          "jam": "18.30-19.20",
+          "ruang": "F4.002",
+          "dosen": "HS"
+        }
+      ],
+      "Sabtu": [
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "B",
+          "jam": "07.00-08.40",
+          "ruang": "F6.102",
+          "dosen": "Mister Susant"
+        },
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "F",
+          "jam": "07.00-08.40",
+          "ruang": "F6.103",
+          "dosen": "Miss Kiki"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "C",
+          "jam": "07.00-09.40",
+          "ruang": "F6.002",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "D",
+          "jam": "08.50-10.30",
+          "ruang": "F6.102",
+          "dosen": "Mister Susant"
+        },
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "C",
+          "jam": "08.50-10.30",
+          "ruang": "F6.103",
+          "dosen": "Miss Kiki"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "F",
+          "jam": "09.40-11.30",
+          "ruang": "F6.002",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "A",
+          "jam": "10.40-11.30",
+          "ruang": "F6.102",
+          "dosen": "Mister Susant"
+        },
+        {
+          "kode": "TI501",
+          "matkul": "Pengembangan Aplikasi Web",
+          "kelas": "F",
+          "jam": "12.10-13.10",
+          "ruang": "F6.002",
+          "dosen": "AS"
+        },
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "A",
+          "jam": "12.10-13.10",
+          "ruang": "F6.102",
+          "dosen": "Mister Susant"
+        },
+        {
+          "kode": "TI507",
+          "matkul": "Bahasa Inggris untuk Membaca Naskah Akademik",
+          "kelas": "E",
+          "jam": "13.20-15.00",
+          "ruang": "F6.102",
+          "dosen": "Mister Susant"
+        }
+      ]
+    }
+  },
+  "ti-s7-gasal-2026": {
+    "subjectColors": {
+      "TI704": "#2f6f4f"
+    },
+    "holidays": [
+      {
+        "date": "2026-01-01",
+        "name": "Tahun Baru Masehi",
+        "type": "national"
+      },
+      {
+        "date": "2026-01-16",
+        "name": "Isra Mikraj Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-02-17",
+        "name": "Tahun Baru Imlek 2577",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-19",
+        "name": "Hari Raya Nyepi Saka 1950",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-20",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-21",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-04-03",
+        "name": "Wafat Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Hari Buruh Internasional",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-14",
+        "name": "Kenaikan Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-27",
+        "name": "Hari Raya Idul Adha 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-31",
+        "name": "Hari Raya Waisak 2570",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-01",
+        "name": "Hari Lahir Pancasila",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-16",
+        "name": "Tahun Baru Islam 1448 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-17",
+        "name": "Hari Kemerdekaan RI",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-25",
+        "name": "Maulid Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Hari Raya Natal",
+        "type": "national"
+      }
+    ],
+    "importantDates": [
+      {
+        "date": "2026-09-07",
+        "name": "Awal Perkuliahan",
+        "type": "academic"
+      },
+      {
+        "date": "2026-12-15",
+        "name": "Awal Ujian Akhir Semester",
+        "type": "academic"
+      },
+      {
+        "date": "2027-01-15",
+        "name": "Akhir Semester",
+        "type": "academic"
+      }
+    ],
+    "schedules": {
+      "Senin": [],
+      "Selasa": [],
+      "Rabu": [],
+      "Kamis": [],
+      "Jumat": [
+        {
+          "kode": "TI704",
+          "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+          "kelas": "B",
+          "jam": "07.50-09.40",
+          "ruang": "F6.202",
+          "dosen": "Miss Kiki"
+        },
+        {
+          "kode": "TI704",
+          "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+          "kelas": "C",
+          "jam": "09.40-11.30",
+          "ruang": "F6.202",
+          "dosen": "Miss Kiki"
+        }
+      ],
+      "Sabtu": [
+        {
+          "kode": "TI704",
+          "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+          "kelas": "A",
+          "jam": "07.00-08.40",
+          "ruang": "F6.202",
+          "dosen": "Miss Kiki"
+        },
+        {
+          "kode": "TI704",
+          "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+          "kelas": "D",
+          "jam": "07.00-08.40",
+          "ruang": "F6.203",
+          "dosen": "Miss Kiki"
+        },
+        {
+          "kode": "TI704",
+          "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+          "kelas": "E",
+          "jam": "08.50-10.30",
+          "ruang": "F6.203",
+          "dosen": "Miss Kiki"
+        }
+      ]
+    }
+  },
+  "ai-s1-gasal-2026": {
+    "subjectColors": {
+      "AI101": "#2f6f4f",
+      "AI102": "#8a4b6b",
+      "AI103": "#1f6f78",
+      "AI104": "#7a4a1f",
+      "AI105": "#4a5d8a",
+      "AI106": "#9c3b2e"
+    },
+    "holidays": [
+      {
+        "date": "2026-01-01",
+        "name": "Tahun Baru Masehi",
+        "type": "national"
+      },
+      {
+        "date": "2026-01-16",
+        "name": "Isra Mikraj Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-02-17",
+        "name": "Tahun Baru Imlek 2577",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-19",
+        "name": "Hari Raya Nyepi Saka 1950",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-20",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-21",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-04-03",
+        "name": "Wafat Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Hari Buruh Internasional",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-14",
+        "name": "Kenaikan Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-27",
+        "name": "Hari Raya Idul Adha 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-31",
+        "name": "Hari Raya Waisak 2570",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-01",
+        "name": "Hari Lahir Pancasila",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-16",
+        "name": "Tahun Baru Islam 1448 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-17",
+        "name": "Hari Kemerdekaan RI",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-25",
+        "name": "Maulid Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Hari Raya Natal",
+        "type": "national"
+      }
+    ],
+    "importantDates": [
+      {
+        "date": "2026-09-07",
+        "name": "Awal Perkuliahan",
+        "type": "academic"
+      },
+      {
+        "date": "2026-12-15",
+        "name": "Awal Ujian Akhir Semester",
+        "type": "academic"
+      },
+      {
+        "date": "2027-01-15",
+        "name": "Akhir Semester",
+        "type": "academic"
+      }
+    ],
+    "schedules": {
+      "Senin": [],
+      "Selasa": [],
+      "Rabu": [
+        {
+          "kode": "AI101",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F4.001",
+          "dosen": "-"
+        },
+        {
+          "kode": "AI102",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.001",
+          "dosen": "-"
+        },
+        {
+          "kode": "AI102",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.001",
+          "dosen": "-"
+        }
+      ],
+      "Kamis": [
+        {
+          "kode": "AI103",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F4.001",
+          "dosen": "-"
+        },
+        {
+          "kode": "AI104",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.001",
+          "dosen": "-"
+        },
+        {
+          "kode": "AI104",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.001",
+          "dosen": "-"
+        }
+      ],
+      "Jumat": [
+        {
+          "kode": "AI105",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F4.001",
+          "dosen": "-"
+        },
+        {
+          "kode": "AI106",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.001",
+          "dosen": "-"
+        },
+        {
+          "kode": "AI106",
+          "matkul": "",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.001",
+          "dosen": "-"
+        }
+      ],
+      "Sabtu": []
+    }
+  },
+  "ti-peminatan-gasal-2026": {
+    "subjectColors": {
+      "TIUX01": "#2f6f4f",
+      "TIDA03": "#8a4b6b",
+      "TINE01": "#1f6f78",
+      "TINE05": "#7a4a1f",
+      "TIDA01": "#4a5d8a",
+      "TIPR01": "#9c3b2e",
+      "TIPR02": "#5c6b23",
+      "TIUX02": "#a1731f"
+    },
+    "holidays": [
+      {
+        "date": "2026-01-01",
+        "name": "Tahun Baru Masehi",
+        "type": "national"
+      },
+      {
+        "date": "2026-01-16",
+        "name": "Isra Mikraj Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-02-17",
+        "name": "Tahun Baru Imlek 2577",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-19",
+        "name": "Hari Raya Nyepi Saka 1950",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-20",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-03-21",
+        "name": "Hari Raya Idul Fitri 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-04-03",
+        "name": "Wafat Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-01",
+        "name": "Hari Buruh Internasional",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-14",
+        "name": "Kenaikan Yesus Kristus",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-27",
+        "name": "Hari Raya Idul Adha 1447 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-05-31",
+        "name": "Hari Raya Waisak 2570",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-01",
+        "name": "Hari Lahir Pancasila",
+        "type": "national"
+      },
+      {
+        "date": "2026-06-16",
+        "name": "Tahun Baru Islam 1448 H",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-17",
+        "name": "Hari Kemerdekaan RI",
+        "type": "national"
+      },
+      {
+        "date": "2026-08-25",
+        "name": "Maulid Nabi Muhammad SAW",
+        "type": "national"
+      },
+      {
+        "date": "2026-12-25",
+        "name": "Hari Raya Natal",
+        "type": "national"
+      }
+    ],
+    "importantDates": [
+      {
+        "date": "2026-09-07",
+        "name": "Awal Perkuliahan",
+        "type": "academic"
+      },
+      {
+        "date": "2026-12-15",
+        "name": "Awal Ujian Akhir Semester",
+        "type": "academic"
+      },
+      {
+        "date": "2027-01-15",
+        "name": "Akhir Semester",
+        "type": "academic"
+      }
+    ],
+    "schedules": {
+      "Senin": [
+        {
+          "kode": "TIUX01",
+          "matkul": "Serious Game",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.002",
+          "dosen": "RG"
+        },
+        {
+          "kode": "TIDA03",
+          "matkul": "Analisis Big Data",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F6.003",
+          "dosen": "SR"
+        },
+        {
+          "kode": "TIDA03",
+          "matkul": "Analisis Big Data",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F6.003",
+          "dosen": "SR"
+        }
+      ],
+      "Selasa": [
+        {
+          "kode": "TINE01",
+          "matkul": "Blockchain",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.002",
+          "dosen": "EP"
+        },
+        {
+          "kode": "TIDA03",
+          "matkul": "Analisis Big Data",
+          "kelas": "B",
+          "jam": "08.50-11.30",
+          "ruang": "F6.004",
+          "dosen": "AG"
+        },
+        {
+          "kode": "TIDA01",
+          "matkul": "Computer Vision",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F6.004",
+          "dosen": "SR/CO"
+        },
+        {
+          "kode": "TIDA01",
+          "matkul": "Computer Vision",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F6.004",
+          "dosen": "SR/CO"
+        },
+        {
+          "kode": "TINE05",
+          "matkul": "Routing Lanjut",
+          "kelas": "A",
+          "jam": "16.20-18.00",
+          "ruang": "F6.003",
+          "dosen": "EP - Lab Cisco"
+        },
+        {
+          "kode": "TINE05",
+          "matkul": "Routing Lanjut",
+          "kelas": "A",
+          "jam": "18.30-19.20",
+          "ruang": "F6.003",
+          "dosen": "EP - Lab Cisco"
+        }
+      ],
+      "Rabu": [
+        {
+          "kode": "TIPR01",
+          "matkul": "Pengembangan Game",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.002",
+          "dosen": "RG"
+        }
+      ],
+      "Kamis": [
+        {
+          "kode": "TIPR02",
+          "matkul": "Teknologi Multimedia",
+          "kelas": "A",
+          "jam": "08.50-11.30",
+          "ruang": "F6.002",
+          "dosen": "DP"
+        },
+        {
+          "kode": "TIUX02",
+          "matkul": "Prototyping",
+          "kelas": "B",
+          "jam": "08.50-11.30",
+          "ruang": "F4.003",
+          "dosen": "RG"
+        },
+        {
+          "kode": "TIUX02",
+          "matkul": "Prototyping",
+          "kelas": "A",
+          "jam": "13.20-15.00",
+          "ruang": "F4.003",
+          "dosen": "RG"
+        },
+        {
+          "kode": "TIUX02",
+          "matkul": "Prototyping",
+          "kelas": "A",
+          "jam": "15.30-16.20",
+          "ruang": "F4.003",
+          "dosen": "RG"
+        }
+      ],
+      "Jumat": [],
+      "Sabtu": []
+    }
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   APP STATE
+   ═══════════════════════════════════════════════════════════════ */
+const DAY_ORDER = ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+
+const App = {
+  index: null,
+  detail: null,
+  state: {
+    semesterId: null,
+    activeTab: "schedule",
+    scheduleView: "table",
+    calendarView: "month",
+    selectedDay: "all",
+    selectedClasses: [],
+    selectedClassesCal: [],
+    theme: "light",
+    style: "default",
+    mainClass: null,
+  },
+
+  /* ── Init ── */
+  async init() {
+    this.index = await this.loadIndex();
+    this.loadPrefs();
+    this.applyTheme(this.state.theme);
+    this.applyStyle(this.state.style);
+    this.populateSemesterSelect();
+    this.bindEvents();
+    if (this.state.semesterId && this.getSemesterMeta(this.state.semesterId)) {
+      await this.loadSemesterDetail(this.state.semesterId);
+      this.applySemesterUI(this.state.semesterId);
+    } else {
+      this.showLanding();
+    }
+  },
+
+  /* ── Data Loading (with graceful offline fallback) ── */
+  async loadIndex() {
+    try {
+      const res = await fetch("data/jadwal.json");
+      if (!res.ok) throw new Error(res.status);
+      return await res.json();
+    } catch (e) {
+      console.warn("Fetch index gagal, pakai data cadangan:", e.message);
+      return FALLBACK_INDEX;
+    }
+  },
+  async loadSemesterDetail(semesterId) {
+    const meta = this.getSemesterMeta(semesterId);
+    if (!meta) return;
+    try {
+      const res = await fetch(meta.file);
+      if (!res.ok) throw new Error(res.status);
+      this.detail = await res.json();
+    } catch (e) {
+      console.warn(`Fetch detail ${semesterId} gagal, pakai data cadangan:`, e.message);
+      this.detail = FALLBACK_DETAILS[semesterId] || null;
+    }
+  },
+
+  /* ── Semester Helpers ── */
+  getSemesterMeta(id) { return this.index.semesters.find(s => s.id === id) || null; },
+  getAllClasses() {
+    if (!this.detail) return [];
+    const cls = new Set();
+    Object.values(this.detail.schedules).forEach(rows => {
+      rows.forEach(r => r.kelas.split(",").forEach(c => cls.add(c.trim())));
+    });
+    return [...cls].sort();
+  },
+  flattenSchedules(dayFilter, classFilter) {
+    if (!this.detail) return [];
+    const items = [];
+    const days = dayFilter === "all" ? DAY_ORDER : [dayFilter];
+    days.forEach(day => {
+      (this.detail.schedules[day] || []).forEach(r => {
+        const rClasses = r.kelas.split(",").map(c => c.trim());
+        if (classFilter.length === 0 || classFilter.some(c => rClasses.includes(c))) {
+          items.push({ day, ...r, rClasses, color: this.detail.subjectColors[r.kode] || null });
+        }
+      });
+    });
+    return items;
+  },
+  isHighlighted(r) {
+    return r.rClasses.some(c => this.state.selectedClasses.includes(c));
+  },
+
+  /* ── Select Semester (manual = show class picker; restore = skip) ── */
+  async selectSemester(id, manual = false) {
+    const meta = this.getSemesterMeta(id);
+    if (!meta) return;
+    this.state.semesterId = id;
+    this.savePrefs();
+    document.getElementById("semesterSelect").value = id;
+    await this.loadSemesterDetail(id);
+    if (manual && this.detail && this.getAllClasses().length) {
+      this.showClassPicker();
+    } else {
+      this.applySemesterUI(id);
+    }
+  },
+
+  applySemesterUI(id) {
+    const meta = this.getSemesterMeta(id);
+    if (!meta) return;
+    this.state.selectedDay = "all";
+    const classes = this.getAllClasses();
+    if (this.state.mainClass && !classes.includes(this.state.mainClass)) {
+      this.state.mainClass = null;
+    }
+    // BUGFIX: seed the filter with the student's saved "Kelas Utama" so it's
+    // actually highlighted by default, instead of always showing an unfiltered list.
+    this.state.selectedClasses = this.state.mainClass ? [this.state.mainClass] : [];
+    this.state.selectedClassesCal = this.state.mainClass ? [this.state.mainClass] : [];
+
+    document.getElementById("headerMeta").textContent =
+      `${meta.program} · ${meta.label} · ${meta.period} ${meta.academicYear}`;
+    document.getElementById("headerLogo").textContent = `JadKul`;
+    document.getElementById("editMainClassBtn").style.display = classes.length ? "flex" : "none";
+    document.getElementById("landingPage").style.display = "none";
+    document.getElementById("appMain").style.display = "";
+    document.getElementById("statStrip").style.display = "";
+    this.renderToolbar("schedule");
+    this.renderToolbar("calendar");
+    this.renderView("schedule");
+    this.renderView("calendar");
+    this.renderStats();
+    document.querySelectorAll(".semester-cards .sem-card").forEach(c => c.classList.toggle("selected", c.dataset.id === id));
+    this.updateFabActive();
+  },
+
+  /* ── Stats strip ── */
+  renderStats() {
+    if (!this.detail) return;
+    const all = this.flattenSchedules("all", []);
+    const total = all.length;
+    const mineCount = this.state.mainClass ? all.filter(r => r.rClasses.includes(this.state.mainClass)).length : 0;
+    const perDay = {};
+    DAY_ORDER.forEach(d => perDay[d] = 0);
+    all.forEach(r => perDay[r.day]++);
+    const busiest = Object.entries(perDay).sort((a,b)=>b[1]-a[1])[0];
+    const matkulSet = new Set(all.map(r => r.kode));
+    const cards = [
+      { num: total, label: "Total sesi" },
+      { num: this.state.mainClass ? mineCount : "—", label: this.state.mainClass ? `Sesi Kelas ${this.state.mainClass}` : "Kelas belum dipilih", gold: !!this.state.mainClass },
+      { num: matkulSet.size, label: "Mata kuliah" },
+      { num: busiest[0], label: `Terpadat (${busiest[1]} sesi)`, small: true },
+    ];
+    document.getElementById("statStrip").innerHTML = cards.map(c => `
+      <div class="stat-card${c.gold ? " gold" : ""}">
+        <div class="stat-num${c.small ? " small" : ""}">${c.num}</div>
+        <div class="stat-label">${c.label}</div>
+      </div>`).join("");
+  },
+
+  /* ── Landing ── */
+  showLanding() {
+    document.getElementById("landingPage").style.display = "";
+    document.getElementById("appMain").style.display = "none";
+    document.getElementById("statStrip").style.display = "none";
+    document.getElementById("editMainClassBtn").style.display = "none";
+    document.getElementById("headerMeta").textContent = "";
+    document.getElementById("headerLogo").textContent = "JadKul";
+    const wrap = document.getElementById("semesterCards");
+    wrap.innerHTML = this.index.semesters.map(s => {
+      const selected = s.id === this.state.semesterId;
+      return `<div class="sem-card${selected ? " selected" : ""}" data-id="${s.id}">
+        <div class="sem-card-header">
+          <span class="sem-card-title">${s.program} ${s.label}</span>
+          <span class="sem-card-badge">${s.period}</span>
+        </div>
+        <div class="sem-card-meta">
+          <span>${ICONS.book} ${s.academicYear}</span>
+        </div>
+      </div>`;
+    }).join("");
+    wrap.querySelectorAll(".sem-card").forEach(card => {
+      card.addEventListener("click", () => this.selectSemester(card.dataset.id, true));
+    });
+  },
+
+  /* ── Class Picker Modal (BUGFIX: tap-to-confirm, pre-selects existing choice) ── */
+  showClassPicker() {
+    const classes = this.getAllClasses();
+    if (classes.length === 0) return;
+    const modal = document.getElementById("classModal");
+    const chipsWrap = document.getElementById("classModalChips");
+    const meta = this.getSemesterMeta(this.state.semesterId);
+    document.getElementById("classModalTitle").textContent = `Pilih Kelas Kamu — ${meta.program} ${meta.label}`;
+    chipsWrap.innerHTML = classes.map(c =>
+      `<button class="modal-class-btn${c === this.state.mainClass ? " active" : ""}" data-cls="${c}">${c}</button>`
+    ).join("");
+    chipsWrap.querySelectorAll(".modal-class-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        this.state.mainClass = btn.dataset.cls;
+        this.hideClassPicker(false);
+      });
+    });
+    modal.style.display = "flex";
+    document.getElementById("classModalSkip").onclick = () => this.hideClassPicker(true);
+  },
+  hideClassPicker(skip) {
+    if (skip) this.state.mainClass = null;
+    document.getElementById("classModal").style.display = "none";
+    this.savePrefs();
+    this.applySemesterUI(this.state.semesterId);
+  },
+
+  /* ── Semester Select Dropdown ── */
+  populateSemesterSelect() {
+    const sel = document.getElementById("semesterSelect");
+    sel.innerHTML = this.index.semesters.map(s =>
+      `<option value="${s.id}">${s.program} ${s.label} (${s.period} ${s.academicYear})</option>`
+    ).join("");
+  },
+
+  /* ── Toolbar Render ── */
+  renderToolbar(tab) {
+    if (!this.detail) return;
+    if (tab === "schedule") {
+      const dayWrap = document.getElementById("dayFilter");
+      dayWrap.innerHTML = `<button class="chip active" data-day="all">Semua</button>` +
+        DAY_ORDER.map(d => `<button class="chip" data-day="${d}">${d}</button>`).join("");
+      dayWrap.querySelectorAll(".chip").forEach(c => {
+        c.addEventListener("click", () => {
+          dayWrap.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+          c.classList.add("active");
+          this.state.selectedDay = c.dataset.day;
+          this.renderView("schedule");
+        });
+      });
+      this.renderClassChips("classFilter", this.state.selectedClasses, (cls) => {
+        this.state.selectedClasses = cls;
+        this.renderView("schedule");
+        this.renderStats();
+      });
+    } else {
+      this.renderClassChips("classFilterCal", this.state.selectedClassesCal, (cls) => {
+        this.state.selectedClassesCal = cls;
+        this.renderView("calendar");
+      });
+    }
+  },
+
+  renderClassChips(containerId, selected, onChange) {
+    const classes = this.getAllClasses();
+    const wrap = document.getElementById(containerId);
+    const allActive = selected.length === 0;
+    wrap.innerHTML = `<button class="chip${allActive ? " active" : ""}" data-cls="all">Semua</button>` +
+      classes.map(c => `<button class="chip${selected.includes(c) ? " multi-active" : ""}" data-cls="${c}">${c}${c === this.state.mainClass ? " ★" : ""}</button>`).join("");
+    wrap.querySelectorAll(".chip").forEach(ch => {
+      ch.addEventListener("click", () => {
+        const cls = ch.dataset.cls;
+        if (cls === "all") { selected.length = 0; }
+        else {
+          const idx = selected.indexOf(cls);
+          if (idx >= 0) selected.splice(idx, 1); else selected.push(cls);
+        }
+        onChange([...selected]);
+        this.renderClassChips(containerId, selected, onChange);
+      });
+    });
+  },
+
+  /* ── View Render ── */
+  renderView(tab) {
+    const clsFilter = tab === "schedule" ? this.state.selectedClasses : this.state.selectedClassesCal;
+    const data = this.flattenSchedules(tab === "schedule" ? this.state.selectedDay : "all", clsFilter);
+    const container = document.getElementById(tab === "schedule" ? "scheduleContainer" : "calendarContainer");
+    const countEl = document.getElementById(tab === "schedule" ? "scheduleCount" : "calendarCount");
+    if (tab === "schedule") {
+      const view = this.state.scheduleView;
+      if (view === "table") this.renderTable(data, container, false);
+      else if (view === "grid") this.renderGrid(data, container);
+      else if (view === "list") this.renderList(data, container);
+      else if (view === "compact") this.renderTable(data, container, true);
+      countEl.textContent = `${data.length} sesi`;
+    } else {
+      const view = this.state.calendarView;
+      if (view === "month") this.renderMonth(clsFilter, container);
+      else if (view === "agenda") this.renderAgenda(data, container);
+      else if (view === "timeline") this.renderTimeline(data, container);
+      const days = new Set(data.map(d => d.day));
+      countEl.textContent = `${data.length} sesi · ${days.size} hari`;
+    }
+  },
+
+  hlBadge(hl) {
+    if (!hl) return "";
+    const label = this.state.mainClass || "★";
+    return `<span class="badge">${ICONS.stamp} ${label}</span>`;
+  },
+
+  /* ── Table Renderer ── */
+  renderTable(data, container, compact) {
+    if (!data.length) { container.innerHTML = this.emptyState("Tidak ada sesi ditemukan."); return; }
+    const cls = compact ? "view-compact" : "view-table";
+    let html = `<div class="table-wrap ${cls}"><table><thead><tr>`;
+    html += compact
+      ? `<th>Kode</th><th>Matkul + Kelas</th><th>Jam</th><th>Ruang</th><th>Dosen</th>`
+      : `<th>Hari</th><th>Kode</th><th>Matkul</th><th>Kelas</th><th>Jam</th><th>Ruang</th><th>Dosen</th>`;
+    html += `</tr></thead><tbody>`;
+    data.forEach(r => {
+      const hl = this.isHighlighted(r) ? " highlight" : "";
+      const dot = r.color ? `<span class="subject-dot" style="background:${r.color}"></span>` : "";
+      if (compact) {
+        html += `<tr class="${hl}">
+          <td class="kode">${r.kode}</td>
+          <td>${dot}${r.matkul} <span class="kelas-tag">${r.kelas}</span>${this.hlBadge(hl)}</td>
+          <td class="jam">${r.jam}</td><td>${r.ruang}</td><td>${r.dosen}</td>
+        </tr>`;
+      } else {
+        html += `<tr class="${hl}">
+          <td class="day-tag">${r.day}</td>
+          <td class="kode">${dot}${r.kode}</td>
+          <td>${r.matkul}${this.hlBadge(hl)}</td>
+          <td class="kelas-tag">${r.kelas}</td>
+          <td class="jam">${r.jam}</td><td>${r.ruang}</td><td>${r.dosen}</td>
+        </tr>`;
+      }
+    });
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── Grid Renderer ── */
+  renderGrid(data, container) {
+    if (!data.length) { container.innerHTML = this.emptyState("Tidak ada sesi ditemukan."); return; }
+    let html = `<div class="view-grid">`;
+    data.forEach((r, i) => {
+      const hl = this.isHighlighted(r) ? " highlight" : "";
+      const dot = r.color ? `<span class="subject-dot" style="background:${r.color}"></span>` : "";
+      html += `<div class="grid-card${hl}" style="animation-delay:${i * 25}ms">
+        <div class="grid-card-header">
+          <span class="grid-card-kode">${dot}${r.kode}</span>
+          <span class="kelas-tag${hl ? " highlight" : ""}">${r.kelas}${this.hlBadge(hl)}</span>
+        </div>
+        <div class="grid-card-matkul">${r.matkul}</div>
+        <div class="grid-card-meta">
+          <span>${ICONS.calendar} ${r.day}</span>
+          <span>${ICONS.clock} ${r.jam}</span>
+          <span>${ICONS.pin} ${r.ruang}</span>
+          <span>${ICONS.user} ${r.dosen}</span>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── List Renderer ── */
+  renderList(data, container) {
+    if (!data.length) { container.innerHTML = this.emptyState("Tidak ada sesi ditemukan."); return; }
+    let html = `<div class="view-list">`;
+    const grouped = {};
+    data.forEach(r => { (grouped[r.day] = grouped[r.day] || []).push(r); });
+    DAY_ORDER.forEach(day => {
+      const items = grouped[day];
+      if (!items) return;
+      html += `<div class="list-day-header">${ICONS.calendar} ${day} <span class="list-day-count">(${items.length} sesi)</span></div>`;
+      items.forEach((r, i) => {
+        const hl = this.isHighlighted(r) ? " highlight" : "";
+        html += `<div class="list-card${hl}" style="animation-delay:${i * 25}ms">
+          <div class="list-card-time">${r.jam}</div>
+          <div class="list-card-info">
+            <div class="list-card-title">${r.kode} — ${r.matkul}${this.hlBadge(hl)}</div>
+            <div class="list-card-detail">Kelas ${r.kelas}</div>
+          </div>
+          <div class="list-card-right">
+            <div class="list-card-room">${r.ruang}</div>
+            <div class="list-card-lector">${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── Month Calendar Renderer ── */
+  renderMonth(clsFilter, container) {
+    const meta = this.getSemesterMeta(this.state.semesterId);
+    if (!meta || !this.detail) return;
+    const start = new Date(meta.startDate + "T00:00:00");
+    const end = new Date(meta.endDate + "T00:00:00");
+    const holidayMap = {}; (this.detail.holidays || []).forEach(h => { holidayMap[h.date] = h.name; });
+    const importantMap = {}; (this.detail.importantDates || []).forEach(d => { importantMap[d.date] = d.name; });
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+
+    const classDayMap = {};
+    this.flattenSchedules("all", clsFilter).forEach(r => {
+      (classDayMap[r.day] = classDayMap[r.day] || new Set()).add(r.kode);
+    });
+
+    const months = [];
+    let cur = new Date(start);
+    while (cur <= end) {
+      const y = cur.getFullYear(), m = cur.getMonth();
+      const monthData = { year: y, month: m, days: [] };
+      const firstDay = new Date(y, m, 1);
+      const lastDay = new Date(y, m + 1, 0);
+      const startOffset = (firstDay.getDay() + 6) % 7;
+      for (let i = 0; i < startOffset; i++) monthData.days.push({ empty: true });
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const dateStr = `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        const dayOfWeek = new Date(y, m, d).getDay();
+        const dayName = dayOfWeek >= 1 && dayOfWeek <= 6 ? DAY_ORDER[dayOfWeek - 1] : null;
+        const isHoliday = !!holidayMap[dateStr];
+        const isImportant = !!importantMap[dateStr];
+        const hasClass = !isHoliday && dayName && classDayMap[dayName] && classDayMap[dayName].size > 0;
+        monthData.days.push({
+          num: d, dateStr, isHoliday, isImportant, hasClass, isToday: dateStr === todayStr,
+          holidayName: holidayMap[dateStr] || null, importantName: importantMap[dateStr] || null,
+        });
+      }
+      months.push(monthData);
+      cur.setMonth(cur.getMonth() + 1); cur.setDate(1);
+    }
+
+    const MONTH_NAMES = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+    const DAY_NAMES = ["Sen","Sel","Rab","Kam","Jum","Sab","Min"];
+    let html = "";
+    months.forEach(m => {
+      html += `<div class="cal-month">
+        <div class="cal-month-title">${ICONS.calendar} ${MONTH_NAMES[m.month]} ${m.year}</div>
+        <div class="cal-grid">`;
+      DAY_NAMES.forEach(d => { html += `<div class="cal-day-header">${d}</div>`; });
+      m.days.forEach(day => {
+        if (day.empty) { html += `<div class="cal-day empty"></div>`; return; }
+        let cls = "cal-day num";
+        if (day.isToday) cls += " today";
+        if (day.isHoliday) cls += " holiday";
+        if (day.isImportant) cls += " important";
+        if (day.hasClass) cls += " has-class";
+        const title = day.holidayName || day.importantName || "";
+        html += `<div class="${cls}" data-date="${day.dateStr}" title="${title}">${day.num}</div>`;
+      });
+      html += `</div>`;
+      html += `<div class="cal-detail" id="calDetail_${m.year}_${m.month}" style="display:none"></div>`;
+      html += `</div>`;
+    });
+    html += `<div class="cal-legend">
+      <span><span class="cal-legend-dot" style="background:var(--amber)"></span> Hari ini</span>
+      <span><span class="cal-legend-dot" style="background:var(--danger)"></span> Libur Nasional</span>
+      <span><span class="cal-legend-dot" style="background:var(--success)"></span> Tanggal Penting</span>
+      <span><span class="cal-legend-dot" style="background:var(--navy)"></span> Ada Kuliah</span>
+    </div>`;
+    container.innerHTML = html;
+  },
+
+  /* ── Agenda Renderer ── */
+  renderAgenda(data, container) {
+    if (!data.length) { container.innerHTML = this.emptyState("Tidak ada sesi ditemukan."); return; }
+    const grouped = {};
+    data.forEach(r => { (grouped[r.day] = grouped[r.day] || []).push(r); });
+    const today = new Date();
+    const todayDay = DAY_ORDER[(today.getDay() === 0 ? 6 : today.getDay() - 1)];
+    let html = "";
+    DAY_ORDER.forEach(day => {
+      const items = grouped[day];
+      if (!items) return;
+      const isToday = day === todayDay;
+      html += `<div class="agenda-day">
+        <div class="agenda-date${isToday ? " today-date" : ""}">${ICONS.calendar} ${day}${isToday ? " (Hari Ini)" : ""}</div>`;
+      items.forEach(r => {
+        const hl = this.isHighlighted(r) ? " highlight" : "";
+        html += `<div class="agenda-item${hl}">
+          <div class="agenda-time">${r.jam}</div>
+          <div class="agenda-info">
+            <div class="agenda-title">${r.kode} — ${r.matkul}${r.kelas.includes(",") ? "" : ` <span class="agenda-badge">${r.kelas}</span>`}${this.hlBadge(hl && r.kelas.includes(",") )}</div>
+            <div class="agenda-detail">Ruang ${r.ruang} · ${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+  },
+
+  /* ── Timeline Renderer ── */
+  renderTimeline(data, container) {
+    if (!data.length) { container.innerHTML = this.emptyState("Tidak ada sesi ditemukan."); return; }
+    const grouped = {};
+    data.forEach(r => { (grouped[r.day] = grouped[r.day] || []).push(r); });
+    let html = "";
+    DAY_ORDER.forEach(day => {
+      const items = grouped[day];
+      if (!items) return;
+      const sorted = items.sort((a, b) => {
+        const tA = parseInt(a.jam.split("-")[0].replace(".", ""));
+        const tB = parseInt(b.jam.split("-")[0].replace(".", ""));
+        return tA - tB;
+      });
+      html += `<div class="timeline-day">
+        <div class="timeline-day-header">${ICONS.calendar} ${day}</div>
+        <div class="timeline">`;
+      sorted.forEach(r => {
+        const hl = this.isHighlighted(r) ? " highlight" : "";
+        html += `<div class="timeline-item${hl}">
+          <div class="timeline-time">${r.jam}</div>
+          <div class="timeline-content${hl}">
+            <div class="timeline-title">${r.kode} — ${r.matkul}${this.hlBadge(hl)}</div>
+            <div class="timeline-meta">Kelas ${r.kelas} · ${r.ruang} · ${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    });
+    container.innerHTML = html;
+  },
+
+  emptyState(msg) { return `<div class="empty-state">${ICONS.emptyIcon}<p>${msg}</p></div>`; },
+
+  /* ── Theme ── */
+  applyTheme(theme) {
+    this.state.theme = theme;
+    if (theme === "system") {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+    document.querySelectorAll(".theme-btn").forEach(b => b.classList.toggle("active", b.dataset.theme === theme));
+    this.savePrefs();
+    this.updateFabActive();
+  },
+  cycleTheme() {
+    const order = ["light", "dark", "system"];
+    this.applyTheme(order[(order.indexOf(this.state.theme) + 1) % order.length]);
+  },
+  applyStyle(style) {
+    this.state.style = style;
+    if (style === "default") document.documentElement.removeAttribute("data-style");
+    else document.documentElement.setAttribute("data-style", style);
+    document.getElementById("styleSelect").value = style;
+    this.savePrefs();
+  },
+  updateFabActive() {
+    const themeIcon = { light: ICONS.sun, dark: ICONS.moon, system: ICONS.monitor };
+    const btn = document.getElementById("fabTheme");
+    if (btn) btn.innerHTML = themeIcon[this.state.theme];
+    document.getElementById("fabSchedule")?.classList.toggle("active", this.state.activeTab === "schedule");
+    document.getElementById("fabCalendar")?.classList.toggle("active", this.state.activeTab === "calendar");
+  },
+
+  /* ── localStorage (single JSON blob holding all persisted keys) ── */
+  savePrefs() {
+    const prefs = {
+      semesterId: this.state.semesterId,
+      scheduleView: this.state.scheduleView,
+      calendarView: this.state.calendarView,
+      theme: this.state.theme,
+      style: this.state.style,
+      mainClass: this.state.mainClass || "",
+    };
+    try { localStorage.setItem("jadkul_prefs", JSON.stringify(prefs)); } catch(e) {}
+  },
+  loadPrefs() {
+    try {
+      const raw = localStorage.getItem("jadkul_prefs");
+      if (!raw) return;
+      const p = JSON.parse(raw);
+      if (p.semesterId) this.state.semesterId = p.semesterId;
+      if (p.scheduleView) this.state.scheduleView = p.scheduleView;
+      if (p.calendarView) this.state.calendarView = p.calendarView;
+      if (p.theme) this.state.theme = p.theme;
+      if (p.style) this.state.style = p.style;
+      if (p.mainClass) this.state.mainClass = p.mainClass;
+    } catch(e) {}
+  },
+
+  /* ── Calendar Day Detail ── */
+  showCalDetail(dateStr, el) {
+    if (!this.detail) return;
+    document.querySelectorAll(".cal-day.selected").forEach(d => d.classList.remove("selected"));
+    el.classList.add("selected");
+    const d = new Date(dateStr + "T00:00:00");
+    const dayOfWeek = d.getDay();
+    const dayName = dayOfWeek >= 1 && dayOfWeek <= 6 ? DAY_ORDER[dayOfWeek - 1] : null;
+    const MONTH_NAMES = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+    const dateLabel = `${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;
+    const holiday = (this.detail.holidays || []).find(h => h.date === dateStr);
+    const important = (this.detail.importantDates || []).find(h => h.date === dateStr);
+    const clsFilter = this.state.selectedClassesCal;
+    let sessions = dayName ? this.flattenSchedules(dayName, clsFilter) : [];
+    let body = "";
+    if (holiday) body += `<div class="cal-detail-section"><div class="cal-detail-holiday">${ICONS.alert} ${holiday.name}</div></div>`;
+    if (important) body += `<div class="cal-detail-section"><div class="cal-detail-important">${ICONS.star} ${important.name}</div></div>`;
+    if (sessions.length) {
+      body += `<div class="cal-detail-section"><div class="cal-detail-section-title">${ICONS.book} Jadwal Kuliah</div>`;
+      sessions.forEach(r => {
+        body += `<div class="cal-detail-item">
+          <div class="cal-detail-item-time">${r.jam}</div>
+          <div class="cal-detail-item-info">
+            <div class="cal-detail-item-title">${r.kode} — ${r.matkul}</div>
+            <div class="cal-detail-item-sub">Kelas ${r.kelas} · ${r.ruang} · ${r.dosen}</div>
+          </div>
+        </div>`;
+      });
+      body += `</div>`;
+    }
+    if (!holiday && !important && !sessions.length) body = `<div class="cal-detail-empty">Tidak ada jadwal atau hari spesial</div>`;
+    const y = d.getFullYear(), m = d.getMonth();
+    const panel = document.getElementById(`calDetail_${y}_${m}`);
+    if (!panel) return;
+    const isVisible = panel.style.display !== "none" && panel.dataset.date === dateStr;
+    document.querySelectorAll(".cal-detail").forEach(p => { p.style.display = "none"; p.dataset.date = ""; });
+    if (isVisible) { panel.style.display = "none"; el.classList.remove("selected"); return; }
+    panel.dataset.date = dateStr;
+    panel.innerHTML = `<div class="cal-detail-header">
+      <span class="cal-detail-title">${ICONS.calCheck} ${dayName || "Minggu"}, ${dateLabel}</span>
+      <button class="cal-detail-close" onclick="this.closest('.cal-detail').style.display='none';document.querySelector('.cal-day.selected')?.classList.remove('selected')">${ICONS.x}</button>
+    </div><div class="cal-detail-body">${body}</div>`;
+    panel.style.display = "";
+  },
+
+  /* ── Events ── */
+  bindEvents() {
+    document.getElementById("semesterSelect").addEventListener("change", (e) => this.selectSemester(e.target.value, true));
+    document.getElementById("editMainClassBtn").addEventListener("click", () => this.showClassPicker());
+    document.querySelectorAll(".theme-btn").forEach(btn => btn.addEventListener("click", () => this.applyTheme(btn.dataset.theme)));
+    document.getElementById("styleSelect").addEventListener("change", (e) => this.applyStyle(e.target.value));
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        this.state.activeTab = btn.dataset.tab;
+        document.getElementById(btn.dataset.tab + "Panel").classList.add("active");
+        this.updateFabActive();
+      });
+    });
+
+    document.querySelectorAll("#scheduleViewTabs .view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#scheduleViewTabs .view-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        this.state.scheduleView = btn.dataset.view;
+        this.renderView("schedule");
+        this.savePrefs();
+      });
+    });
+    document.querySelectorAll("#calendarViewTabs .view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#calendarViewTabs .view-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        this.state.calendarView = btn.dataset.view;
+        this.renderView("calendar");
+        this.savePrefs();
+      });
+    });
+
+    document.getElementById("fabMain").addEventListener("click", () => {
+      const actions = document.getElementById("fabActions");
+      const main = document.getElementById("fabMain");
+      const isOpen = actions.classList.toggle("open");
+      main.classList.toggle("open", isOpen);
+    });
+    document.getElementById("fabTheme").addEventListener("click", () => this.cycleTheme());
+    document.getElementById("fabTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.getElementById("fabSchedule").addEventListener("click", () => document.querySelector('.tab-btn[data-tab="schedule"]').click());
+    document.getElementById("fabCalendar").addEventListener("click", () => document.querySelector('.tab-btn[data-tab="calendar"]').click());
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+      if (this.state.theme === "system") this.applyTheme("system");
+    });
+
+    document.addEventListener("click", (e) => {
+      const fab = document.getElementById("fabWrap");
+      if (fab && !fab.contains(e.target)) {
+        document.getElementById("fabActions").classList.remove("open");
+        document.getElementById("fabMain").classList.remove("open");
+      }
+      const calDay = e.target.closest(".cal-day.num");
+      if (calDay && calDay.dataset.date) {
+        this.showCalDetail(calDay.dataset.date, calDay);
+      } else if (!e.target.closest(".cal-detail") && !e.target.closest(".cal-day")) {
+        document.querySelectorAll(".cal-detail").forEach(d => d.style.display = "none");
+        document.querySelectorAll(".cal-day.selected").forEach(d => d.classList.remove("selected"));
+      }
+    });
+  },
+};
+
+/* Inline SVG icon strings (zero external icon dependency) */
+const ICONS = {
+  calendar:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  pin:'<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  user:'<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20c1.5-4 5-5.5 7.5-5.5S18 16 19.5 20"/></svg>',
+  book:'<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>',
+  star:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="m12 2 2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7L6 21l1.6-7L2.2 9.2l7-.6Z"/></svg>',
+  calCheck:'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M9 16l2 2 4-4"/></svg>',
+  x:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+  emptyIcon:'<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M9 14l2 2 4-4"/></svg>',
+  stamp:'<svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="vertical-align:-1px"><circle cx="12" cy="12" r="9" stroke-dasharray="2.8 2.8"/></svg>',
+  sun:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+  moon:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.5A8.5 8.5 0 1 1 11.5 3a7 7 0 0 0 9.5 9.5Z"/></svg>',
+  monitor:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>',
+};
+
+document.addEventListener("DOMContentLoaded", () => App.init());
+</script>
+</body>
+</html>

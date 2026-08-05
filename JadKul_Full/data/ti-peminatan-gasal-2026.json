@@ -1,0 +1,235 @@
+{
+  "subjectColors": {
+    "TIUX01": "#2f6f4f",
+    "TIDA03": "#8a4b6b",
+    "TINE01": "#1f6f78",
+    "TINE05": "#7a4a1f",
+    "TIDA01": "#4a5d8a",
+    "TIPR01": "#9c3b2e",
+    "TIPR02": "#5c6b23",
+    "TIUX02": "#a1731f"
+  },
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru Masehi",
+      "type": "national"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Isra Mikraj Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baru Imlek 2577",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Hari Raya Nyepi Saka 1950",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Wafat Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh Internasional",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Kenaikan Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Idul Adha 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Raya Waisak 2570",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Tahun Baru Islam 1448 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan RI",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulid Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national"
+    }
+  ],
+  "importantDates": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan",
+      "type": "academic"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester",
+      "type": "academic"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester",
+      "type": "academic"
+    }
+  ],
+  "schedules": {
+    "Senin": [
+      {
+        "kode": "TIUX01",
+        "matkul": "Serious Game",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.002",
+        "dosen": "RG"
+      },
+      {
+        "kode": "TIDA03",
+        "matkul": "Analisis Big Data",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.003",
+        "dosen": "SR"
+      },
+      {
+        "kode": "TIDA03",
+        "matkul": "Analisis Big Data",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.003",
+        "dosen": "SR"
+      }
+    ],
+    "Selasa": [
+      {
+        "kode": "TINE01",
+        "matkul": "Blockchain",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.002",
+        "dosen": "EP"
+      },
+      {
+        "kode": "TIDA03",
+        "matkul": "Analisis Big Data",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F6.004",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TIDA01",
+        "matkul": "Computer Vision",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.004",
+        "dosen": "SR/CO"
+      },
+      {
+        "kode": "TIDA01",
+        "matkul": "Computer Vision",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.004",
+        "dosen": "SR/CO"
+      },
+      {
+        "kode": "TINE05",
+        "matkul": "Routing Lanjut",
+        "kelas": "A",
+        "jam": "16.20-18.00",
+        "ruang": "F6.003",
+        "dosen": "EP - Lab Cisco"
+      },
+      {
+        "kode": "TINE05",
+        "matkul": "Routing Lanjut",
+        "kelas": "A",
+        "jam": "18.30-19.20",
+        "ruang": "F6.003",
+        "dosen": "EP - Lab Cisco"
+      }
+    ],
+    "Rabu": [
+      {
+        "kode": "TIPR01",
+        "matkul": "Pengembangan Game",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.002",
+        "dosen": "RG"
+      }
+    ],
+    "Kamis": [
+      {
+        "kode": "TIPR02",
+        "matkul": "Teknologi Multimedia",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.002",
+        "dosen": "DP"
+      },
+      {
+        "kode": "TIUX02",
+        "matkul": "Prototyping",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F4.003",
+        "dosen": "RG"
+      },
+      {
+        "kode": "TIUX02",
+        "matkul": "Prototyping",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F4.003",
+        "dosen": "RG"
+      },
+      {
+        "kode": "TIUX02",
+        "matkul": "Prototyping",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F4.003",
+        "dosen": "RG"
+      }
+    ],
+    "Jumat": [],
+    "Sabtu": []
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "subjectColors": {
+    "TI704": "#2f6f4f"
+  },
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru Masehi",
+      "type": "national"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Isra Mikraj Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baru Imlek 2577",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Hari Raya Nyepi Saka 1950",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Wafat Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh Internasional",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Kenaikan Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Idul Adha 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Raya Waisak 2570",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Tahun Baru Islam 1448 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan RI",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulid Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national"
+    }
+  ],
+  "importantDates": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan",
+      "type": "academic"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester",
+      "type": "academic"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester",
+      "type": "academic"
+    }
+  ],
+  "schedules": {
+    "Senin": [],
+    "Selasa": [],
+    "Rabu": [],
+    "Kamis": [],
+    "Jumat": [
+      {
+        "kode": "TI704",
+        "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+        "kelas": "B",
+        "jam": "07.50-09.40",
+        "ruang": "F6.202",
+        "dosen": "Miss Kiki"
+      },
+      {
+        "kode": "TI704",
+        "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+        "kelas": "C",
+        "jam": "09.40-11.30",
+        "ruang": "F6.202",
+        "dosen": "Miss Kiki"
+      }
+    ],
+    "Sabtu": [
+      {
+        "kode": "TI704",
+        "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+        "kelas": "A",
+        "jam": "07.00-08.40",
+        "ruang": "F6.202",
+        "dosen": "Miss Kiki"
+      },
+      {
+        "kode": "TI704",
+        "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+        "kelas": "D",
+        "jam": "07.00-08.40",
+        "ruang": "F6.203",
+        "dosen": "Miss Kiki"
+      },
+      {
+        "kode": "TI704",
+        "matkul": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+        "kelas": "E",
+        "jam": "08.50-10.30",
+        "ruang": "F6.203",
+        "dosen": "Miss Kiki"
+      }
+    ]
+  }
+}

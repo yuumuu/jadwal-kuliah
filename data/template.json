@@ -7,6 +7,8 @@
       "academicYear": "",
       "program": "",
       "semester": 0,
+      "startDate": "",
+      "endDate": "",
       "file": ""
     }
   ]
@@ -23,6 +25,8 @@
 //   academicYear : "2027/2028"
 //   program      : "TI"
 //   semester     : 7
+//   startDate    : "2027-09-01"
+//   endDate      : "2028-01-15"
 //   file         : "data/s7-gasal-2027.json"
 //
 // ═══════════════════════════════════════════════════════════════
