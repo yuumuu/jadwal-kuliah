@@ -1006,6 +1006,15 @@ const App = {
     this.state.selectedClasses = this.state.mainClass ? [this.state.mainClass] : [];
     this.state.selectedClassesCal = this.state.mainClass ? [this.state.mainClass] : [];
 
+    const start = new Date((meta.startDate || "2026-09-01") + "T00:00:00");
+    this.state.calYear = start.getFullYear();
+    const today = new Date();
+    if (today.getFullYear() === this.state.calYear) {
+      this.state.calActiveMonthIndex = today.getMonth();
+    } else {
+      this.state.calActiveMonthIndex = start.getMonth();
+    }
+
     const isArchived = meta.status === "archived" || meta.active === false;
     const archLabel = isArchived ? " [ARSIP]" : "";
 
@@ -1323,7 +1332,7 @@ const App = {
     if (!meta || !this.detail) { container.innerHTML = this.emptyState(); return; }
 
     const start = new Date((meta.startDate || "2026-09-01") + "T00:00:00");
-    const end = new Date((meta.endDate || "2027-01-15") + "T00:00:00");
+    const baseYear = this.state.calYear || start.getFullYear();
 
     const holidayMap = {}; (this.detail.holidays || []).forEach(h => { holidayMap[h.date] = h.name; });
     const importantMap = {}; (this.detail.importantDates || []).forEach(d => { importantMap[d.date] = d.name; });
@@ -1337,9 +1346,8 @@ const App = {
     });
 
     const months = [];
-    let cur = new Date(start.getFullYear(), start.getMonth(), 1);
-    while (cur <= end) {
-      const y = cur.getFullYear(), m = cur.getMonth();
+    for (let m = 0; m < 12; m++) {
+      const y = baseYear;
       const monthData = { year: y, month: m, days: [] };
       const firstDay = new Date(y, m, 1);
       const lastDay = new Date(y, m + 1, 0);
@@ -1361,16 +1369,20 @@ const App = {
         });
       }
       months.push(monthData);
-      cur.setMonth(cur.getMonth() + 1);
     }
 
-    if (this.state.calActiveMonthIndex >= months.length) this.state.calActiveMonthIndex = 0;
-    const targetMonths = this.state.calShowAll ? months : [months[this.state.calActiveMonthIndex] || months[0]];
+    if (this.state.calActiveMonthIndex < 0) this.state.calActiveMonthIndex = 11;
+    if (this.state.calActiveMonthIndex >= 12) this.state.calActiveMonthIndex = 0;
 
-    const activeM = months[this.state.calActiveMonthIndex] || months[0];
-    document.getElementById("calCurrentMonthLabel").textContent = this.state.calShowAll 
-      ? `Semua Bulan Semester (${months.length} Bulan)`
-      : `${MONTH_NAMES[activeM.month]} ${activeM.year}`;
+    const targetMonths = this.state.calShowAll ? months : [months[this.state.calActiveMonthIndex]];
+    const activeM = months[this.state.calActiveMonthIndex];
+
+    const labelElem = document.getElementById("calCurrentMonthLabel");
+    if (labelElem) {
+      labelElem.textContent = this.state.calShowAll 
+        ? `Kalender 1 Tahun Full ${baseYear} (12 Bulan: Jan - Des)`
+        : `${MONTH_NAMES[activeM.month]} ${activeM.year}`;
+    }
 
     const DAY_NAMES = ["Sen","Sel","Rab","Kam","Jum","Sab","Min"];
     let html = "";
@@ -1556,23 +1568,36 @@ const App = {
 
     document.getElementById("calPrevBtn").addEventListener("click", () => {
       this.state.calShowAll = false;
-      if (this.state.calActiveMonthIndex > 0) this.state.calActiveMonthIndex--;
+      this.state.calActiveMonthIndex--;
+      if (this.state.calActiveMonthIndex < 0) {
+        this.state.calActiveMonthIndex = 11;
+        this.state.calYear = (this.state.calYear || 2026) - 1;
+      }
       this.renderView("calendar");
     });
     document.getElementById("calNextBtn").addEventListener("click", () => {
       this.state.calShowAll = false;
       this.state.calActiveMonthIndex++;
+      if (this.state.calActiveMonthIndex > 11) {
+        this.state.calActiveMonthIndex = 0;
+        this.state.calYear = (this.state.calYear || 2026) + 1;
+      }
       this.renderView("calendar");
     });
     document.getElementById("calTodayBtn").addEventListener("click", () => {
       this.state.calShowAll = false;
-      this.state.calActiveMonthIndex = 0;
+      const today = new Date();
+      this.state.calYear = today.getFullYear();
+      this.state.calActiveMonthIndex = today.getMonth();
       this.renderView("calendar");
     });
-    document.getElementById("calAllBtn").addEventListener("click", () => {
-      this.state.calShowAll = !this.state.calShowAll;
-      this.renderView("calendar");
-    });
+    const showAllBtn = document.getElementById("calShowAllBtn") || document.getElementById("calAllBtn");
+    if (showAllBtn) {
+      showAllBtn.addEventListener("click", () => {
+        this.state.calShowAll = !this.state.calShowAll;
+        this.renderView("calendar");
+      });
+    }
 
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
       if (this.state.theme === "system") this.applyTheme("system");
