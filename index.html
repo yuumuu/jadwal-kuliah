@@ -140,9 +140,14 @@
   --border-strong: #374151;
   --text-main: #f9fafb;
   --text-muted: #9ca3af;
+  --text-inverse: #090d16;
   --primary: #f3f4f6;
+  --primary-deep: #e5e7eb;
   --primary-light: #1f2937;
-  --primary-text: #f9fafb;
+  --primary-text: #60a5fa;
+  --accent: #f59e0b;
+  --accent-light: rgba(245, 158, 11, 0.2);
+  --accent-text: #fbbf24;
 }
 
 /* 5. BENTO STYLE */
@@ -407,7 +412,7 @@ select.select-control optgroup {
   white-space: nowrap; font-family: var(--font-mono); min-height: 36px;
   display: inline-flex; align-items: center; gap: 0.3rem; transition: all var(--transition-main);
 }
-.chip.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.chip.active { background: var(--primary); color: var(--text-inverse, #ffffff); border-color: var(--primary); }
 .chip.multi-active { background: var(--accent-light); color: var(--accent-text); border-color: var(--accent); }
 .chip.today-chip { background: var(--accent-light); color: var(--accent-text); border-color: var(--accent); font-weight: 800; }
 
@@ -598,7 +603,7 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   background: var(--bg-subtle); font-size: 0.78rem; font-weight: 700; text-align: center;
   cursor: pointer; transition: all var(--transition-main);
 }
-.modal-opt-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.modal-opt-btn.active { background: var(--primary); color: var(--text-inverse, #ffffff); border-color: var(--primary); }
 .modal-opt-btn.archive-btn { border-style: dashed; opacity: 0.85; }
 
 .archive-toggle-btn {
@@ -613,11 +618,11 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   font-weight: 800; font-size: 1rem; cursor: pointer; transition: all var(--transition-main);
   display: flex; align-items: center; justify-content: center;
 }
-.modal-class-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.modal-class-btn.active { background: var(--primary); color: var(--text-inverse, #ffffff); border-color: var(--primary); }
 
 .btn-primary {
   width: 100%; padding: 0.7rem; border: none; border-radius: var(--radius-sm);
-  background: var(--primary); color: #ffffff; font-weight: 700; font-size: 0.88rem;
+  background: var(--primary); color: var(--text-inverse, #ffffff); font-weight: 700; font-size: 0.88rem;
   cursor: pointer; transition: all var(--transition-main); min-height: 44px;
 }
 .btn-primary:hover { background: var(--primary-deep); }
