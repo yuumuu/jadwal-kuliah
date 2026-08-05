@@ -567,15 +567,50 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 15px; }
 body {
-  background-color: var(--bg-main);
+  background: var(--bg-main);
+  background-attachment: fixed;
   color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.5;
-  transition: background-color var(--transition-main), color var(--transition-main);
+  transition: background var(--transition-main), color var(--transition-main);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+
+/* GLASSMORPHISM BACKDROP BLUR SURFACES */
+[data-style="glassmorphism"] .app-header,
+[data-style="glassmorphism"] .stat-card,
+[data-style="glassmorphism"] .toolbar-card,
+[data-style="glassmorphism"] .table-wrap,
+[data-style="glassmorphism"] .grid-card,
+[data-style="glassmorphism"] .list-item-card,
+[data-style="glassmorphism"] .timeline-card,
+[data-style="glassmorphism"] .cal-nav-bar,
+[data-style="glassmorphism"] .cal-month-card,
+[data-style="glassmorphism"] .cal-date-cell,
+[data-style="glassmorphism"] .modal-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Y2K SURFACE ENHANCEMENTS */
+[data-style="y2k"] .app-header,
+[data-style="y2k"] .stat-card,
+[data-style="y2k"] .toolbar-card,
+[data-style="y2k"] .table-wrap,
+[data-style="y2k"] .grid-card,
+[data-style="y2k"] .list-item-card,
+[data-style="y2k"] .timeline-card,
+[data-style="y2k"] .cal-nav-bar,
+[data-style="y2k"] .cal-month-card,
+[data-style="y2k"] .modal-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-card);
+}
 input, button, select { font-family: inherit; color: inherit; }
 a { color: var(--primary); text-decoration: none; }
 
@@ -1030,14 +1065,17 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 
 @media print {
   .app-header, .stat-container, .tabs-nav, .toolbar-card, .header-actions,
-  .copy-summary-btn, .modal-overlay, #printScheduleBtn, .cal-nav-bar, .theme-toggle-group {
+  .copy-summary-btn, .modal-overlay, #printScheduleBtn, .cal-nav-bar, .theme-toggle-group,
+  #calendarPanel {
     display: none !important;
+  }
+  #schedulePanel {
+    display: block !important;
   }
   body {
     background: #ffffff !important; color: #000000 !important; font-size: 10pt;
   }
   .app-container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
-  .view-panel { display: block !important; }
   .table-wrap { box-shadow: none !important; border: 1px solid #000000 !important; }
   table.schedule-table th, table.schedule-table td {
     border-bottom: 1px solid #cccccc !important; color: #000000 !important; padding: 6px 8px !important;
