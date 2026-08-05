@@ -123,13 +123,26 @@
   --primary: #cbd5e1; --primary-light: rgba(203, 213, 225, 0.12); --primary-text: #f1f5f9;
 }
 
-/* 4. MINIMAL STYLE */
+/* 4. MINIMAL STYLE & DARK THEME FIX */
 [data-style="minimal"] {
   --font-body: 'Space Grotesk', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
   --radius-sm: 0px; --radius-md: 2px; --radius-lg: 4px;
   --shadow-sm: none; --shadow-card: none; --shadow-hover: none;
   --primary: #0f172a; --primary-light: #f1f5f9; --primary-text: #0f172a;
+}
+[data-theme="dark"][data-style="minimal"] {
+  --bg-main: #090d16;
+  --bg-card: #111827;
+  --bg-subtle: #1f2937;
+  --bg-hover: #374151;
+  --border-color: #1f2937;
+  --border-strong: #374151;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --primary: #f3f4f6;
+  --primary-light: #1f2937;
+  --primary-text: #f9fafb;
 }
 
 /* 5. BENTO STYLE */
@@ -139,12 +152,26 @@
   --radius-sm: 12px; --radius-md: 20px; --radius-lg: 28px;
 }
 
-/* 6. FORMAL STYLE */
+/* 6. FORMAL STYLE & DARK THEME FIX */
 [data-style="formal"] {
   --font-body: 'Inter', sans-serif;
   --font-heading: 'Cinzel', serif;
   --radius-sm: 4px; --radius-md: 6px; --radius-lg: 10px;
   --primary: #0369a1; --primary-light: #e0f2fe; --primary-text: #0284c7;
+}
+[data-theme="dark"][data-style="formal"] {
+  --bg-main: #0a1120;
+  --bg-card: #111e36;
+  --bg-subtle: #1b2a47;
+  --bg-hover: #263859;
+  --border-color: #1e2e4a;
+  --border-strong: #2e4368;
+  --text-main: #f0f6ff;
+  --text-muted: #94a3b8;
+  --primary: #38bdf8;
+  --primary-deep: #0284c7;
+  --primary-light: rgba(56, 189, 248, 0.15);
+  --primary-text: #7dd3fc;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -186,6 +213,11 @@ select.select-control {
 select.select-control option {
   background-color: var(--bg-card);
   color: var(--text-main);
+}
+select.select-control optgroup {
+  background-color: var(--bg-card);
+  color: var(--primary);
+  font-weight: 700;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -280,7 +312,7 @@ select.select-control option {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   MOBILE-FIRST STAT STRIP
+   STAT STRIP & MAIN CONTAINER
    ═══════════════════════════════════════════════════════════════ */
 .stat-container {
   max-width: 1200px; margin: 0.85rem auto 0; padding: 0 0.85rem;
@@ -306,9 +338,6 @@ select.select-control option {
   text-transform: uppercase; letter-spacing: 0.03em; margin-top: 0.2rem;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   MAIN APP & TOOLBAR
-   ═══════════════════════════════════════════════════════════════ */
 .app-container {
   max-width: 1200px; margin: 0 auto; padding: 0.85rem 0.85rem 3rem;
 }
@@ -330,9 +359,7 @@ select.select-control option {
   border-radius: var(--radius-md); padding: 0.85rem; margin-bottom: 1rem;
   box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 0.75rem;
 }
-.toolbar-top {
-  display: flex; flex-direction: column; gap: 0.65rem;
-}
+.toolbar-top { display: flex; flex-direction: column; gap: 0.65rem; }
 @media (min-width: 640px) {
   .toolbar-top { flex-direction: row; align-items: center; justify-content: space-between; }
 }
@@ -362,7 +389,6 @@ select.select-control option {
 .view-btn svg { width: 16px; height: 16px; }
 .view-btn.active { background: var(--bg-card); color: var(--primary); box-shadow: var(--shadow-sm); }
 
-/* Horizontal Touch Scroll Chips */
 .filter-row { display: flex; flex-direction: column; gap: 0.65rem; }
 .filter-group { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
 .filter-label {
@@ -402,7 +428,6 @@ select.select-control option {
 .view-panel { display: none; }
 .view-panel.active { display: block; animation: fadeIn 0.2s ease; }
 
-/* Table View */
 .table-wrap {
   background: var(--bg-card); border: 1px solid var(--border-color);
   border-radius: var(--radius-md); overflow-x: auto; box-shadow: var(--shadow-card);
@@ -424,13 +449,7 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   font-size: 0.65rem; font-weight: 700; background: var(--accent); color: #ffffff;
   padding: 0.1rem 0.4rem; border-radius: var(--radius-full); margin-left: 0.3rem;
 }
-.live-badge {
-  display: inline-flex; align-items: center; gap: 0.2rem; font-family: var(--font-mono);
-  font-size: 0.65rem; font-weight: 800; background: var(--success); color: #ffffff;
-  padding: 0.1rem 0.4rem; border-radius: var(--radius-full); margin-left: 0.3rem;
-}
 
-/* Grid Cards View */
 .view-grid { display: grid; grid-template-columns: 1fr; gap: var(--card-gap); }
 @media (min-width: 640px) { .view-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); } }
 .grid-card {
@@ -445,7 +464,6 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 .grid-card-title { font-family: var(--font-heading); font-weight: 700; font-size: 0.95rem; line-height: 1.3; }
 .grid-card-meta { font-size: 0.78rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.25rem; }
 
-/* List View */
 .view-list { display: flex; flex-direction: column; gap: 0.85rem; }
 .list-group-header {
   font-family: var(--font-heading); font-weight: 800; font-size: 1rem; color: var(--primary);
@@ -464,7 +482,6 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 .list-info-sub { font-size: 0.78rem; color: var(--text-muted); }
 .list-location { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; }
 
-/* Timeline View */
 .timeline-wrap { position: relative; padding-left: 1.2rem; }
 .timeline-wrap::before {
   content: ''; position: absolute; left: 0.4rem; top: 0; bottom: 0; width: 2px; background: var(--border-color);
@@ -480,7 +497,7 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   ENLARGED CALENDAR & SCROLLABLE CELLS
+   ENLARGED CALENDAR DAY NUMBERS (REQS 3)
    ═══════════════════════════════════════════════════════════════ */
 .cal-nav-bar {
   display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 0.85rem;
@@ -513,24 +530,28 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   color: var(--text-muted); text-align: center; padding-bottom: 0.3rem; text-transform: uppercase;
 }
 
-/* ENLARGED DAY NUMBERS (REQS 3) */
+/* MAXIMIZED DAY NUMBERS FILLING THE CELL (REQS 3) */
 .cal-date-cell {
-  aspect-ratio: 1; min-height: 56px; border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm); background: var(--bg-card); padding: 0.25rem;
-  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  aspect-ratio: 1; min-height: 60px; border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm); background: var(--bg-card); padding: 0.2rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   cursor: pointer; transition: all var(--transition-main); position: relative; font-family: var(--font-mono);
 }
 .cal-date-cell span {
-  font-size: 1.15rem; font-weight: 800; line-height: 1.1; margin-top: 2px;
+  font-size: clamp(1.4rem, 4.5vw, 1.9rem); font-weight: 800; line-height: 1; margin: auto 0;
+  display: flex; align-items: center; justify-content: center;
 }
 .cal-date-cell.empty { opacity: 0; pointer-events: none; border-color: transparent; }
-.cal-date-cell:hover { background: var(--bg-hover); border-color: var(--primary); transform: scale(1.04); z-index: 2; }
+.cal-date-cell:hover { background: var(--bg-hover); border-color: var(--primary); transform: scale(1.05); z-index: 2; }
 .cal-date-cell.today { background: var(--accent); color: #ffffff; font-weight: 800; border-color: var(--accent); }
 .cal-date-cell.holiday { background: var(--danger-light); color: var(--danger); }
 .cal-date-cell.important { background: var(--success-light); color: var(--success); }
 
-.cal-dots { display: flex; gap: 3px; margin-top: auto; padding-bottom: 2px; }
-.cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+.cal-dots {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 3px;
+}
+.cal-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); }
 .cal-dot.holiday-dot { background: var(--danger); }
 .cal-dot.important-dot { background: var(--success); }
 
@@ -542,7 +563,7 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 
 /* ═══════════════════════════════════════════════════════════════
-   SCROLLABLE MODALS (REQS 4 & 5)
+   SCROLLABLE MODALS & ARCHIVE GROUPING (REQS 1 & 4 & 5)
    ═══════════════════════════════════════════════════════════════ */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 500;
@@ -567,9 +588,10 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 .modal-section-title {
   font-size: 0.78rem; font-weight: 800; text-transform: uppercase;
   letter-spacing: 0.05em; color: var(--primary); margin-bottom: 0.4rem; font-family: var(--font-mono);
+  display: flex; align-items: center; justify-content: space-between;
 }
 .modal-grid-options {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.4rem; margin-bottom: 1rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.4rem; margin-bottom: 0.85rem;
 }
 .modal-opt-btn {
   padding: 0.5rem; border-radius: var(--radius-sm); border: 1.5px solid var(--border-color);
@@ -577,6 +599,12 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   cursor: pointer; transition: all var(--transition-main);
 }
 .modal-opt-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.modal-opt-btn.archive-btn { border-style: dashed; opacity: 0.85; }
+
+.archive-toggle-btn {
+  background: transparent; border: none; font-size: 0.75rem; font-weight: 700;
+  color: var(--accent); cursor: pointer; text-decoration: underline; padding: 0.2rem 0;
+}
 
 .modal-chip-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-bottom: 1.25rem; }
 .modal-class-btn {
@@ -737,14 +765,25 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
   </section>
 </main>
 
-<!-- ═══════════════ UNIFIED WELCOME / POP-UP MODAL (REQS 5) ═══════════════ -->
+<!-- ═══════════════ UNIFIED WELCOME / POP-UP MODAL (REQS 1 & 5) ═══════════════ -->
 <div id="welcomeModal" class="modal-overlay" style="display:none">
   <div class="modal-card">
     <h3 class="modal-title">Konfigurasi Jadwal Anda</h3>
-    <p class="modal-desc">Silakan pilih Semester dan Kelas Utama Anda agar jadwal sesi dapat disajikan secara otomatis.</p>
+    <p class="modal-desc">Silakan pilih Semester dan Kelas Utama Anda agar jadwal sesi disajikan secara presisi.</p>
     
-    <div class="modal-section-title">1. Pilih Semester</div>
-    <div class="modal-grid-options" id="modalSemOptions"></div>
+    <div class="modal-section-title">
+      <span>1. Pilih Semester</span>
+      <button class="archive-toggle-btn" id="modalArchiveToggleBtn">Lihat Arsip Jadwal</button>
+    </div>
+    
+    <!-- Active Semesters Grid -->
+    <div class="modal-grid-options" id="modalSemOptionsActive"></div>
+
+    <!-- Archive Semesters Grid (Collapsible) -->
+    <div id="modalSemOptionsArchiveWrap" style="display:none; margin-bottom:0.85rem; background:var(--bg-subtle); padding:0.6rem; border-radius:var(--radius-sm); border:1px dashed var(--border-strong);">
+      <div style="font-size:0.72rem; font-weight:700; color:var(--text-muted); margin-bottom:0.4rem; font-family:var(--font-mono);">📁 ARSIP JADWAL (LAMA):</div>
+      <div class="modal-grid-options" id="modalSemOptionsArchive" style="margin-bottom:0;"></div>
+    </div>
 
     <div class="modal-section-title">2. Pilih Kelas Utama Anda</div>
     <div class="modal-chip-grid" id="modalClassChips"></div>
@@ -782,12 +821,13 @@ const ICONS = {
    ═══════════════════════════════════════════════════════════════ */
 const FALLBACK_INDEX = {
   "semesters": [
-    { "id": "ti-s1-gasal-2026", "label": "Semester 1", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 1, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s1-gasal-2026.json" },
-    { "id": "ti-s3-gasal-2026", "label": "Semester 3", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 3, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s3-gasal-2026.json" },
-    { "id": "ti-s5-gasal-2026", "label": "Semester 5", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 5, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s5-gasal-2026.json" },
-    { "id": "ti-s7-gasal-2026", "label": "Semester 7", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 7, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s7-gasal-2026.json" },
-    { "id": "ai-s1-gasal-2026", "label": "Semester 1", "period": "Gasal", "academicYear": "2026/2027", "program": "AI", "semester": 1, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ai-s1-gasal-2026.json" },
-    { "id": "ti-peminatan-gasal-2026", "label": "Peminatan / Lintas Semester", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 0, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-peminatan-gasal-2026.json" }
+    { "id": "ti-s1-gasal-2026", "label": "Semester 1", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 1, "status": "active", "active": true, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s1-gasal-2026.json" },
+    { "id": "ti-s3-gasal-2026", "label": "Semester 3", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 3, "status": "active", "active": true, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s3-gasal-2026.json" },
+    { "id": "ti-s5-gasal-2026", "label": "Semester 5", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 5, "status": "active", "active": true, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s5-gasal-2026.json" },
+    { "id": "ti-s7-gasal-2026", "label": "Semester 7", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 7, "status": "active", "active": true, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-s7-gasal-2026.json" },
+    { "id": "ai-s1-gasal-2026", "label": "Semester 1", "period": "Gasal", "academicYear": "2026/2027", "program": "AI", "semester": 1, "status": "active", "active": true, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ai-s1-gasal-2026.json" },
+    { "id": "ti-peminatan-gasal-2026", "label": "Peminatan / Lintas Semester", "period": "Gasal", "academicYear": "2026/2027", "program": "TI", "semester": 0, "status": "active", "active": true, "startDate": "2026-09-01", "endDate": "2027-01-15", "file": "data/ti-peminatan-gasal-2026.json" },
+    { "id": "ti-s5-gasal-2025", "label": "Semester 5 (Arsip)", "period": "Gasal", "academicYear": "2025/2026", "program": "TI", "semester": 5, "status": "archived", "active": false, "startDate": "2025-09-01", "endDate": "2026-01-15", "file": "data/ti-s5-gasal-2026.json" }
   ]
 };
 
@@ -839,7 +879,6 @@ const App = {
       this.state.semesterId = this.index.semesters[0]?.id || "ti-s5-gasal-2026";
     }
 
-    // Always ensure scheduleView is valid
     if (!["table", "grid", "list", "timeline"].includes(this.state.scheduleView)) {
       this.state.scheduleView = "table";
     }
@@ -852,7 +891,6 @@ const App = {
     await this.loadSemesterDetail(this.state.semesterId);
     this.applySemesterUI(this.state.semesterId);
 
-    // FIRST LOAD POP UP (REQS 5 & 6)
     if (!this.state.hasOnboarded) {
       this.showWelcomeModal();
     }
@@ -959,7 +997,10 @@ const App = {
     this.state.selectedClasses = this.state.mainClass ? [this.state.mainClass] : [];
     this.state.selectedClassesCal = this.state.mainClass ? [this.state.mainClass] : [];
 
-    document.getElementById("headerMeta").textContent = `${meta.program} · ${meta.label} (${meta.academicYear})`;
+    const isArchived = meta.status === "archived" || meta.active === false;
+    const archLabel = isArchived ? " [ARSIP]" : "";
+
+    document.getElementById("headerMeta").textContent = `${meta.program} · ${meta.label} (${meta.academicYear})${archLabel}`;
     document.getElementById("mainClassLabel").textContent = this.state.mainClass || "Semua";
 
     this.renderToolbar("schedule");
@@ -1000,21 +1041,32 @@ const App = {
     document.getElementById("statGrid").innerHTML = html;
   },
 
-  /* ── UNIFIED WELCOME POP-UP (REQS 5 & 6) ── */
+  /* ── ACTIVE VS ARCHIVE POP-UP MODAL (REQS 1 & 5) ── */
   showWelcomeModal() {
     const modal = document.getElementById("welcomeModal");
-    const semWrap = document.getElementById("modalSemOptions");
+    const activeSemWrap = document.getElementById("modalSemOptionsActive");
+    const archiveSemWrap = document.getElementById("modalSemOptionsArchive");
+    const archiveWrapContainer = document.getElementById("modalSemOptionsArchiveWrap");
+    const toggleArchiveBtn = document.getElementById("modalArchiveToggleBtn");
     const classWrap = document.getElementById("modalClassChips");
 
     let tempSemId = this.state.semesterId;
     let tempClass = this.state.mainClass;
+    let showArchive = false;
 
     const renderSemBtns = () => {
-      semWrap.innerHTML = this.index.semesters.map(s =>
+      const activeSemesters = this.index.semesters.filter(s => s.status !== "archived" && s.active !== false);
+      const archivedSemesters = this.index.semesters.filter(s => s.status === "archived" || s.active === false);
+
+      activeSemWrap.innerHTML = activeSemesters.map(s =>
         `<button class="modal-opt-btn ${s.id === tempSemId ? "active" : ""}" data-id="${s.id}">${s.program} ${s.label}</button>`
       ).join("");
 
-      semWrap.querySelectorAll(".modal-opt-btn").forEach(btn => {
+      archiveSemWrap.innerHTML = archivedSemesters.length
+        ? archivedSemesters.map(s => `<button class="modal-opt-btn archive-btn ${s.id === tempSemId ? "active" : ""}" data-id="${s.id}">${s.program} ${s.label} (${s.academicYear})</button>`).join("")
+        : `<div style="font-size:0.75rem; color:var(--text-muted);">Belum ada arsip jadwal lama.</div>`;
+
+      modal.querySelectorAll(".modal-opt-btn").forEach(btn => {
         btn.addEventListener("click", async () => {
           tempSemId = btn.dataset.id;
           renderSemBtns();
@@ -1022,6 +1074,12 @@ const App = {
           renderClassBtns();
         });
       });
+    };
+
+    toggleArchiveBtn.onclick = () => {
+      showArchive = !showArchive;
+      archiveWrapContainer.style.display = showArchive ? "block" : "none";
+      toggleArchiveBtn.textContent = showArchive ? "Sembunyikan Arsip" : "Lihat Arsip Jadwal";
     };
 
     const renderClassBtns = () => {
@@ -1057,11 +1115,27 @@ const App = {
     };
   },
 
+  /* ── ACTIVE VS ARCHIVE SELECT POPULATION (REQS 1) ── */
   populateSemesterSelect() {
     const sel = document.getElementById("semesterSelect");
-    sel.innerHTML = this.index.semesters.map(s =>
-      `<option value="${s.id}">${s.program} ${s.label} (${s.academicYear})</option>`
-    ).join("");
+    const activeList = this.index.semesters.filter(s => s.status !== "archived" && s.active !== false);
+    const archiveList = this.index.semesters.filter(s => s.status === "archived" || s.active === false);
+
+    let html = `<optgroup label="🌟 Semester Aktif">`;
+    activeList.forEach(s => {
+      html += `<option value="${s.id}">${s.program} ${s.label} (${s.academicYear})</option>`;
+    });
+    html += `</optgroup>`;
+
+    if (archiveList.length) {
+      html += `<optgroup label="📁 Arsip Jadwal (Tahun Ajaran Lalu)">`;
+      archiveList.forEach(s => {
+        html += `<option value="${s.id}">${s.program} ${s.label} (${s.academicYear}) [Arsip]</option>`;
+      });
+      html += `</optgroup>`;
+    }
+
+    sel.innerHTML = html;
   },
 
   renderToolbar(tab) {
