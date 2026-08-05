@@ -179,6 +179,86 @@
   --primary-text: #7dd3fc;
 }
 
+/* 7. NEUMORPHISM STYLE */
+[data-style="neumorphism"] {
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --radius-sm: 10px; --radius-md: 16px; --radius-lg: 24px; --radius-full: 50px;
+  --bg-main: #e0e5ec;
+  --bg-card: #e0e5ec;
+  --bg-subtle: #e0e5ec;
+  --bg-hover: #d1d9e6;
+  --border-color: transparent;
+  --border-strong: #d1d9e6;
+  --shadow-sm: 3px 3px 6px #b8b9be, -3px -3px 6px #ffffff;
+  --shadow-card: 6px 6px 14px #b8b9be, -6px -6px 14px #ffffff;
+  --shadow-hover: 9px 9px 18px #b8b9be, -9px -9px 18px #ffffff;
+  --primary: #3b82f6; --primary-light: rgba(59, 130, 246, 0.15); --primary-text: #1d4ed8;
+  --text-inverse: #ffffff;
+}
+[data-theme="dark"][data-style="neumorphism"] {
+  --bg-main: #181d28;
+  --bg-card: #181d28;
+  --bg-subtle: #181d28;
+  --bg-hover: #222938;
+  --border-color: transparent;
+  --border-strong: #222938;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --shadow-sm: 3px 3px 6px #10131b, -3px -3px 6px #202735;
+  --shadow-card: 6px 6px 14px #10131b, -6px -6px 14px #202735;
+  --shadow-hover: 9px 9px 18px #10131b, -9px -9px 18px #202735;
+  --primary: #60a5fa; --primary-light: rgba(96, 165, 250, 0.15); --primary-text: #93c5fd;
+  --text-inverse: #0f172a;
+}
+
+/* 8. NEOBRUTALISM STYLE */
+[data-style="neobrutalism"] {
+  --font-body: 'Fredoka', 'Space Grotesk', sans-serif;
+  --font-heading: 'Fredoka', 'Space Grotesk', sans-serif;
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-full: 9999px;
+  --bg-main: #fffbeb;
+  --bg-card: #ffffff;
+  --bg-subtle: #fef08a;
+  --bg-hover: #fde047;
+  --border-color: #000000;
+  --border-strong: #000000;
+  --shadow-sm: 3px 3px 0px #000000;
+  --shadow-card: 5px 5px 0px #000000;
+  --shadow-hover: 7px 7px 0px #000000;
+  --primary: #ff5e7e;
+  --primary-deep: #e11d48;
+  --primary-light: #fef08a;
+  --primary-text: #000000;
+  --text-main: #000000;
+  --text-muted: #1f2937;
+  --text-inverse: #ffffff;
+  --accent: #06b6d4;
+  --accent-light: #cff4fc;
+  --accent-text: #000000;
+}
+[data-theme="dark"][data-style="neobrutalism"] {
+  --bg-main: #121212;
+  --bg-card: #1e1e1e;
+  --bg-subtle: #2d2d2d;
+  --bg-hover: #3d3d3d;
+  --border-color: #facc15;
+  --border-strong: #facc15;
+  --shadow-sm: 3px 3px 0px #facc15;
+  --shadow-card: 5px 5px 0px #facc15;
+  --shadow-hover: 7px 7px 0px #facc15;
+  --text-main: #ffffff;
+  --text-muted: #fef08a;
+  --text-inverse: #000000;
+  --primary: #facc15;
+  --primary-deep: #eab308;
+  --primary-light: #2d2d2d;
+  --primary-text: #ffffff;
+  --accent: #38bdf8;
+  --accent-light: #1e293b;
+  --accent-text: #38bdf8;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    RESET & MOBILE-FIRST BASE
    ═══════════════════════════════════════════════════════════════ */
@@ -699,6 +779,8 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
         <option value="minimal">Minimal Style</option>
         <option value="bento">Bento Style</option>
         <option value="formal">Formal Style</option>
+        <option value="neumorphism">Neumorphism Style</option>
+        <option value="neobrutalism">Neobrutalism Style</option>
       </select>
 
       <a href="https://github.com/yuumuu/jadwal-kuliah" target="_blank" rel="noopener noreferrer" class="github-link-btn" title="Repository GitHub">
