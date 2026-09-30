@@ -1,3 +1,6 @@
 /.playwright-mcp
 /JadKul_Full
 /nitip
+
+.omc/
+.DS_Store

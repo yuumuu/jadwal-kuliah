@@ -21,6 +21,12 @@ Didesain dengan arsitektur **Mobile-First**, tanpa *dependencies/framework* bera
   <img src="docs/screenshots/calendar_preview.png" alt="Preview Kalender Akademik" width="90%">
 </p>
 
+<p align="center">
+  <b>Personalized Schedule</b><br>
+  <img src="docs/screenshots/personalized_schedule.png" alt="Personalized Schedule" width="90%">
+  <b>Generate jadwal kuliah secara personal berdasarkan kombinasi mata kuliah dan kelas yang dipilih mahasiswa.</b>
+</p>
+
 ---
 
 ## ✨ Fitur Unggulan

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id" data-theme="light">
 <head>
@@ -862,6 +863,13 @@ table.schedule-table th {
 }
 table.schedule-table td { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border-color); vertical-align: top; }
 table.schedule-table tr.highlight td { background: var(--primary-light); }
+table.schedule-table tr.conflict-row td { background: var(--danger-light); border-left: 3px solid var(--danger); }
+
+.conflict-banner {
+  background: var(--danger-light); color: var(--danger); padding: 0.75rem 0.9rem; border-radius: var(--radius-sm);
+  margin-bottom: 0.85rem; font-size: 0.82rem; font-weight: 600; line-height: 1.6;
+}
+.conflict-banner strong { display: block; margin-bottom: 0.25rem; font-weight: 800; }
 
 .subject-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.4rem; }
 .code-tag { font-family: var(--font-mono); font-weight: 700; color: var(--primary); }
@@ -1043,6 +1051,26 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 }
 .modal-class-btn.active { background: var(--primary); color: var(--text-inverse, #ffffff); border-color: var(--primary); }
 
+/* ── JADWAL SAYA: PILIH KELAS PER MATKUL (BARU) ── */
+.modal-matkul-list { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.modal-matkul-row { border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.5rem 0.6rem; background: var(--bg-subtle); }
+.modal-matkul-row .mm-title { font-size: 0.78rem; font-weight: 700; margin-bottom: 0.35rem; display: flex; gap: 0.4rem; align-items: baseline; }
+.modal-matkul-row .mm-code { font-family: var(--font-mono); color: var(--primary); font-weight: 800; }
+.modal-matkul-row .mm-chip-row { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.empty-state { padding: 2rem 1rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+
+.matkul-semester-group { border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; }
+.matkul-semester-group + .matkul-semester-group { margin-top: 0.5rem; }
+.matkul-semester-header {
+  cursor: pointer; list-style: none; padding: 0.55rem 0.7rem; font-size: 0.8rem; font-weight: 800;
+  background: var(--bg-subtle); display: flex; align-items: center; gap: 0.4rem;
+}
+.matkul-semester-header::-webkit-details-marker { display: none; }
+.matkul-semester-header::before { content: "▸"; font-size: 0.7rem; transition: transform 0.15s ease; }
+.matkul-semester-group[open] > .matkul-semester-header::before { transform: rotate(90deg); }
+.matkul-semester-header .mm-count { font-weight: 600; color: var(--text-muted); font-size: 0.72rem; }
+.matkul-semester-body { padding: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
 .btn-primary {
   width: 100%; padding: 0.7rem; border: none; border-radius: var(--radius-sm);
   background: var(--primary); color: var(--text-inverse, #ffffff); font-weight: 700; font-size: 0.88rem;
@@ -1071,11 +1099,14 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 
 @media print {
   .app-header, .stat-container, .tabs-nav, .toolbar-card, .header-actions,
-  .copy-summary-btn, .modal-overlay, #printScheduleBtn, .cal-nav-bar, .theme-toggle-group,
+  .copy-summary-btn, .modal-overlay, #printScheduleBtn, #printMyScheduleBtn, .cal-nav-bar, .theme-toggle-group,
   #calendarPanel {
     display: none !important;
   }
-  #schedulePanel {
+  #schedulePanel:not(.active), #myschedulePanel:not(.active) {
+    display: none !important;
+  }
+  #schedulePanel.active, #myschedulePanel.active {
     display: block !important;
   }
   body {
@@ -1173,6 +1204,10 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
       Kalender Akademik
     </button>
+    <button class="tab-btn" data-tab="myschedule">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.1-1.01L12 2z"/></svg>
+      Jadwal Saya
+    </button>
   </nav>
 
   <!-- ── SCHEDULE PANEL ── -->
@@ -1253,6 +1288,39 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 
     <div id="calendarContainer"></div>
   </section>
+
+  <!-- ── JADWAL SAYA PANEL (BARU) ── -->
+  <section id="myschedulePanel" class="view-panel">
+    <div class="toolbar-card">
+      <div class="filter-row">
+        <div class="session-count-bar">
+          <span id="myScheduleCount">0 sesi</span>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="copy-summary-btn" id="editMyClassesBtn">Atur Kelas per Matkul</button>
+            <button class="copy-summary-btn" id="resetMyClassesBtn" title="Hapus semua pilihan kelas">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/></svg>
+              Reset
+            </button>
+            <button class="copy-summary-btn" id="printMyScheduleBtn" title="Cetak / Simpan sebagai PDF">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak PDF
+            </button>
+            <button class="copy-summary-btn" id="copyMyScheduleSummaryBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Salin Ringkasan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="print-header">
+      <h2 id="printMyTitle">Jadwal Saya — Teknologi Informasi UMY</h2>
+      <p id="printMyMeta">Semester Gasal 2026/2027</p>
+    </div>
+
+    <div id="myScheduleContainer"></div>
+  </section>
 </main>
 
 <!-- ═══════════════ UNIFIED WELCOME / POP-UP MODAL (REQS 1 & 5) ═══════════════ -->
@@ -1280,6 +1348,17 @@ table.schedule-table tr.highlight td { background: var(--primary-light); }
 
     <button class="btn-primary" id="welcomeModalSave">Simpan & Tampilkan Jadwal</button>
     <button class="btn-secondary" id="welcomeModalSkip">Tampilkan Seluruh Sesi</button>
+  </div>
+</div>
+
+<!-- ═══════════════ JADWAL SAYA: MODAL PILIH KELAS PER MATKUL (BARU) ═══════════════ -->
+<div id="myClassesModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <h3 class="modal-title">Atur Kelas per Mata Kuliah</h3>
+    <p class="modal-desc">Pilih kelas yang Anda ambil untuk masing-masing mata kuliah. Setiap matkul bisa punya kelas yang berbeda.</p>
+    <div class="modal-matkul-list" id="myClassesMatkulList"></div>
+    <button class="btn-primary" id="myClassesModalSave">Simpan</button>
+    <button class="btn-secondary" id="myClassesModalClose">Tutup</button>
   </div>
 </div>
 
@@ -1370,6 +1449,9 @@ const LECTURER_MAP = {
 const App = {
   index: null,
   detail: null,
+  crossSemesterCache: {},
+  _crossSemesterReady: false,
+  _crossSemesterReadyPromise: null,
   state: {
     semesterId: "ti-s5-gasal-2026",
     activeTab: "schedule",
@@ -1383,7 +1465,8 @@ const App = {
     mainClass: null,
     calActiveMonthIndex: 0,
     calShowAll: false,
-    hasOnboarded: false
+    hasOnboarded: false,
+    myClasses: {}
   },
 
   async init() {
@@ -1452,22 +1535,134 @@ const App = {
     return [...cls].sort();
   },
 
+  /* ── JADWAL SAYA: PILIH KELAS PER MATKUL LINTAS SEMESTER ── */
+  getClassesForKode(kode, detail = this.detail) {
+    if (!detail) return [];
+    const cls = new Set();
+    Object.values(detail.schedules || {}).forEach(rows => {
+      rows.forEach(r => {
+        if (r.kode === kode) (r.kelas || "").split(",").forEach(c => cls.add(c.trim()));
+      });
+    });
+    return [...cls].sort();
+  },
+
+  getMatkulList(detail = this.detail) {
+    if (!detail) return [];
+    const seen = new Map();
+    Object.values(detail.schedules || {}).forEach(rows => {
+      rows.forEach(r => { if (!seen.has(r.kode)) seen.set(r.kode, r.matkul); });
+    });
+    return [...seen.entries()]
+      .map(([kode, matkul]) => ({ kode, matkul, kelas: this.getClassesForKode(kode, detail) }))
+      .sort((a, b) => a.kode.localeCompare(b.kode));
+  },
+
+  getEligibleSemesters() {
+    return (this.index.semesters || []).filter(s => s.status !== "archived" && s.active !== false);
+  },
+
+  async loadCrossSemesterData() {
+    const eligible = this.getEligibleSemesters();
+    await Promise.all(eligible.map(async (meta) => {
+      if (this.crossSemesterCache[meta.id]) return;
+      try {
+        const res = await fetch(meta.file);
+        if (!res.ok) throw new Error();
+        this.crossSemesterCache[meta.id] = await res.json();
+      } catch (e) {
+        console.warn(`Gagal memuat data semester ${meta.id}`, e);
+      }
+    }));
+  },
+
+  getCrossSemesterMatkulList() {
+    return this.getEligibleSemesters()
+      .filter(meta => this.crossSemesterCache[meta.id])
+      .map(meta => ({
+        semesterId: meta.id,
+        semesterLabel: `${meta.program} ${meta.label}`,
+        matkul: this.getMatkulList(this.crossSemesterCache[meta.id])
+      }));
+  },
+
+  async ensureCrossSemesterReady() {
+    await this.loadCrossSemesterData();
+    const { result, removedKodes } = this.sanitizeMyClasses(this.state.myClasses);
+    this.state.myClasses = result;
+    if (removedKodes.length > 0) {
+      this.savePrefs();
+      alert(`${removedKodes.length} pilihan kelas dihapus karena tidak tersedia lagi: ${removedKodes.join(", ")}`);
+    }
+  },
+
+  async ensureCrossSemesterReadyOnce() {
+    if (this._crossSemesterReady) return;
+    if (!this._crossSemesterReadyPromise) {
+      this._crossSemesterReadyPromise = this.ensureCrossSemesterReady().then(() => {
+        this._crossSemesterReady = true;
+      });
+    }
+    await this._crossSemesterReadyPromise;
+  },
+
+  sanitizeMyClasses(myClasses) {
+    const result = {};
+    const removedKodes = [];
+    Object.entries(myClasses || {}).forEach(([key, kelas]) => {
+      const sep = key.indexOf("::");
+      if (sep === -1) { result[key] = kelas; return; }
+      const semesterId = key.slice(0, sep);
+      const kode = key.slice(sep + 2);
+      const meta = this.index.semesters.find(s => s.id === semesterId);
+      if (!meta) { removedKodes.push(kode); return; }
+      const detail = this.crossSemesterCache[semesterId];
+      if (!detail) { result[key] = kelas; return; }
+      const avail = this.getClassesForKode(kode, detail);
+      if (avail.includes(kelas)) result[key] = kelas;
+      else removedKodes.push(kode);
+    });
+    return { result, removedKodes };
+  },
+
+  isMine(r, semesterId = this.state.semesterId) {
+    const mine = this.state.myClasses[`${semesterId}::${r.kode}`];
+    return !!mine && r.rClasses.includes(mine);
+  },
+
+  flattenCrossSemesterMine() {
+    const items = [];
+    Object.entries(this.state.myClasses).forEach(([key, kelas]) => {
+      const sep = key.indexOf("::");
+      if (sep === -1) return;
+      const semesterId = key.slice(0, sep);
+      const kode = key.slice(sep + 2);
+      const detail = this.crossSemesterCache[semesterId];
+      const meta = this.index.semesters.find(s => s.id === semesterId);
+      if (!detail || !meta) return;
+      this.flattenSchedules("all", [], "", detail)
+        .filter(r => r.kode === kode && r.rClasses.includes(kelas))
+        .forEach(r => items.push({ ...r, semesterId, semesterLabel: `${meta.program} ${meta.label}` }));
+    });
+    return items;
+  },
+
   getTodayName() {
     const d = new Date().getDay();
     return d >= 1 && d <= 6 ? DAY_ORDER[d - 1] : null;
   },
 
-  flattenSchedules(dayFilter, classFilter, query = "") {
-    if (!this.detail) return [];
+  flattenSchedules(dayFilter, classFilter, query = "", detail = this.detail) {
+    if (!detail) return [];
     const items = [];
     const days = dayFilter === "all" ? DAY_ORDER : [dayFilter];
     const q = query.toLowerCase().trim();
 
     days.forEach(day => {
-      (this.detail.schedules[day] || []).forEach(r => {
+      (detail.schedules[day] || []).forEach(r => {
         const rClasses = r.kelas.split(",").map(c => c.trim());
         const matchClass = classFilter.length === 0 || classFilter.some(c => rClasses.includes(c));
-        const matchQuery = !q || 
+        const matchQuery = !q ||
           r.matkul.toLowerCase().includes(q) ||
           r.kode.toLowerCase().includes(q) ||
           r.dosen.toLowerCase().includes(q) ||
@@ -1476,7 +1671,7 @@ const App = {
         if (matchClass && matchQuery) {
           items.push({
             day, ...r, rClasses,
-            color: (this.detail.subjectColors && this.detail.subjectColors[r.kode]) || null
+            color: (detail.subjectColors && detail.subjectColors[r.kode]) || null
           });
         }
       });
@@ -1487,6 +1682,46 @@ const App = {
   isHighlighted(r) {
     if (this.state.mainClass && r.rClasses.includes(this.state.mainClass)) return true;
     return this.state.selectedClasses.some(c => r.rClasses.includes(c));
+  },
+
+  isMineOrMain(r) {
+    if (this.state.mainClass && r.rClasses.includes(this.state.mainClass)) return true;
+    return this.isMine(r, r.semesterId || this.state.semesterId);
+  },
+
+  parseJam(jam) {
+    const m = (jam || "").match(/(\d{1,2})[.:](\d{2})\s*-\s*(\d{1,2})[.:](\d{2})/);
+    if (!m) return null;
+    const start = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+    const end = parseInt(m[3], 10) * 60 + parseInt(m[4], 10);
+    return { start, end };
+  },
+
+  findConflicts(data) {
+    const conflicts = [];
+    const conflictKeys = new Set();
+    const byDay = {};
+    data.forEach((r, idx) => { (byDay[r.day] = byDay[r.day] || []).push({ r, idx }); });
+
+    Object.values(byDay).forEach(rows => {
+      for (let i = 0; i < rows.length; i++) {
+        const a = rows[i].r;
+        const aRange = this.parseJam(a.jam);
+        if (!aRange) continue;
+        for (let j = i + 1; j < rows.length; j++) {
+          const b = rows[j].r;
+          if (a.kode === b.kode) continue;
+          const bRange = this.parseJam(b.jam);
+          if (!bRange) continue;
+          if (aRange.start < bRange.end && bRange.start < aRange.end) {
+            conflicts.push({ a, b });
+            conflictKeys.add(`${a.day}|${a.kode}|${a.jam}`);
+            conflictKeys.add(`${b.day}|${b.kode}|${b.jam}`);
+          }
+        }
+      }
+    });
+    return { conflicts, conflictKeys };
   },
 
   async selectSemester(id) {
@@ -1537,7 +1772,14 @@ const App = {
   renderStats() {
     if (!this.detail) return;
     const all = this.flattenSchedules("all", []);
-    const mineCount = this.state.mainClass ? all.filter(r => r.rClasses.includes(this.state.mainClass)).length : 0;
+    const hasMain = !!this.state.mainClass;
+    const hasMyClasses = Object.keys(this.state.myClasses).length > 0;
+    const mineCount = all.filter(r => this.isMineOrMain(r)).length;
+    let mineLabel;
+    if (hasMain && hasMyClasses) mineLabel = "Sesi Kelas Saya";
+    else if (hasMain) mineLabel = `Sesi Kelas ${this.state.mainClass}`;
+    else if (hasMyClasses) mineLabel = "Sesi Jadwal Saya (Per Matkul)";
+    else mineLabel = "Kelas Utama Belum Set";
     const perDay = {};
     DAY_ORDER.forEach(d => perDay[d] = 0);
     all.forEach(r => perDay[r.day]++);
@@ -1550,8 +1792,8 @@ const App = {
         <div class="stat-label">Total Sesi Kuliah</div>
       </div>
       <div class="stat-card accent">
-        <div class="stat-value">${this.state.mainClass ? mineCount : '—'}</div>
-        <div class="stat-label">${this.state.mainClass ? `Sesi Kelas ${this.state.mainClass}` : 'Kelas Utama Belum Set'}</div>
+        <div class="stat-value">${(hasMain || hasMyClasses) ? mineCount : '—'}</div>
+        <div class="stat-label">${mineLabel}</div>
       </div>
       <div class="stat-card">
         <div class="stat-value">${matkulSet.size}</div>
@@ -1730,10 +1972,103 @@ const App = {
       else if (view === "list") this.renderList(data, container);
       else if (view === "timeline") this.renderTimeline(data, container);
       else this.renderTable(data, container);
-    } else {
+    } else if (tab === "calendar") {
       const container = document.getElementById("calendarContainer");
       this.renderCalendarView(container);
+    } else if (tab === "myschedule") {
+      this.renderMySchedule();
     }
+  },
+
+  /* ── JADWAL SAYA: RENDER TAB LINTAS SEMESTER ── */
+  async renderMySchedule() {
+    const container = document.getElementById("myScheduleContainer");
+    if (!this._crossSemesterReady) {
+      container.innerHTML = `<div class="empty-state">Memuat data lintas semester...</div>`;
+      await this.ensureCrossSemesterReadyOnce();
+    }
+
+    const data = this.flattenCrossSemesterMine();
+    document.getElementById("myScheduleCount").textContent = `${data.length} sesi ditemukan`;
+    if (Object.keys(this.state.myClasses).length === 0) {
+      container.innerHTML = `<div class="empty-state">Anda belum mengatur kelas untuk mata kuliah manapun. Klik "Atur Kelas per Matkul" untuk mulai.</div>`;
+      return;
+    }
+    const { conflicts, conflictKeys } = this.findConflicts(data);
+    let banner = "";
+    if (conflicts.length > 0) {
+      const lines = conflicts.map(({ a, b }) =>
+        `${a.day}, ${a.jam}: ${a.kode} (Kelas ${a.kelas}) vs ${b.kode} (Kelas ${b.kelas})`
+      );
+      banner = `<div class="conflict-banner">
+        <strong>${ICONS.important} Bentrok Jadwal Terdeteksi (${conflicts.length})</strong>
+        ${lines.map(l => `• ${l}`).join("<br>")}
+      </div>`;
+    }
+    container.innerHTML = banner;
+    const tableWrap = document.createElement("div");
+    container.appendChild(tableWrap);
+    this.renderTable(data, tableWrap, conflictKeys);
+  },
+
+  async showMyClassesModal() {
+    const modal = document.getElementById("myClassesModal");
+    const wrap = document.getElementById("myClassesMatkulList");
+    modal.style.display = "flex";
+    wrap.innerHTML = `<div class="empty-state">Memuat data lintas semester...</div>`;
+
+    if (!this._crossSemesterReady) {
+      await this.ensureCrossSemesterReadyOnce();
+    }
+
+    let temp = { ...this.state.myClasses };
+    const openSemesters = new Set([this.state.semesterId]);
+
+    const renderRows = () => {
+      wrap.querySelectorAll("details.matkul-semester-group").forEach(d => {
+        if (d.open) openSemesters.add(d.dataset.semesterId); else openSemesters.delete(d.dataset.semesterId);
+      });
+
+      const groups = this.getCrossSemesterMatkulList();
+      wrap.innerHTML = groups.length ? groups.map(g => `
+        <details class="matkul-semester-group" data-semester-id="${g.semesterId}" ${openSemesters.has(g.semesterId) ? "open" : ""}>
+          <summary class="matkul-semester-header">${g.semesterLabel} <span class="mm-count">(${g.matkul.length} matkul)</span></summary>
+          <div class="matkul-semester-body">
+            ${g.matkul.length ? g.matkul.map(m => {
+              const key = `${g.semesterId}::${m.kode}`;
+              return `
+              <div class="modal-matkul-row">
+                <div class="mm-title"><span class="mm-code">${m.kode}</span><span>${m.matkul}</span></div>
+                <div class="mm-chip-row">
+                  <button class="chip ${!temp[key] ? "active" : ""}" data-key="${key}" data-cls="">Belum Pilih</button>
+                  ${m.kelas.map(c => `<button class="chip ${temp[key] === c ? "active" : ""}" data-key="${key}" data-cls="${c}">${c}</button>`).join("")}
+                </div>
+              </div>`;
+            }).join("") : `<div class="empty-state">Tidak ada matkul.</div>`}
+          </div>
+        </details>
+      `).join("") : `<div class="empty-state">Data semester belum tersedia.</div>`;
+
+      wrap.querySelectorAll("button[data-key]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const { key, cls } = btn.dataset;
+          if (cls) temp[key] = cls; else delete temp[key];
+          renderRows();
+        });
+      });
+    };
+
+    renderRows();
+
+    document.getElementById("myClassesModalSave").onclick = () => {
+      this.state.myClasses = { ...temp };
+      this.savePrefs();
+      modal.style.display = "none";
+      this.renderMySchedule();
+    };
+    document.getElementById("myClassesModalClose").onclick = () => {
+      modal.style.display = "none";
+    };
   },
 
   formatDosenBadges(dosenStr) {
@@ -1785,21 +2120,24 @@ const App = {
   },
 
   /* ── RENDERERS ── */
-  renderTable(data, container) {
+  renderTable(data, container, conflictKeys = new Set()) {
     if (!data.length) { container.innerHTML = this.emptyState(); return; }
+    const showSemester = !!data[0].semesterLabel;
     let html = `<div class="table-wrap"><table class="schedule-table"><thead><tr>
-      <th>Hari</th><th>Kode</th><th>Mata Kuliah</th><th>Kelas</th><th>Jam</th><th>Ruang</th><th>Dosen</th>
+      <th>Hari</th><th>Kode</th><th>Mata Kuliah</th>${showSemester ? "<th>Semester</th>" : ""}<th>Kelas</th><th>Jam</th><th>Ruang</th><th>Dosen</th>
     </tr></thead><tbody>`;
 
     data.forEach(r => {
       const hl = this.isHighlighted(r) ? "highlight" : "";
+      const conflict = conflictKeys.has(`${r.day}|${r.kode}|${r.jam}`) ? "conflict-row" : "";
       const dot = r.color ? `<span class="subject-dot" style="background:${r.color}"></span>` : "";
-      const star = r.rClasses.includes(this.state.mainClass) ? `<span class="star-badge">${ICONS.star} Kelas Saya</span>` : "";
+      const star = this.isMineOrMain(r) ? `<span class="star-badge">${ICONS.star} Kelas Saya</span>` : "";
       const dosenBadges = this.formatDosenBadges(r.dosen);
-      html += `<tr class="${hl}">
+      html += `<tr class="${hl} ${conflict}">
         <td style="font-weight:700;">${r.day}</td>
         <td class="code-tag">${dot}${r.kode}</td>
         <td style="font-weight:600;">${r.matkul}${star}</td>
+        ${showSemester ? `<td><span class="class-tag">${r.semesterLabel}</span></td>` : ""}
         <td><span class="class-tag">${r.kelas}</span></td>
         <td style="font-family:var(--font-mono);">${r.jam}</td>
         <td><strong>${r.ruang}</strong></td>
@@ -1818,7 +2156,7 @@ const App = {
 
     data.forEach(r => {
       const hl = this.isHighlighted(r) ? "highlight" : "";
-      const star = r.rClasses.includes(this.state.mainClass) ? `<span class="star-badge">${ICONS.star}</span>` : "";
+      const star = this.isMineOrMain(r) ? `<span class="star-badge">${ICONS.star}</span>` : "";
       const dosenBadges = this.formatDosenBadges(r.dosen);
       html += `<div class="grid-card ${hl}">
         <div class="grid-card-header">
@@ -1851,7 +2189,7 @@ const App = {
       html += `<div class="list-group-header"><span>${ICONS.calendar}</span> ${day} (${items.length} sesi)</div>`;
       items.forEach(r => {
         const hl = this.isHighlighted(r) ? "highlight" : "";
-        const star = r.rClasses.includes(this.state.mainClass) ? `<span class="star-badge">${ICONS.star}</span>` : "";
+        const star = this.isMineOrMain(r) ? `<span class="star-badge">${ICONS.star}</span>` : "";
         const dosenBadges = this.formatDosenBadges(r.dosen);
         html += `<div class="list-item-card ${hl}">
           <div class="list-time">${r.jam}</div>
@@ -2047,6 +2385,26 @@ const App = {
     });
   },
 
+  async copyMyScheduleSummary() {
+    if (!this._crossSemesterReady) {
+      await this.ensureCrossSemesterReadyOnce();
+    }
+    const data = this.flattenCrossSemesterMine();
+    if (!data.length) { alert("Belum ada kelas yang diatur untuk disalin."); return; }
+
+    let text = `*JadKul — Jadwal Saya (Personalisasi Lintas Semester)*\n*Total:* ${data.length} sesi\n---------------------------------\n`;
+
+    data.forEach((r, i) => {
+      text += `${i+1}. [${r.day} ${r.jam}] ${r.kode} - ${r.matkul} (Kelas ${r.kelas}) @ Ruang ${r.ruang} (Dosen: ${r.dosen}) — ${r.semesterLabel}\n`;
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Ringkasan jadwal saya berhasil disalin ke clipboard! Siap dibagikan ke WhatsApp / Telegram.");
+    }).catch(() => {
+      alert("Gagal menyalin otomatis. Silakan salin manual.");
+    });
+  },
+
   applyTheme(theme) {
     this.state.theme = theme;
     if (theme === "system") {
@@ -2074,7 +2432,8 @@ const App = {
       theme: this.state.theme,
       style: this.state.style,
       mainClass: this.state.mainClass || "",
-      hasOnboarded: this.state.hasOnboarded
+      hasOnboarded: this.state.hasOnboarded,
+      myClasses: this.state.myClasses || {}
     };
     try { localStorage.setItem("jadkul_prefs", JSON.stringify(prefs)); } catch(e) {}
   },
@@ -2092,15 +2451,31 @@ const App = {
       if (p.style) this.state.style = p.style;
       if (p.mainClass) this.state.mainClass = p.mainClass;
       if (p.hasOnboarded) this.state.hasOnboarded = p.hasOnboarded;
+      if (p.myClasses && typeof p.myClasses === "object") {
+        const migratedSemesterId = p.semesterId || this.state.semesterId;
+        const migrated = {};
+        Object.entries(p.myClasses).forEach(([key, kelas]) => {
+          migrated[key.includes("::") ? key : `${migratedSemesterId}::${key}`] = kelas;
+        });
+        this.state.myClasses = migrated;
+      }
     } catch(e) {}
   },
 
   bindEvents() {
     document.getElementById("semesterSelect").addEventListener("change", (e) => this.selectSemester(e.target.value));
     document.getElementById("editMainClassBtn").addEventListener("click", () => this.showWelcomeModal());
+    document.getElementById("editMyClassesBtn").addEventListener("click", () => this.showMyClassesModal());
+    document.getElementById("resetMyClassesBtn").addEventListener("click", () => {
+      if (!confirm("Hapus semua pilihan kelas di Jadwal Saya? Tindakan ini tidak bisa dibatalkan.")) return;
+      this.state.myClasses = {};
+      this.savePrefs();
+      this.renderMySchedule();
+    });
     document.querySelectorAll(".theme-btn").forEach(btn => btn.addEventListener("click", () => this.applyTheme(btn.dataset.theme)));
     document.getElementById("styleSelect").addEventListener("change", (e) => this.applyStyle(e.target.value));
     document.getElementById("copySummaryBtn").addEventListener("click", () => this.copyScheduleSummary());
+    document.getElementById("copyMyScheduleSummaryBtn").addEventListener("click", () => this.copyMyScheduleSummary());
 
     const printBtn = document.getElementById("printScheduleBtn");
     if (printBtn) {
@@ -2110,6 +2485,19 @@ const App = {
           document.getElementById("printTitle").textContent = `JADWAL PERKULIAHAN — ${meta.program} ${meta.label}`;
           document.getElementById("printMeta").textContent = `Tahun Ajaran ${meta.academicYear} | Filter: ${this.state.selectedDay === 'all' ? 'Semua Hari' : this.state.selectedDay} (${this.state.mainClass ? 'Kelas ' + this.state.mainClass : 'Semua Kelas'})`;
         }
+        window.print();
+      });
+    }
+
+    const printMyBtn = document.getElementById("printMyScheduleBtn");
+    if (printMyBtn) {
+      printMyBtn.addEventListener("click", async () => {
+        if (!this._crossSemesterReady) {
+          await this.ensureCrossSemesterReadyOnce();
+          this.renderMySchedule();
+        }
+        document.getElementById("printMyTitle").textContent = `JADWAL SAYA — Personalisasi Lintas Semester`;
+        document.getElementById("printMyMeta").textContent = `TI/AI UMY | Dicetak ${new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}`;
         window.print();
       });
     }
