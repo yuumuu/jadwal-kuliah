@@ -1,0 +1,443 @@
+{
+  "subjectColors": {
+    "TI101": "#2f6f4f",
+    "TI102": "#8a4b6b",
+    "TI106": "#1f6f78",
+    "TI105": "#7a4a1f",
+    "TI103": "#4a5d8a",
+    "TI109": "#9c3b2e",
+    "TI104": "#5c6b23"
+  },
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru Masehi",
+      "type": "national"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Isra Mikraj Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baru Imlek 2577",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Hari Raya Nyepi Saka 1950",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Wafat Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh Internasional",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Kenaikan Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Idul Adha 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Raya Waisak 2570",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Tahun Baru Islam 1448 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan RI",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulid Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national"
+    }
+  ],
+  "importantDates": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan",
+      "type": "academic"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester",
+      "type": "academic"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester",
+      "type": "academic"
+    }
+  ],
+  "schedules": {
+    "Senin": [
+      {
+        "kode": "TI101",
+        "matkul": "Fisika dan Elektronika Teknologi Informasi",
+        "kelas": "A,C",
+        "jam": "07.00-08.40",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "DP / QA"
+      },
+      {
+        "kode": "TI102",
+        "matkul": "Matematika Teknologi Informasi 1",
+        "kelas": "B,C",
+        "jam": "08.50-11.30",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI105",
+        "matkul": "Database Design",
+        "kelas": "IUP",
+        "jam": "08.50-10.30",
+        "ruang": "F6.003",
+        "dosen": "FF"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "D",
+        "jam": "08.50-11.30",
+        "ruang": "F6.101",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TI102",
+        "matkul": "Matematika Teknologi Informasi 1",
+        "kelas": "A,D",
+        "jam": "13.20-15.00",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "B",
+        "jam": "13.20-15.00",
+        "ruang": "F6.002",
+        "dosen": "WS / RG"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F6.101",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TI101",
+        "matkul": "Physics and Electronics Information Technology",
+        "kelas": "IUP",
+        "jam": "13.20-15.00",
+        "ruang": "F6.203",
+        "dosen": "AL"
+      },
+      {
+        "kode": "TI102",
+        "matkul": "Matematika Teknologi Informasi 1",
+        "kelas": "A,D",
+        "jam": "15.30-16.20",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "B",
+        "jam": "15.30-16.20",
+        "ruang": "F6.002",
+        "dosen": "WS / RG"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "C",
+        "jam": "15.30-16.20",
+        "ruang": "F6.101",
+        "dosen": "AG"
+      }
+    ],
+    "Selasa": [
+      {
+        "kode": "TI101",
+        "matkul": "Fisika dan Elektronika Teknologi Informasi",
+        "kelas": "B,D",
+        "jam": "07.00-08.40",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "DP / QA"
+      },
+      {
+        "kode": "TI105",
+        "matkul": "Perancangan Basis Data",
+        "kelas": "A,C",
+        "jam": "08.50-10.30",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "F",
+        "jam": "08.50-11.30",
+        "ruang": "F6.003",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "E",
+        "jam": "08.50-11.30",
+        "ruang": "F4.002",
+        "dosen": "WS / RG"
+      },
+      {
+        "kode": "TI105",
+        "matkul": "Perancangan Basis Data",
+        "kelas": "B,D",
+        "jam": "13.20-15.00",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "AK"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.002",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Requirements Engineering",
+        "kelas": "IUP",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "RG"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Bahasa Inggris Dasar",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F4.003",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Rekayasa Kebutuhan",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.002",
+        "dosen": "AG"
+      },
+      {
+        "kode": "TI106",
+        "matkul": "Requirements Engineering",
+        "kelas": "IUP",
+        "jam": "15.30-16.20",
+        "ruang": "F4.002",
+        "dosen": "RG"
+      }
+    ],
+    "Rabu": [
+      {
+        "kode": "TI104",
+        "matkul": "Logika Teknik Pemrograman",
+        "kelas": "A,C",
+        "jam": "07.00-08.40",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Bahasa Inggris Dasar",
+        "kelas": "F",
+        "jam": "07.00-08.40",
+        "ruang": "F6.202",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.103",
+        "dosen": "CO"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Bahasa Inggris Dasar",
+        "kelas": "E",
+        "jam": "08.50-10.30",
+        "ruang": "F6.202",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "F",
+        "jam": "08.50-11.30",
+        "ruang": "F4.002",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI104",
+        "matkul": "Programming Engineering Logic",
+        "kelas": "IUP",
+        "jam": "10.40-11.30",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI104",
+        "matkul": "Programming Engineering Logic",
+        "kelas": "IUP",
+        "jam": "12.10-13.10",
+        "ruang": "F4.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI104",
+        "matkul": "Logika Teknik Pemrograman",
+        "kelas": "B,D",
+        "jam": "13.20-15.00",
+        "ruang": "RKBesar/F6.001",
+        "dosen": "HS"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Basic English",
+        "kelas": "IUP",
+        "jam": "13.20-15.00",
+        "ruang": "F6.202",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Bahasa Inggris Dasar",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.203",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "C",
+        "jam": "13.20-15.00",
+        "ruang": "F4.002",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Bahasa Inggris Dasar",
+        "kelas": "B",
+        "jam": "15.30-17.10",
+        "ruang": "F6.202",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI109",
+        "matkul": "Bahasa Inggris Dasar",
+        "kelas": "D",
+        "jam": "15.30-17.10",
+        "ruang": "F6.203",
+        "dosen": "TW"
+      },
+      {
+        "kode": "TI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "C",
+        "jam": "15.30-16.20",
+        "ruang": "F4.002",
+        "dosen": "HQ"
+      }
+    ],
+    "Kamis": [
+      {
+        "kode": "TI103",
+        "matkul": "Basics of Information Technology",
+        "kelas": "IUP",
+        "jam": "08.50-11.30",
+        "ruang": "F6.004",
+        "dosen": "FF"
+      },
+      {
+        "kode": "TI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "D",
+        "jam": "08.50-11.30",
+        "ruang": "F6.101",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "TI102",
+        "matkul": "Information Technology Mathematics 1",
+        "kelas": "IUP",
+        "jam": "13.20-15.00",
+        "ruang": "F6.203",
+        "dosen": "AL"
+      },
+      {
+        "kode": "TI102",
+        "matkul": "Information Technology Mathematics 1",
+        "kelas": "IUP",
+        "jam": "15.30-16.20",
+        "ruang": "F6.203",
+        "dosen": "AL"
+      }
+    ],
+    "Jumat": [
+      {
+        "kode": "TI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "B",
+        "jam": "08.50-11.30",
+        "ruang": "F6.003",
+        "dosen": "CO"
+      }
+    ],
+    "Sabtu": []
+  }
+}

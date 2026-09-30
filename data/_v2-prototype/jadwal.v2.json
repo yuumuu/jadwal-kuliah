@@ -1,0 +1,84 @@
+{
+  "lastUpdated": "2026-09-15",
+  "version": "2.0.0",
+  "semesters": [
+    {
+      "id": "ti-s1-gasal-2026",
+      "label": "TI Semester 1 — Gasal 2026/2027",
+      "program": "ti",
+      "period": "gasal",
+      "year": "2026/2027",
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/semesters/ti-s1-gasal-2026.json",
+      "status": "active",
+      "lastUpdated": "2026-09-15",
+      "source": "migrasi legacy"
+    },
+    {
+      "id": "ti-s3-gasal-2026",
+      "label": "TI Semester 3 — Gasal 2026/2027",
+      "program": "ti",
+      "period": "gasal",
+      "year": "2026/2027",
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/semesters/ti-s3-gasal-2026.json",
+      "status": "active",
+      "lastUpdated": "2026-09-15",
+      "source": "migrasi legacy"
+    },
+    {
+      "id": "ti-s5-gasal-2026",
+      "label": "TI Semester 5 — Gasal 2026/2027",
+      "program": "ti",
+      "period": "gasal",
+      "year": "2026/2027",
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/semesters/ti-s5-gasal-2026.json",
+      "status": "active",
+      "lastUpdated": "2026-09-15",
+      "source": "migrasi legacy"
+    },
+    {
+      "id": "ti-s7-gasal-2026",
+      "label": "TI Semester 7 — Gasal 2026/2027",
+      "program": "ti",
+      "period": "gasal",
+      "year": "2026/2027",
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/semesters/ti-s7-gasal-2026.json",
+      "status": "active",
+      "lastUpdated": "2026-09-15",
+      "source": "migrasi legacy"
+    },
+    {
+      "id": "ai-s1-gasal-2026",
+      "label": "AI Semester 1 — Gasal 2026/2027",
+      "program": "ai",
+      "period": "gasal",
+      "year": "2026/2027",
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/semesters/ai-s1-gasal-2026.json",
+      "status": "active",
+      "lastUpdated": "2026-09-15",
+      "source": "migrasi legacy"
+    },
+    {
+      "id": "ti-peminatan-gasal-2026",
+      "label": "TI Peminatan / Lintas Semester — Gasal 2026/2027",
+      "program": "ti",
+      "period": "gasal",
+      "year": "2026/2027",
+      "startDate": "2026-09-01",
+      "endDate": "2027-01-15",
+      "file": "data/semesters/ti-peminatan-gasal-2026.json",
+      "status": "active",
+      "lastUpdated": "2026-09-15",
+      "source": "migrasi legacy"
+    }
+  ]
+}

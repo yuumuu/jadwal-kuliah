@@ -1,0 +1,194 @@
+{
+  "subjectColors": {
+    "AI101": "#2f6f4f",
+    "AI102": "#8a4b6b",
+    "AI103": "#1f6f78",
+    "AI104": "#7a4a1f",
+    "AI105": "#4a5d8a",
+    "AI106": "#9c3b2e",
+    "AI108": "#a1731f"
+  },
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "Tahun Baru Masehi",
+      "type": "national"
+    },
+    {
+      "date": "2026-01-16",
+      "name": "Isra Mikraj Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "Tahun Baru Imlek 2577",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Hari Raya Nyepi Saka 1950",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-20",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-03-21",
+      "name": "Hari Raya Idul Fitri 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Wafat Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Hari Buruh Internasional",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Kenaikan Yesus Kristus",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-27",
+      "name": "Hari Raya Idul Adha 1447 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-05-31",
+      "name": "Hari Raya Waisak 2570",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-01",
+      "name": "Hari Lahir Pancasila",
+      "type": "national"
+    },
+    {
+      "date": "2026-06-16",
+      "name": "Tahun Baru Islam 1448 H",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-17",
+      "name": "Hari Kemerdekaan RI",
+      "type": "national"
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Maulid Nabi Muhammad SAW",
+      "type": "national"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal",
+      "type": "national"
+    }
+  ],
+  "importantDates": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan",
+      "type": "academic"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester",
+      "type": "academic"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester",
+      "type": "academic"
+    }
+  ],
+  "schedules": {
+    "Senin": [
+      {
+        "kode": "AI101",
+        "matkul": "Teori Bilangan",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F6.203",
+        "dosen": "TN"
+      }
+    ],
+    "Selasa": [
+      {
+        "kode": "AI108",
+        "matkul": "Etika Profesi",
+        "kelas": "A",
+        "jam": "08.50-10.30",
+        "ruang": "F6.203",
+        "dosen": "CO"
+      },
+      {
+        "kode": "AI102",
+        "matkul": "Matematika Diskrit",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.202",
+        "dosen": "AL"
+      },
+      {
+        "kode": "AI102",
+        "matkul": "Matematika Diskrit",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.202",
+        "dosen": "AL"
+      }
+    ],
+    "Rabu": [
+      {
+        "kode": "AI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.002",
+        "dosen": "CO"
+      },
+      {
+        "kode": "AI103",
+        "matkul": "Dasar Teknologi Informasi",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.002",
+        "dosen": "CO"
+      }
+    ],
+    "Kamis": [
+      {
+        "kode": "AI106",
+        "matkul": "Perancangan Basis Data",
+        "kelas": "A",
+        "jam": "08.50-11.30",
+        "ruang": "F4.001",
+        "dosen": "AL"
+      },
+      {
+        "kode": "AI104",
+        "matkul": "Pemrograman Dasar",
+        "kelas": "A",
+        "jam": "13.20-15.00",
+        "ruang": "F6.003",
+        "dosen": "HQ"
+      },
+      {
+        "kode": "AI104",
+        "matkul": "Pemrograman Dasar",
+        "kelas": "A",
+        "jam": "15.30-16.20",
+        "ruang": "F6.003",
+        "dosen": "HQ"
+      }
+    ],
+    "Jumat": [],
+    "Sabtu": []
+  }
+}

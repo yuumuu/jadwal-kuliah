@@ -1,99 +1,268 @@
+
 <!DOCTYPE html>
-<html lang="id" data-style="default" data-theme="light">
+<html lang="id" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="Jadwal kuliah interaktif — lihat jadwal per semester, cari ruang kosong, deteksi bentrok, dan ekspor ke .ics.">
-<meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Jadwal Kuliah">
-<meta property="og:description" content="Jadwal kuliah interaktif — cari, filter, ekspor.">
-<meta property="og:type" content="website">
-<title>Jadwal Kuliah</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>JadKul — Jadwal Pengajaran TI UMY</title>
 
-<script>
-  // Pre-paint: cegah flash tema sebelum CSS render
-  (function () {
-    try {
-      var p = JSON.parse(localStorage.getItem('jadkul_prefs_v2') || '{}');
-      if (p.theme) document.documentElement.dataset.theme = p.theme;
-      if (p.style) document.documentElement.dataset.style = p.style;
-    } catch (e) {}
-  })();
-</script>
+<!-- Multi-Style Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- HugeIcons Stroke Rounded — single icon system -->
+<link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css">
 
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/app.css">
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/tokens.css?v=port1">
+<link rel="stylesheet" href="css/app.css?v=port1">
+
 </head>
 <body>
-<noscript>
-  <div class="noscript">Aplikasi ini membutuhkan JavaScript untuk menampilkan jadwal.</div>
-</noscript>
 
-<div id="app" class="app" hidden>
-  <header class="app-header">
-    <div class="app-header__inner">
-      <button class="brand" id="brandBtn" aria-label="Buka menu">
-        <span class="brand__mark" aria-hidden="true">JK</span>
-        <span class="brand__text">
-          <strong id="headerTitle">Jadwal Kuliah</strong>
-          <small id="headerSubtitle">Memuat…</small>
-        </span>
-      </button>
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Ganti tema" aria-pressed="false">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-          </svg>
-        </button>
-        <button class="icon-btn" id="menuBtn" aria-label="Buka menu pengaturan">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
+<!-- ═══════════════ APP HEADER ═══════════════ -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-row-main">
+      <div class="brand-group">
+        <div class="brand-badge">TI UMY</div>
+        <div class="brand-title-wrap">
+          <span class="brand-title" id="headerLogo">JadKul</span>
+          <span class="brand-sub" id="headerMeta">Jadwal Pengajaran TI UMY</span>
+        </div>
+      </div>
+      <div class="menu-wrap">
+        <button class="icon-btn icon-only" id="headerMoreBtn" title="Menu lainnya" aria-label="Menu lainnya"><i class="hgi-stroke hgi-more-vertical"></i></button>
+        <div class="menu-dropdown" id="headerMoreMenu">
+          <div class="menu-label">Tampilan</div>
+          <select id="styleSelect" class="select-control" title="Style Theme">
+            <option value="default">Default Style</option>
+            <option value="playful">Playful Style</option>
+            <option value="elegant">Elegant Style</option>
+            <option value="minimal">Minimal Style</option>
+            <option value="bento">Bento Style</option>
+            <option value="formal">Formal Style</option>
+            <option value="neumorphism">Neumorphism Style</option>
+            <option value="neobrutalism">Neobrutalism Style</option>
+            <option value="cyberpunk">Cyberpunk Style</option>
+            <option value="glassmorphism">Glassmorphism Style</option>
+            <option value="claymorphism">Claymorphism Style</option>
+            <option value="terminal">Retro Terminal Style</option>
+            <option value="nordic">Nordic Style</option>
+            <option value="y2k">Y2K Retro Style</option>
+            <option value="paper">Paper Journal Style</option>
+          </select>
+          <div class="theme-toggle-group" style="margin-top:0.3rem;">
+            <button class="theme-btn" data-theme="light" title="Light Mode"><i class="hgi-stroke hgi-sun-01"></i></button>
+            <button class="theme-btn" data-theme="dark" title="Dark Mode"><i class="hgi-stroke hgi-moon-01"></i></button>
+            <button class="theme-btn" data-theme="system" title="System Preference"><i class="hgi-stroke hgi-computer-phone-sync"></i></button>
+          </div>
+          <div class="menu-divider"></div>
+          <div class="menu-label">Sumber</div>
+          <a href="https://github.com/yuumuu/jadwal-kuliah" target="_blank" rel="noopener noreferrer" class="menu-item"><i class="hgi-stroke hgi-github"></i>Repository GitHub</a>
+          <a href="https://instagram.com/haidaryuum" target="_blank" rel="noopener noreferrer" class="menu-item"><i class="hgi-stroke hgi-instagram"></i>Instagram @haidaryuum</a>
+          <a href="docs/" class="menu-item"><i class="hgi-stroke hgi-book-open-01"></i>Dokumentasi</a>
+        </div>
       </div>
     </div>
-  </header>
+    <div class="header-row-sub">
+      <select id="semesterSelect" class="select-control" title="Pilih Semester"></select>
+      <button class="edit-class-btn" id="editMainClassBtn" title="Ganti kelas utama">
+        <span>Kelas: <strong id="mainClassLabel">Semua</strong></span>
+        <i class="hgi-stroke hgi-edit-02"></i>
+      </button>
+    </div>
+  </div>
+</header>
 
-  <main class="app-main" id="appMain">
-    <section class="now-next" id="nowNext" aria-live="polite" aria-label="Kelas sekarang dan berikutnya"></section>
-    <div class="view" id="viewRoot"></div>
-  </main>
-
-  <nav class="tabs-nav" id="tabsNav" role="tablist" aria-label="Navigasi utama"></nav>
-  <nav class="bottom-nav" id="bottomNav" role="tablist" aria-label="Navigasi utama"></nav>
-
-  <button class="fab" id="fabAi" aria-label="Tanya asisten jadwal" hidden>
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 3a9 9 0 0 1 9 9v3a4 4 0 0 1-4 4h-1v2a2 2 0 0 1-3.4 1.4L10 20H9a9 9 0 0 1-9-9 9 9 0 0 1 9-9Z"/>
-      <circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/>
-    </svg>
-  </button>
+<!-- ═══════════════ STAT STRIP ═══════════════ -->
+<div class="stat-container" id="statStrip">
+  <div class="stat-grid" id="statGrid"></div>
 </div>
 
-<div class="skeleton-app" id="skeleton" aria-hidden="true">
-  <div class="sk sk-header"></div>
-  <div class="sk sk-hero"></div>
-  <div class="sk sk-row"></div>
-  <div class="sk sk-row"></div>
-  <div class="sk sk-card"></div>
-  <div class="sk sk-card"></div>
+<!-- ═══════════════ MAIN APP CONTAINER ═══════════════ -->
+<main id="appMain" class="app-container">
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="schedule">
+      <i class="hgi-stroke hgi-table-01"></i>
+      Jadwal
+    </button>
+    <button class="tab-btn" data-tab="calendar">
+      <i class="hgi-stroke hgi-calendar-03"></i>
+      Kalender
+    </button>
+    <button class="tab-btn" data-tab="myschedule">
+      <i class="hgi-stroke hgi-calendar-favorite-01"></i>
+      Jadwal Saya
+    </button>
+  </nav>
+
+  <!-- ── SCHEDULE PANEL ── -->
+  <section id="schedulePanel" class="view-panel active">
+    <div class="toolbar-card">  
+      <div class="search-box">
+        <span class="search-icon"><i class="hgi-stroke hgi-search-01"></i></span>
+        <input type="text" id="searchInput" placeholder="Cari matkul, kode, dosen, ruang...">
+      </div>
+      <div class="toolbar-controls-row">
+        <div class="view-subtabs" id="scheduleViewTabs">
+          <button class="view-btn active" data-view="table" title="Tampilan Tabel"><i class="hgi-stroke hgi-table-01"></i></button>
+          <button class="view-btn" data-view="grid" title="Tampilan Grid"><i class="hgi-stroke hgi-grid-view"></i></button>
+          <button class="view-btn" data-view="list" title="Tampilan Daftar"><i class="hgi-stroke hgi-menu-11"></i></button>
+          <button class="view-btn" data-view="timeline" title="Tampilan Timeline"><i class="hgi-stroke hgi-timer-01"></i></button>
+        </div>
+        <button class="icon-btn" id="scheduleFilterToggle" aria-expanded="false"><i class="hgi-stroke hgi-filter-horizontal"></i>Filter <span class="filter-badge" id="scheduleFilterBadge" style="display:none">0</span></button>
+        <div class="action-menu-row">
+          <span id="scheduleCount" style="font-size:0.76rem;color:var(--text-muted);font-weight:600;">0 sesi</span>
+          <div class="menu-wrap">
+            <button class="icon-btn icon-only" id="scheduleActionsBtn" title="Aksi lainnya" aria-label="Aksi lainnya"><i class="hgi-stroke hgi-more-vertical"></i></button>
+            <div class="menu-dropdown" id="scheduleActionsMenu">
+              <button class="menu-item" id="printScheduleBtn"><i class="hgi-stroke hgi-printer"></i>Cetak / PDF</button>
+              <button class="menu-item" id="copySummaryBtn"><i class="hgi-stroke hgi-copy-01"></i>Salin Ringkasan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <details class="filter-details" id="scheduleFilterDetails">
+        <summary><i class="hgi-stroke hgi-filter-horizontal"></i>Filter hari & kelas <span class="filter-badge" id="scheduleFilterBadge2" style="display:none">0</span></summary>
+        <div class="filter-details-body">
+          <div class="filter-group">
+            <span class="filter-label">Hari:</span>
+            <div class="chip-group" id="dayFilter"></div>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Kelas:</span>
+            <div class="chip-group" id="classFilter"></div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="print-header">
+      <h2 id="printTitle">Jadwal Kuliah Teknologi Informasi UMY</h2>
+      <p id="printMeta">Semester Gasal 2026/2027</p>
+    </div>
+
+    <div id="scheduleContainer"></div>
+  </section>
+
+  <!-- ── CALENDAR PANEL ── -->
+  <section id="calendarPanel" class="view-panel">
+    <div class="toolbar-card">
+      <div class="toolbar-controls-row">
+        <div class="cal-nav-title" id="calCurrentMonthLabel" style="font-weight:800;font-size:0.85rem;">Bulan Semester</div>
+        <div class="action-menu-row">
+          <button class="icon-btn icon-only" id="calPrevBtn" title="Bulan sebelumnya" aria-label="Bulan sebelumnya"><i class="hgi-stroke hgi-arrow-left-01"></i></button>
+          <button class="icon-btn" id="calTodayBtn">Bulan Ini</button>
+          <button class="icon-btn icon-only" id="calNextBtn" title="Bulan berikutnya" aria-label="Bulan berikutnya"><i class="hgi-stroke hgi-arrow-right-01"></i></button>
+          <div class="menu-wrap">
+            <button class="icon-btn icon-only" id="calActionsBtn" title="Opsi kalender" aria-label="Opsi kalender"><i class="hgi-stroke hgi-more-vertical"></i></button>
+            <div class="menu-dropdown" id="calActionsMenu">
+              <button class="menu-item" id="calAllBtn"><i class="hgi-stroke hgi-calendar-03"></i>Semua Bulan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <details class="filter-details" id="calFilterDetails">
+        <summary><i class="hgi-stroke hgi-filter-horizontal"></i>Filter kelas kalender</summary>
+        <div class="filter-details-body">
+          <div class="filter-group">
+            <span class="filter-label">Kelas:</span>
+            <div class="chip-group" id="classFilterCal"></div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div id="calendarContainer"></div>
+  </section>
+
+  <!-- ── JADWAL SAYA PANEL (BARU) ── -->
+  <section id="myschedulePanel" class="view-panel">
+    <div class="toolbar-card">
+      <button class="btn-primary-action" id="editMyClassesBtn"><i class="hgi-stroke hgi-settings-01"></i>Atur Kelas per Matkul</button>
+      <div class="toolbar-controls-row">
+        <span id="myScheduleCount" style="font-size:0.76rem;color:var(--text-muted);font-weight:600;">0 sesi</span>
+        <div class="action-menu-row">
+          <div class="menu-wrap">
+            <button class="icon-btn icon-only" id="myScheduleActionsBtn" title="Aksi lainnya" aria-label="Aksi lainnya"><i class="hgi-stroke hgi-more-vertical"></i></button>
+            <div class="menu-dropdown" id="myScheduleActionsMenu">
+              <button class="menu-item" id="printMyScheduleBtn"><i class="hgi-stroke hgi-printer"></i>Cetak / PDF</button>
+              <button class="menu-item" id="copyMyScheduleSummaryBtn"><i class="hgi-stroke hgi-copy-01"></i>Salin Ringkasan</button>
+              <div class="menu-divider"></div>
+              <button class="menu-item" id="resetMyClassesBtn"><i class="hgi-stroke hgi-delete-02"></i>Reset Pilihan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="print-header">
+      <h2 id="printMyTitle">Jadwal Saya — Teknologi Informasi UMY</h2>
+      <p id="printMyMeta">Semester Gasal 2026/2027</p>
+    </div>
+
+    <div id="myScheduleContainer"></div>
+  </section>
+</main>
+
+<!-- ═══════════════ UNIFIED WELCOME / POP-UP MODAL (REQS 1 & 5) ═══════════════ -->
+<div id="welcomeModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <h3 class="modal-title">Konfigurasi Jadwal Anda</h3>
+    <p class="modal-desc">Silakan pilih Semester dan Kelas Utama Anda agar jadwal sesi disajikan secara presisi.</p>
+    
+    <div class="modal-section-title">
+      <span>1. Pilih Semester</span>
+      <button class="archive-toggle-btn" id="modalArchiveToggleBtn">Lihat Arsip Jadwal</button>
+    </div>
+    
+    <!-- Active Semesters Grid -->
+    <div class="modal-grid-options" id="modalSemOptionsActive"></div>
+
+    <!-- Archive Semesters Grid (Collapsible) -->
+    <div id="modalSemOptionsArchiveWrap" style="display:none; margin-bottom:0.85rem; background:var(--bg-subtle); padding:0.6rem; border-radius:var(--radius-sm); border:1px dashed var(--border-strong);">
+      <div style="font-size:0.72rem; font-weight:700; color:var(--text-muted); margin-bottom:0.4rem; font-family:var(--font-mono);">📁 ARSIP JADWAL (LAMA):</div>
+      <div class="modal-grid-options" id="modalSemOptionsArchive" style="margin-bottom:0;"></div>
+    </div>
+
+    <div class="modal-section-title">2. Pilih Kelas Utama Anda</div>
+    <div class="modal-chip-grid" id="modalClassChips"></div>
+
+    <button class="btn-primary" id="welcomeModalSave">Simpan & Tampilkan Jadwal</button>
+    <button class="btn-secondary" id="welcomeModalSkip">Tampilkan Seluruh Sesi</button>
+  </div>
 </div>
 
-<div class="toast-stack" id="toastStack" role="status" aria-live="polite" aria-atomic="false"></div>
-
-<div class="overlay-backdrop" id="overlayBackdrop" hidden></div>
-
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
-  <div class="sheet__handle" aria-hidden="true"></div>
-  <header class="sheet__header">
-    <h2 class="sheet__title" id="sheetTitle"></h2>
-    <button class="icon-btn" id="sheetClose" aria-label="Tutup">✕</button>
-  </header>
-  <div class="sheet__body" id="sheetBody"></div>
+<!-- ═══════════════ JADWAL SAYA: MODAL PILIH KELAS PER MATKUL (BARU) ═══════════════ -->
+<div id="myClassesModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <h3 class="modal-title">Atur Kelas per Mata Kuliah</h3>
+    <p class="modal-desc">Pilih kelas yang Anda ambil untuk masing-masing mata kuliah. Setiap matkul bisa punya kelas yang berbeda.</p>
+    <div class="modal-matkul-list" id="myClassesMatkulList"></div>
+    <button class="btn-primary" id="myClassesModalSave">Simpan</button>
+    <button class="btn-secondary" id="myClassesModalClose">Tutup</button>
+  </div>
 </div>
 
-<script type="module" src="js/app.js"></script>
+<!-- ═══════════════ DATE DETAIL MODAL ═══════════════ -->
+<div id="dateDetailModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <h3 class="modal-title" id="dateModalTitle">Detail Tanggal</h3>
+    <div id="dateModalContent" style="margin-top: 0.85rem;"></div>
+    <button class="btn-secondary" style="margin-top: 1rem;" onclick="document.getElementById('dateDetailModal').style.display='none'">Tutup</button>
+  </div>
+</div>
+
+<!-- ═══════════════ LECTURER DETAIL MODAL (POIN 5) ═══════════════ -->
+<div id="lecturerModal" class="modal-overlay" style="display:none">
+  <div class="modal-card">
+    <h3 class="modal-title" id="lecturerModalTitle">Detail Pengampu Dosen</h3>
+    <div id="lecturerModalContent" style="margin-top: 0.85rem;"></div>
+    <button class="btn-secondary" style="margin-top: 1rem;" onclick="document.getElementById('lecturerModal').style.display='none'">Tutup</button>
+  </div>
+</div>
+
+
+<script src="js/app.js?v=port1" defer></script>
 </body>
 </html>
