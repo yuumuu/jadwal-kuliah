@@ -77,19 +77,6 @@
       "startDate": "2026-09-01",
       "endDate": "2027-01-15",
       "file": "data/ti-peminatan-gasal-2026.json"
-    },
-    {
-      "id": "ti-s5-gasal-2025",
-      "label": "Semester 5 (Arsip)",
-      "period": "Gasal",
-      "academicYear": "2025/2026",
-      "program": "TI",
-      "semester": 5,
-      "status": "archived",
-      "active": false,
-      "startDate": "2025-09-01",
-      "endDate": "2026-01-15",
-      "file": "data/ti-s5-gasal-2026.json"
     }
   ]
 }
