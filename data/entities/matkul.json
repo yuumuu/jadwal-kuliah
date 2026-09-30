@@ -1,0 +1,226 @@
+{
+  "items": [
+    {
+      "kode": "AI101",
+      "nama": "Teori Bilangan",
+      "sks": 3,
+      "color": "#2f6f4f"
+    },
+    {
+      "kode": "AI102",
+      "nama": "Matematika Diskrit",
+      "sks": 3,
+      "color": "#8a4b6b"
+    },
+    {
+      "kode": "AI103",
+      "nama": "Dasar Teknologi Informasi",
+      "sks": 3,
+      "color": "#1f6f78"
+    },
+    {
+      "kode": "AI104",
+      "nama": "Pemrograman Dasar",
+      "sks": 3,
+      "color": "#7a4a1f"
+    },
+    {
+      "kode": "AI106",
+      "nama": "Perancangan Basis Data",
+      "sks": 3,
+      "color": "#9c3b2e"
+    },
+    {
+      "kode": "AI108",
+      "nama": "Etika Profesi",
+      "sks": 3,
+      "color": "#a1731f"
+    },
+    {
+      "kode": "TI101",
+      "nama": "Fisika dan Elektronika Teknologi Informasi",
+      "sks": 3,
+      "color": "#2f6f4f"
+    },
+    {
+      "kode": "TI102",
+      "nama": "Matematika Teknologi Informasi 1",
+      "sks": 3,
+      "color": "#8a4b6b"
+    },
+    {
+      "kode": "TI103",
+      "nama": "Dasar Teknologi Informasi",
+      "sks": 3,
+      "color": "#4a5d8a"
+    },
+    {
+      "kode": "TI104",
+      "nama": "Logika Teknik Pemrograman",
+      "sks": 3,
+      "color": "#5c6b23"
+    },
+    {
+      "kode": "TI105",
+      "nama": "Database Design",
+      "sks": 3,
+      "color": "#7a4a1f"
+    },
+    {
+      "kode": "TI106",
+      "nama": "Rekayasa Kebutuhan",
+      "sks": 3,
+      "color": "#1f6f78"
+    },
+    {
+      "kode": "TI109",
+      "nama": "Bahasa Inggris Dasar",
+      "sks": 3,
+      "color": "#9c3b2e"
+    },
+    {
+      "kode": "TI301",
+      "nama": "Probabilitas dan Statistika",
+      "sks": 3,
+      "color": "#4a5d8a"
+    },
+    {
+      "kode": "TI302",
+      "nama": "Pemrograman Multiplatform",
+      "sks": 3,
+      "color": "#1f6f78"
+    },
+    {
+      "kode": "TI303",
+      "nama": "Implementasi Basis Data",
+      "sks": 3,
+      "color": "#9c3b2e"
+    },
+    {
+      "kode": "TI304",
+      "nama": "Switching dan Wireless",
+      "sks": 3,
+      "color": "#7a4a1f"
+    },
+    {
+      "kode": "TI305",
+      "nama": "Teknologi Server",
+      "sks": 3,
+      "color": "#2f6f4f"
+    },
+    {
+      "kode": "TI306",
+      "nama": "Perancangan Berorientasi Objek",
+      "sks": 3,
+      "color": "#8a4b6b"
+    },
+    {
+      "kode": "TI308",
+      "nama": "Bahasa Inggris Lanjut",
+      "sks": 3,
+      "color": "#5c6b23"
+    },
+    {
+      "kode": "TI501",
+      "nama": "Pengembangan Aplikasi Web",
+      "sks": 3,
+      "color": "#4a5d8a"
+    },
+    {
+      "kode": "TI502",
+      "nama": "Pengembangan Aplikasi Mobile",
+      "sks": 3,
+      "color": "#5c6b23"
+    },
+    {
+      "kode": "TI503",
+      "nama": "Pengembangan Web Service",
+      "sks": 3,
+      "color": "#7a4a1f"
+    },
+    {
+      "kode": "TI504",
+      "nama": "WAN dan Teknologi Jaringan",
+      "sks": 3,
+      "color": "#2f6f4f"
+    },
+    {
+      "kode": "TI505",
+      "nama": "Tata Kelola Teknologi Informasi",
+      "sks": 3,
+      "color": "#9c3b2e"
+    },
+    {
+      "kode": "TI506",
+      "nama": "Manajemen Proyek",
+      "sks": 3,
+      "color": "#8a4b6b"
+    },
+    {
+      "kode": "TI507",
+      "nama": "Bahasa Inggris untuk Membaca Naskah Akademik",
+      "sks": 3,
+      "color": "#a1731f"
+    },
+    {
+      "kode": "TI508",
+      "nama": "Technopreneurship",
+      "sks": 3,
+      "color": "#1f6f78"
+    },
+    {
+      "kode": "TI704",
+      "nama": "Bahasa Inggris untuk Penulisan Naskah Akademik",
+      "sks": 3,
+      "color": "#2f6f4f"
+    },
+    {
+      "kode": "TIDA01",
+      "nama": "Computer Vision",
+      "sks": 3,
+      "color": "#4a5d8a"
+    },
+    {
+      "kode": "TIDA03",
+      "nama": "Analisis Big Data",
+      "sks": 3,
+      "color": "#8a4b6b"
+    },
+    {
+      "kode": "TINE01",
+      "nama": "Blockchain",
+      "sks": 3,
+      "color": "#1f6f78"
+    },
+    {
+      "kode": "TINE05",
+      "nama": "Routing Lanjut",
+      "sks": 3,
+      "color": "#7a4a1f"
+    },
+    {
+      "kode": "TIPR01",
+      "nama": "Pengembangan Game",
+      "sks": 3,
+      "color": "#9c3b2e"
+    },
+    {
+      "kode": "TIPR02",
+      "nama": "Teknologi Multimedia",
+      "sks": 3,
+      "color": "#5c6b23"
+    },
+    {
+      "kode": "TIUX01",
+      "nama": "Serious Game",
+      "sks": 3,
+      "color": "#2f6f4f"
+    },
+    {
+      "kode": "TIUX02",
+      "nama": "Prototyping",
+      "sks": 3,
+      "color": "#a1731f"
+    }
+  ]
+}

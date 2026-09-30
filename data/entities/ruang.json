@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "kode": "F4.001",
+      "nama": "F4.001 — Ruang F4.001",
+      "gedung": "F4"
+    },
+    {
+      "kode": "F4.002",
+      "nama": "F4.002 — Ruang F4.002",
+      "gedung": "F4"
+    },
+    {
+      "kode": "F4.003",
+      "nama": "F4.003 — Ruang F4.003",
+      "gedung": "F4"
+    },
+    {
+      "kode": "F6.002",
+      "nama": "F6.002 — Ruang F6.002",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.003",
+      "nama": "F6.003 — Ruang F6.003",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.004",
+      "nama": "F6.004 — Ruang F6.004",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.101",
+      "nama": "F6.101 — Ruang F6.101",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.102",
+      "nama": "F6.102 — Ruang F6.102",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.103",
+      "nama": "F6.103 — Ruang F6.103",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.202",
+      "nama": "F6.202 — Ruang F6.202",
+      "gedung": "F6"
+    },
+    {
+      "kode": "F6.203",
+      "nama": "F6.203 — Ruang F6.203",
+      "gedung": "F6"
+    },
+    {
+      "kode": "RKBesar/F6.001",
+      "nama": "RKBesar/F6.001 — Ruang RKBesar/F6.001",
+      "gedung": "RKBesar"
+    }
+  ]
+}

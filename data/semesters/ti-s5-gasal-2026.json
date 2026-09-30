@@ -1,0 +1,430 @@
+{
+  "id": "ti-s5-gasal-2026",
+  "startDate": "2026-09-01",
+  "endDate": "2027-01-15",
+  "lastUpdated": "2026-09-15",
+  "source": "migrasi dari data legacy monolith",
+  "version": "1.0.0",
+  "classes": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "sessions": [
+    {
+      "kode": "TI501",
+      "kelas": "E",
+      "hari": "Senin",
+      "jam": "08:50-11:30",
+      "ruang": "F4.003",
+      "dosen": "AS"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "B",
+      "hari": "Senin",
+      "jam": "08:50-11:30",
+      "ruang": "F4.002",
+      "dosen": "DP / QA"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "D",
+      "hari": "Senin",
+      "jam": "08:50-11:30",
+      "ruang": "F6.102",
+      "dosen": "HQ / WS"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "E",
+      "hari": "Senin",
+      "jam": "12:10-15:00",
+      "ruang": "F6.102",
+      "dosen": "HQ"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "C",
+      "hari": "Senin",
+      "jam": "13:20-15:00",
+      "ruang": "F4.003",
+      "dosen": "AS"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "A",
+      "hari": "Senin",
+      "jam": "13:20-15:00",
+      "ruang": "F4.002",
+      "dosen": "DP"
+    },
+    {
+      "kode": "TI508",
+      "kelas": "D",
+      "hari": "Senin",
+      "jam": "13:20-15:00",
+      "ruang": "F4.001",
+      "dosen": "EI/FF"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "C",
+      "hari": "Senin",
+      "jam": "15:30-16:20",
+      "ruang": "F4.003",
+      "dosen": "AS"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "A",
+      "hari": "Senin",
+      "jam": "15:30-16:20",
+      "ruang": "F4.002",
+      "dosen": "DP"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "07:50-10:30",
+      "ruang": "F4.001",
+      "dosen": "HQ"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "E",
+      "hari": "Selasa",
+      "jam": "08:50-11:30",
+      "ruang": "F6.102",
+      "dosen": "FF"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "C",
+      "hari": "Selasa",
+      "jam": "09:40-11:30",
+      "ruang": "F6.202",
+      "dosen": "HQ"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "C",
+      "hari": "Selasa",
+      "jam": "12:10-13:10",
+      "ruang": "F6.202",
+      "dosen": "HQ"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "D",
+      "hari": "Selasa",
+      "jam": "13:20-15:00",
+      "ruang": "F6.102",
+      "dosen": "DP / AM"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "B",
+      "hari": "Selasa",
+      "jam": "13:20-15:00",
+      "ruang": "F6.203",
+      "dosen": "HQ / WS"
+    },
+    {
+      "kode": "TI508",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "13:20-15:00",
+      "ruang": "F4.001",
+      "dosen": "EI/FF"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "D",
+      "hari": "Selasa",
+      "jam": "15:30-16:20",
+      "ruang": "F6.102",
+      "dosen": "DP / AM"
+    },
+    {
+      "kode": "TI506",
+      "kelas": "B",
+      "hari": "Selasa",
+      "jam": "15:30-16:20",
+      "ruang": "F6.203",
+      "dosen": "HQ / WS"
+    },
+    {
+      "kode": "TI504",
+      "kelas": "C",
+      "hari": "Selasa",
+      "jam": "15:30-17:10",
+      "ruang": "F4.001",
+      "dosen": "FF"
+    },
+    {
+      "kode": "TI508",
+      "kelas": "E",
+      "hari": "Rabu",
+      "jam": "07:50-09:40",
+      "ruang": "F6.203",
+      "dosen": "EI/FF"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "A",
+      "hari": "Rabu",
+      "jam": "08:50-11:30",
+      "ruang": "F6.003",
+      "dosen": "AS"
+    },
+    {
+      "kode": "TI503",
+      "kelas": "C",
+      "hari": "Rabu",
+      "jam": "08:50-11:30",
+      "ruang": "F6.101",
+      "dosen": "DP"
+    },
+    {
+      "kode": "TI508",
+      "kelas": "B",
+      "hari": "Rabu",
+      "jam": "09:40-11:30",
+      "ruang": "F6.203",
+      "dosen": "EI/FF"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "B",
+      "hari": "Rabu",
+      "jam": "13:20-15:00",
+      "ruang": "F6.003",
+      "dosen": "AS"
+    },
+    {
+      "kode": "TI504",
+      "kelas": "A",
+      "hari": "Rabu",
+      "jam": "13:20-15:00",
+      "ruang": "F6.102",
+      "dosen": "EP"
+    },
+    {
+      "kode": "TI508",
+      "kelas": "C",
+      "hari": "Rabu",
+      "jam": "13:20-15:00",
+      "ruang": "F4.001",
+      "dosen": "EI/FF"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "B",
+      "hari": "Rabu",
+      "jam": "15:30-16:20",
+      "ruang": "F6.003",
+      "dosen": "AS"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "B",
+      "hari": "Kamis",
+      "jam": "08:50-11:30",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI505",
+      "kelas": "D,E,F",
+      "hari": "Kamis",
+      "jam": "08:50-11:30",
+      "ruang": "RKBesar/F6.001",
+      "dosen": "CO"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "D",
+      "hari": "Kamis",
+      "jam": "13:20-15:00",
+      "ruang": "F6.103",
+      "dosen": "QA"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "E",
+      "hari": "Kamis",
+      "jam": "13:20-15:00",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI505",
+      "kelas": "A,B,C",
+      "hari": "Kamis",
+      "jam": "13:20-15:00",
+      "ruang": "RKBesar/F6.001",
+      "dosen": "CO"
+    },
+    {
+      "kode": "TI501",
+      "kelas": "D",
+      "hari": "Kamis",
+      "jam": "15:30-16:20",
+      "ruang": "F6.103",
+      "dosen": "QA"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "E",
+      "hari": "Kamis",
+      "jam": "15:30-16:20",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI505",
+      "kelas": "A,B,C",
+      "hari": "Kamis",
+      "jam": "15:30-16:20",
+      "ruang": "RKBesar/F6.001",
+      "dosen": "CO"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "C",
+      "hari": "Kamis",
+      "jam": "16:20-18:00",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI504",
+      "kelas": "B",
+      "hari": "Kamis",
+      "jam": "16:20-18:00",
+      "ruang": "F6.003",
+      "dosen": "EP"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "C",
+      "hari": "Kamis",
+      "jam": "18:30-19:20",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "A",
+      "hari": "Jumat",
+      "jam": "07:50-10:30",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI504",
+      "kelas": "D",
+      "hari": "Jumat",
+      "jam": "08:50-10:30",
+      "ruang": "F6.002",
+      "dosen": "FF"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "D",
+      "hari": "Jumat",
+      "jam": "13:20-15:00",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI504",
+      "kelas": "E",
+      "hari": "Jumat",
+      "jam": "13:20-15:00",
+      "ruang": "F6.002",
+      "dosen": "FF"
+    },
+    {
+      "kode": "TI502",
+      "kelas": "D",
+      "hari": "Jumat",
+      "jam": "15:30-16:20",
+      "ruang": "F4.002",
+      "dosen": "HS"
+    },
+    {
+      "kode": "TI507",
+      "kelas": "B",
+      "hari": "Sabtu",
+      "jam": "07:00-08:40",
+      "ruang": "F6.102",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI507",
+      "kelas": "C",
+      "hari": "Sabtu",
+      "jam": "08:50-10:30",
+      "ruang": "F6.103",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI507",
+      "kelas": "D",
+      "hari": "Sabtu",
+      "jam": "08:50-10:30",
+      "ruang": "F6.102",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI507",
+      "kelas": "A",
+      "hari": "Sabtu",
+      "jam": "10:40-11:30",
+      "ruang": "F6.102",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI507",
+      "kelas": "A",
+      "hari": "Sabtu",
+      "jam": "12:10-13:10",
+      "ruang": "F6.102",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI507",
+      "kelas": "E",
+      "hari": "Sabtu",
+      "jam": "13:20-15:00",
+      "ruang": "F6.102",
+      "dosen": "TW"
+    }
+  ],
+  "holidays": [
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal"
+    }
+  ],
+  "important": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester"
+    }
+  ]
+}

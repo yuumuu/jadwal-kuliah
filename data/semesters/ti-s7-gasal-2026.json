@@ -1,0 +1,77 @@
+{
+  "id": "ti-s7-gasal-2026",
+  "startDate": "2026-09-01",
+  "endDate": "2027-01-15",
+  "lastUpdated": "2026-09-15",
+  "source": "migrasi dari data legacy monolith",
+  "version": "1.0.0",
+  "classes": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "sessions": [
+    {
+      "kode": "TI704",
+      "kelas": "B",
+      "hari": "Jumat",
+      "jam": "07:50-09:40",
+      "ruang": "F6.202",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI704",
+      "kelas": "C",
+      "hari": "Jumat",
+      "jam": "09:40-11:30",
+      "ruang": "F6.202",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI704",
+      "kelas": "A",
+      "hari": "Sabtu",
+      "jam": "07:00-08:40",
+      "ruang": "F6.202",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI704",
+      "kelas": "D",
+      "hari": "Sabtu",
+      "jam": "07:00-08:40",
+      "ruang": "F6.203",
+      "dosen": "TW"
+    },
+    {
+      "kode": "TI704",
+      "kelas": "E",
+      "hari": "Sabtu",
+      "jam": "08:50-10:30",
+      "ruang": "F6.203",
+      "dosen": "TW"
+    }
+  ],
+  "holidays": [
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal"
+    }
+  ],
+  "important": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester"
+    }
+  ]
+}

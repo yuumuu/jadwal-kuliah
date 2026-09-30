@@ -1,0 +1,128 @@
+{
+  "items": [
+    {
+      "kode": "AD",
+      "nama": "AD"
+    },
+    {
+      "kode": "AG",
+      "nama": "AG"
+    },
+    {
+      "kode": "AK",
+      "nama": "AK"
+    },
+    {
+      "kode": "AL",
+      "nama": "AL"
+    },
+    {
+      "kode": "AM",
+      "nama": "AM"
+    },
+    {
+      "kode": "AS",
+      "nama": "AS"
+    },
+    {
+      "kode": "CD",
+      "nama": "CD"
+    },
+    {
+      "kode": "CO",
+      "nama": "CO"
+    },
+    {
+      "kode": "DP",
+      "nama": "DP"
+    },
+    {
+      "kode": "DP / AM",
+      "nama": "DP / AM"
+    },
+    {
+      "kode": "DP / QA",
+      "nama": "DP / QA"
+    },
+    {
+      "kode": "EI",
+      "nama": "EI"
+    },
+    {
+      "kode": "EI/FF",
+      "nama": "EI/FF"
+    },
+    {
+      "kode": "EP",
+      "nama": "EP"
+    },
+    {
+      "kode": "EP / AM",
+      "nama": "EP / AM"
+    },
+    {
+      "kode": "FF",
+      "nama": "FF"
+    },
+    {
+      "kode": "HQ",
+      "nama": "HQ"
+    },
+    {
+      "kode": "HQ / WS",
+      "nama": "HQ / WS"
+    },
+    {
+      "kode": "HS",
+      "nama": "HS"
+    },
+    {
+      "kode": "NA",
+      "nama": "NA"
+    },
+    {
+      "kode": "QA",
+      "nama": "QA"
+    },
+    {
+      "kode": "RG",
+      "nama": "RG"
+    },
+    {
+      "kode": "SR",
+      "nama": "SR"
+    },
+    {
+      "kode": "SR / AD",
+      "nama": "SR / AD"
+    },
+    {
+      "kode": "TA",
+      "nama": "TA"
+    },
+    {
+      "kode": "TA / AD",
+      "nama": "TA / AD"
+    },
+    {
+      "kode": "TA / AM",
+      "nama": "TA / AM"
+    },
+    {
+      "kode": "TN",
+      "nama": "TN"
+    },
+    {
+      "kode": "TW",
+      "nama": "TW"
+    },
+    {
+      "kode": "WS",
+      "nama": "WS"
+    },
+    {
+      "kode": "WS / RG",
+      "nama": "WS / RG"
+    }
+  ]
+}

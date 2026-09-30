@@ -1,0 +1,154 @@
+{
+  "id": "ti-peminatan-gasal-2026",
+  "startDate": "2026-09-01",
+  "endDate": "2027-01-15",
+  "lastUpdated": "2026-09-15",
+  "source": "migrasi dari data legacy monolith",
+  "version": "1.0.0",
+  "classes": [
+    "A",
+    "B"
+  ],
+  "sessions": [
+    {
+      "kode": "TIUX01",
+      "kelas": "A",
+      "hari": "Senin",
+      "jam": "08:50-11:30",
+      "ruang": "F6.002",
+      "dosen": "RG"
+    },
+    {
+      "kode": "TIDA03",
+      "kelas": "B",
+      "hari": "Selasa",
+      "jam": "08:50-11:30",
+      "ruang": "F6.004",
+      "dosen": "AG"
+    },
+    {
+      "kode": "TINE01",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "08:50-11:30",
+      "ruang": "F6.002",
+      "dosen": "EP"
+    },
+    {
+      "kode": "TIDA01",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "13:20-15:00",
+      "ruang": "F6.004",
+      "dosen": "SR / AD"
+    },
+    {
+      "kode": "TIDA01",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "15:30-16:20",
+      "ruang": "F6.004",
+      "dosen": "SR / AD"
+    },
+    {
+      "kode": "TINE05",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "16:20-18:00",
+      "ruang": "F6.003",
+      "dosen": "EP / AM"
+    },
+    {
+      "kode": "TINE05",
+      "kelas": "A",
+      "hari": "Selasa",
+      "jam": "18:30-19:20",
+      "ruang": "F6.003",
+      "dosen": "EP / AM"
+    },
+    {
+      "kode": "TIPR01",
+      "kelas": "A",
+      "hari": "Rabu",
+      "jam": "08:50-11:30",
+      "ruang": "F6.002",
+      "dosen": "RG"
+    },
+    {
+      "kode": "TIDA01",
+      "kelas": "B",
+      "hari": "Rabu",
+      "jam": "15:30-18:00",
+      "ruang": "F6.102",
+      "dosen": "SR"
+    },
+    {
+      "kode": "TIPR02",
+      "kelas": "A",
+      "hari": "Kamis",
+      "jam": "08:50-11:30",
+      "ruang": "F6.002",
+      "dosen": "DP"
+    },
+    {
+      "kode": "TIDA03",
+      "kelas": "A",
+      "hari": "Kamis",
+      "jam": "13:20-15:00",
+      "ruang": "F6.002",
+      "dosen": "SR / AD"
+    },
+    {
+      "kode": "TIDA03",
+      "kelas": "A",
+      "hari": "Kamis",
+      "jam": "15:30-16:20",
+      "ruang": "F6.002",
+      "dosen": "SR / AD"
+    },
+    {
+      "kode": "TIUX02",
+      "kelas": "B",
+      "hari": "Jumat",
+      "jam": "08:50-11:30",
+      "ruang": "F4.003",
+      "dosen": "QA"
+    },
+    {
+      "kode": "TIUX02",
+      "kelas": "A",
+      "hari": "Jumat",
+      "jam": "13:20-15:00",
+      "ruang": "F4.003",
+      "dosen": "RG"
+    },
+    {
+      "kode": "TIUX02",
+      "kelas": "A",
+      "hari": "Jumat",
+      "jam": "15:30-16:20",
+      "ruang": "F4.003",
+      "dosen": "RG"
+    }
+  ],
+  "holidays": [
+    {
+      "date": "2026-12-25",
+      "name": "Hari Raya Natal"
+    }
+  ],
+  "important": [
+    {
+      "date": "2026-09-07",
+      "name": "Awal Perkuliahan"
+    },
+    {
+      "date": "2026-12-15",
+      "name": "Awal Ujian Akhir Semester"
+    },
+    {
+      "date": "2027-01-15",
+      "name": "Akhir Semester"
+    }
+  ]
+}

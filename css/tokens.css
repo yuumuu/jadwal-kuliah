@@ -1,0 +1,206 @@
+/* ============================================================
+   Design Tokens — jadwal-kuliah
+   ============================================================ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Spacing */
+  --sp-1: .25rem; --sp-2: .5rem; --sp-3: .75rem; --sp-4: 1rem;
+  --sp-5: 1.25rem; --sp-6: 1.5rem; --sp-8: 2rem; --sp-10: 2.5rem; --sp-12: 3rem;
+
+  /* Radius */
+  --r-sm: 6px; --r-md: 12px; --r-lg: 20px; --r-xl: 28px; --r-full: 9999px;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+  --font-display: var(--font-sans);
+
+  --fs-xs: .75rem; --fs-sm: .8125rem; --fs-base: .9375rem; --fs-md: 1rem;
+  --fs-lg: 1.125rem; --fs-xl: 1.25rem; --fs-2xl: 1.5rem; --fs-3xl: 1.875rem;
+
+  --fw-normal: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+  --lh-tight: 1.25; --lh-normal: 1.5; --lh-relaxed: 1.625;
+
+  /* Motion */
+  --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 320ms;
+  --ease: cubic-bezier(.4,0,.2,1);
+  --ease-out: cubic-bezier(0,0,.2,1);
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+
+  /* Layout */
+  --header-h: 3.75rem;
+  --tabs-h: 3rem;
+  --bottom-nav-h: 4.25rem;
+  --content-max: 74rem;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Z-index */
+  --z-header: 100; --z-tabs: 90; --z-bottom-nav: 100;
+  --z-fab: 90; --z-overlay: 500; --z-toast: 900;
+}
+
+/* ============================================================
+   Style: Default (light + dark)
+   ============================================================ */
+
+[data-style="default"] {
+  --bg: #f6f7fb; --bg-elev: #ffffff; --bg-sunken: #eef0f6; --bg-hover: #f0f2f8;
+  --surface: #ffffff; --surface-2: #f8f9fc; --surface-3: #eef1f7;
+  --border: #e2e5ee; --border-strong: #cdd2e0;
+  --text: #0f172a; --text-2: #475569; --text-3: #94a3b8; --text-inv: #ffffff;
+  --primary: #4f46e5; --primary-hover: #4338ca; --primary-soft: #eef2ff;
+  --primary-deep: #3730a3; --primary-text: #ffffff;
+  --accent: #06b6d4; --accent-light: #cffafe; --accent-text: #0e7490;
+  --success: #10b981; --success-soft: #d1fae5;
+  --warning: #f59e0b; --warning-soft: #fef3c7;
+  --danger: #ef4444; --danger-soft: #fee2e2;
+  --info: #3b82f6; --info-soft: #dbeafe;
+  --shadow-1: 0 1px 2px rgba(15,23,42,.06);
+  --shadow-2: 0 2px 8px rgba(15,23,42,.08);
+  --shadow-3: 0 8px 24px rgba(15,23,42,.12);
+  --shadow-4: 0 16px 48px rgba(15,23,42,.18);
+}
+
+[data-style="default"][data-theme="dark"] {
+  --bg: #0b1020; --bg-elev: #131a2e; --bg-sunken: #080d1c; --bg-hover: #1a2238;
+  --surface: #131a2e; --surface-2: #1a2238; --surface-3: #222c47;
+  --border: #26304a; --border-strong: #38456a;
+  --text: #e8ecf6; --text-2: #a5b0cc; --text-3: #6b7899; --text-inv: #0f172a;
+  --primary: #818cf8; --primary-hover: #a5b4fc; --primary-soft: #1e1b4b;
+  --primary-deep: #c7d2fe; --primary-text: #0f172a;
+  --accent: #22d3ee; --accent-light: #164e63; --accent-text: #67e8f9;
+  --success: #34d399; --success-soft: #064e3b;
+  --warning: #fbbf24; --warning-soft: #78350f;
+  --danger: #f87171; --danger-soft: #7f1d1d;
+  --info: #60a5fa; --info-soft: #1e3a8a;
+  --shadow-1: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-2: 0 2px 8px rgba(0,0,0,.5);
+  --shadow-3: 0 8px 24px rgba(0,0,0,.6);
+  --shadow-4: 0 16px 48px rgba(0,0,0,.7);
+}
+
+/* ============================================================
+   Style: Terminal
+   ============================================================ */
+
+[data-style="terminal"] {
+  --font-display: var(--font-mono); --font-sans: var(--font-mono);
+  --bg: #0a0e0a; --bg-elev: #0f140f; --bg-sunken: #050805; --bg-hover: #141a14;
+  --surface: #0f140f; --surface-2: #131a13; --surface-3: #1a221a;
+  --border: #1f2a1f; --border-strong: #2d3d2d;
+  --text: #b8f0b8; --text-2: #7dab7d; --text-3: #4d6b4d; --text-inv: #0a0e0a;
+  --primary: #4ade80; --primary-hover: #86efac; --primary-soft: #0f2a17;
+  --primary-deep: #bbf7d0; --primary-text: #0a0e0a;
+  --accent: #fbbf24; --accent-light: #3a2e08; --accent-text: #fde68a;
+  --success: #4ade80; --success-soft: #0f2a17;
+  --warning: #fbbf24; --warning-soft: #2a1e08;
+  --danger: #f87171; --danger-soft: #2a0f0f;
+  --info: #60a5fa; --info-soft: #0f1a2a;
+  --r-sm: 2px; --r-md: 4px; --r-lg: 6px; --r-xl: 8px; --r-full: 4px;
+  --shadow-1: none;
+  --shadow-2: 0 0 0 1px var(--border);
+  --shadow-3: 0 0 0 1px var(--border-strong);
+  --shadow-4: 0 0 0 1px var(--border-strong);
+}
+
+/* ============================================================
+   Style: Cyberpunk
+   ============================================================ */
+
+[data-style="cyberpunk"] {
+  --font-display: var(--font-mono);
+  --bg: #0a0014; --bg-elev: #14001f; --bg-sunken: #05000a; --bg-hover: #1e0030;
+  --surface: #14001f; --surface-2: #1a0028; --surface-3: #240036;
+  --border: #3d0060; --border-strong: #6a00a8;
+  --text: #f0e0ff; --text-2: #b88edb; --text-3: #7a4da8; --text-inv: #0a0014;
+  --primary: #ff00e5; --primary-hover: #ff4deb; --primary-soft: #3a0033;
+  --primary-deep: #ffb3f5; --primary-text: #0a0014;
+  --accent: #00f0ff; --accent-light: #003a3d; --accent-text: #80f8ff;
+  --success: #00ff88; --success-soft: #003a1f;
+  --warning: #ffb800; --warning-soft: #3a2a00;
+  --danger: #ff0055; --danger-soft: #3a0011;
+  --info: #00aaff; --info-soft: #002a3d;
+  --shadow-1: 0 0 8px rgba(255,0,229,.2);
+  --shadow-2: 0 0 16px rgba(255,0,229,.3);
+  --shadow-3: 0 0 32px rgba(255,0,229,.4);
+  --shadow-4: 0 0 48px rgba(0,240,255,.5);
+}
+
+/* ============================================================
+   Style: Playful
+   ============================================================ */
+
+[data-style="playful"] {
+  --bg: #fff8f0; --bg-elev: #ffffff; --bg-sunken: #fff0e0; --bg-hover: #fff5e8;
+  --surface: #ffffff; --surface-2: #fff8f0; --surface-3: #ffeedd;
+  --border: #ffe0c0; --border-strong: #ffc899;
+  --text: #3d2817; --text-2: #7a5c3e; --text-3: #b89070; --text-inv: #ffffff;
+  --primary: #ff6b6b; --primary-hover: #ee5a5a; --primary-soft: #ffe0e0;
+  --primary-deep: #cc4444; --primary-text: #ffffff;
+  --accent: #ffd93d; --accent-light: #fff6cc; --accent-text: #8a6d00;
+  --success: #6bcf7f; --success-soft: #d8f5de;
+  --warning: #ffb84d; --warning-soft: #ffe8cc;
+  --danger: #ff6b6b; --danger-soft: #ffe0e0;
+  --info: #6bc5ff; --info-soft: #d8eeff;
+  --r-sm: 10px; --r-md: 18px; --r-lg: 28px; --r-xl: 40px;
+}
+
+/* ============================================================
+   Style: Y2K
+   ============================================================ */
+
+[data-style="y2k"] {
+  --bg: #e0e7ff; --bg-elev: #ffffff; --bg-sunken: #c7d2fe; --bg-hover: #dbe3ff;
+  --surface: #ffffff; --surface-2: #f0f4ff; --surface-3: #dbe3ff;
+  --border: #a5b4fc; --border-strong: #818cf8;
+  --text: #1e1b4b; --text-2: #4338ca; --text-3: #818cf8; --text-inv: #ffffff;
+  --primary: #ec4899; --primary-hover: #db2777; --primary-soft: #fce7f3;
+  --primary-deep: #9d174d; --primary-text: #ffffff;
+  --accent: #06b6d4; --accent-light: #cffafe; --accent-text: #0e7490;
+  --success: #10b981; --success-soft: #d1fae5;
+  --warning: #f59e0b; --warning-soft: #fef3c7;
+  --danger: #ef4444; --danger-soft: #fee2e2;
+  --info: #3b82f6; --info-soft: #dbeafe;
+  --shadow-1: 1px 1px 0 var(--border-strong);
+  --shadow-2: 2px 2px 0 var(--border-strong);
+  --shadow-3: 4px 4px 0 var(--border-strong);
+  --shadow-4: 6px 6px 0 var(--border-strong);
+}
+
+/* ============================================================
+   Style: Neobrutalism
+   ============================================================ */
+
+[data-style="neobrutalism"] {
+  --bg: #fef3c7; --bg-elev: #ffffff; --bg-sunken: #fde68a; --bg-hover: #fef9e7;
+  --surface: #ffffff; --surface-2: #fffbeb; --surface-3: #fef3c7;
+  --border: #000000; --border-strong: #000000;
+  --text: #000000; --text-2: #333333; --text-3: #666666; --text-inv: #ffffff;
+  --primary: #fbbf24; --primary-hover: #f59e0b; --primary-soft: #fef3c7;
+  --primary-deep: #b45309; --primary-text: #000000;
+  --accent: #ec4899; --accent-light: #fce7f3; --accent-text: #831843;
+  --success: #10b981; --success-soft: #d1fae5;
+  --warning: #f59e0b; --warning-soft: #fef3c7;
+  --danger: #ef4444; --danger-soft: #fee2e2;
+  --info: #3b82f6; --info-soft: #dbeafe;
+  --r-sm: 0; --r-md: 0; --r-lg: 0; --r-xl: 0; --r-full: 0;
+  --shadow-1: 3px 3px 0 #000;
+  --shadow-2: 4px 4px 0 #000;
+  --shadow-3: 6px 6px 0 #000;
+  --shadow-4: 8px 8px 0 #000;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
